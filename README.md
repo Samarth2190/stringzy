@@ -692,6 +692,16 @@ Contributions are welcome! Please feel free to submit a Pull Request.
                     </sub>
                 </a>
             </td>
+          <td align="center">
+                <a href="https://github.com/michaelvbend">
+                    <img src="https://avatars.githubusercontent.com/michaelvbend" width="100px;"
+                        alt="Michael van der Bend" />
+                    <br />
+                    <sub>
+                        <b>Michael van der Bend</b>
+                    </sub>
+                </a>
+            </td>
         </tr>
     </tbody>
 </table>
