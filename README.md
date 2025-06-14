@@ -1,4 +1,3 @@
-
 <div align="center">
   
   
@@ -88,6 +87,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isDate](#isdate) - Checks if a string is a valid date
 - [isEmpty](#isempty) - Checks if a string is empty or contains only whitespace
 - [isSlug](#isslug) - Checks if a string is a valid slug
+- [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
 
 ###  Analysis
 - [wordCount](#wordcount) - Counts the number of words in a string
@@ -435,6 +435,25 @@ isSlug("hello_world");         // false (underscore not allowed)
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | text | string | required | The input string to validate as slug |
+
+#### <a id="isipv4"></a>`isIPv4(text)`
+
+Checks if a string is a valid IPv4 address.
+
+```javascript
+import { isIPv4 } from 'stringzy';
+
+isIPv4('192.168.1.1'); // true
+isIPv4('0.0.0.0'); // true
+isIPv4('256.1.1.1'); // false (out of range)
+isIPv4('192.168.1'); // false (incomplete)
+isIPv4('192.168.01.1'); // false (leading zeros)
+isIPv4('192.168.1.a'); // false (non-numeric)
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| text | string | required | The input string to validate as IPv4 address |
 
 ---
 
