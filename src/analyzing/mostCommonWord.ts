@@ -1,4 +1,10 @@
 export function mostCommonword(text : string) : string | null {
+
+
+    if (typeof text !== "string") {
+        throw new TypeError("Input must be a string");
+    }
+
     const words = text.toLowerCase().match(/\b\w+\b/g);
     if(!words) {
         return null;
