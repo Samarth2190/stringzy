@@ -425,7 +425,7 @@ deburr('über cool');
 // Returns: 'uber cool'
 
 ```
-| Parameter | Type   | Default  Description                               |
+| Parameter | Type   | Default |  Description                               |
 | --------- | ------ | -------- | ----------------------------------------- |
 | text      | string | required | The input string to strip diacritics from |
 
