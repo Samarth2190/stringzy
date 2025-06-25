@@ -883,6 +883,48 @@ Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTIN
                 </a>
             </td>
         </tr>
+      <tr>
+       <td align="center">
+                <a href="https://github.com/cokolwiekpl">
+                    <img src="https://avatars.githubusercontent.com/cokolwiekpl" width="100px;"
+                        alt="Stanisław Kumor" />
+                    <br />
+                    <sub>
+                        <b>Stanisław Kumor</b>
+                    </sub>
+                </a>
+            </td>
+         <td align="center">
+                <a href="https://github.com/Alimedhat000">
+                    <img src="https://avatars.githubusercontent.com/Alimedhat000" width="100px;"
+                        alt="Ali Medhat" />
+                    <br />
+                    <sub>
+                        <b>Ali Medhat</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/Soham-Powar">
+                    <img src="https://avatars.githubusercontent.com/Soham-Powar" width="100px;"
+                        alt="Soham Powar" />
+                    <br />
+                    <sub>
+                        <b>Soham Powar</b>
+                    </sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/a-arham-x">
+                    <img src="https://avatars.githubusercontent.com/a-arham-x" width="100px;"
+                        alt="Soham Powar" />
+                    <br />
+                    <sub>
+                        <b>Abdul Arham</b>
+                    </sub>
+                </a>
+            </td>
+      </tr>
     </tbody>
 </table>
 
