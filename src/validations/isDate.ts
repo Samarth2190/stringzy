@@ -1,52 +1,78 @@
-export function isDate(input: string): boolean {
+export enum DateFormats {
+  YYYYMMDD = 'YYYYMMDD',
+  YYMMDD = 'YYMMDD',
+  MMDDYYYY = 'MMDDYYYY',
+  MMDDYY = 'MMDDYY',
+  DDMMYYYY = 'DDMMYYYY',
+  DDMMYY = 'DDMMYY',
+}
+
+const VALID_SEPARATORS = ['.', '-', '/'] as const;
+type ValidSeparators = typeof VALID_SEPARATORS[number]
+
+/**
+ * Takes a date and a format and returns whether or not the date matches the specified format.
+ * Optionally takes a separator that can be used instead of the default hyphen.
+ */
+export function isDate(
+  input: string,
+  format: DateFormats,
+  separator: ValidSeparators = '-'
+): boolean {
   if (typeof input !== "string") return false;
+  // Ensure separator is supported
+  if (![...VALID_SEPARATORS].includes(separator)) return false;
 
   const formats = [
     {
-      // Format: YYYY-MM-DD 
-      regex: /^\d{4}-\d{2}-\d{2}$/,
-      split: (s: string) => s.split("-").map(Number),
+      // Format: YYYY-MM-DD
+      format: DateFormats.YYYYMMDD,
+      regex: new RegExp(`^\\d{4}${separator}\\d{2}${separator}\\d{2}$`),
       order: ["Y", "M", "D"],
     },
     {
-      // Format: MM-DD-YYYY 
-      regex: /^\d{2}-\d{2}-\d{4}$/,
-      split: (s: string) => s.split("-").map(Number),
+      // Format: YY-MM-DD
+      format: DateFormats.YYMMDD,
+      regex: new RegExp(`^\\d{2}${separator}\\d{2}${separator}\\d{2}$`),
+      order: ["Y", "M", "D"],
+    },
+    {
+      // Format: MM-DD-YYYY
+      format: DateFormats.MMDDYYYY,
+      regex: new RegExp(`^\d{2}${separator}\d{2}${separator}\d{4}$/`),
       order: ["M", "D", "Y"],
     },
     {
-      // Format: DD-MM-YYYY 
-      regex: /^\d{2}-\d{2}-\d{4}$/,
-      split: (s: string) => s.split("-").map(Number),
+      // Format: MM-DD-YY
+      format: DateFormats.MMDDYY,
+      regex: new RegExp(`^\d{2}${separator}\d{2}${separator}\d{2}$/`),
+      order: ["M", "D", "Y"],
+    },
+    {
+      // Format: DD-MM-YYYY
+      format: DateFormats.DDMMYYYY,
+      regex: new RegExp(`^\d{2}${separator}\d{2}${separator}\d{4}$`),
       order: ["D", "M", "Y"],
     },
     {
-      // Format: DD/MM/YYYY 
-      regex: /^\d{2}\/\d{2}\/\d{4}$/,
-      split: (s: string) => s.split("/").map(Number),
+      // Format: DD-MM-YY
+      format: DateFormats.DDMMYY,
+      regex: new RegExp(`^\d{2}${separator}\d{2}${separator}\d{2}$`),
       order: ["D", "M", "Y"],
-    },
-    {
-      // Format: YYYY/MM/DD 
-      regex: /^\d{4}\/\d{2}\/\d{2}$/,
-      split: (s: string) => s.split("/").map(Number),
-      order: ["Y", "M", "D"],
     },
   ];
 
-  for (const format of formats) {
-    if (format.regex.test(input)) {
-      const parts = format.split(input);
-      const dateParts: Record<string, number> = {};
-      format.order.forEach((key, i) => {
-        dateParts[key] = parts[i];
-      });
+  const targetFormat = formats.find(f => f.format === format);
+  const parts = input.split(separator).map(Number);
+  const dateParts: Record<string, number> = {};
+  targetFormat?.order.forEach((k, i) => {
+    dateParts[k] = parts[i];
+  });
 
-      const { Y, M, D } = dateParts;
-      const date = new Date(Y, M - 1, D); // JS months are 0-indexed
-      return date.getFullYear() === Y && date.getMonth() === M - 1 && date.getDate() === D;
-    }
-  }
+  const { Y, M, D } = dateParts;
 
-  return false;
+  // If the date is 2 digits, add 1900 to make it 4 digits
+  return Y.toString().length === 2
+    ? !isNaN(Date.parse(`${1900 + Y}-${M}-${D}`))
+    : !isNaN(Date.parse(`${Y}-${M}-${D}`))
 }
