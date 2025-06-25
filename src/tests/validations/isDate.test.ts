@@ -25,9 +25,13 @@ describe('isDate', () => {
   });
   it('validates dates formatted as DD-MM-YYYY', () => {
     assert.strictEqual(isDate('31-12-2020', DateFormats.DDMMYYYY), true);
+    assert.strictEqual(isDate('23-01-1888', DateFormats.DDMMYYYY), true);
+    assert.strictEqual(isDate('28-02-2000', DateFormats.DDMMYYYY), true);
   });
   it('invalidates dates formatted as DD-MM-YYYY', () => {
-    assert.strictEqual(isDate('31-12-2020', DateFormats.DDMMYYYY), true);
+    assert.strictEqual(isDate('32-12-2020', DateFormats.DDMMYYYY), false);
+    assert.strictEqual(isDate('30-02-2001', DateFormats.DDMMYYYY), false);
+    assert.strictEqual(isDate('01-13-1999', DateFormats.DDMMYYYY), false);
   });
   it('properly handles other valid separators', () => {
     assert.strictEqual(isDate('2020/12/31', DateFormats.YYYYMMDD, '/'), true);
@@ -37,11 +41,11 @@ describe('isDate', () => {
     assert.strictEqual(isDate('2020?12?31', DateFormats.YYYYMMDD, '?' as '-'), false);
     assert.strictEqual(isDate('2020!12!31', DateFormats.YYYYMMDD, '!' as '-'), false);
   });
-  // it('returns false for invalid date', () => {
-  //   assert.strictEqual(isDate('2020-13-01'), false);
-  //   assert.strictEqual(isDate('not a date'), false);
-  // });
-  // it('returns false for non-string input', () => {
-  //   assert.strictEqual(isDate(123 as any), false);
-  // });
+  it('invalidates improperly formatted dates', () => {
+    assert.strictEqual(isDate('1-01-2000', DateFormats.MMDDYYYY), false);
+    assert.strictEqual(isDate('01-1-2000', DateFormats.MMDDYYYY), false);
+    assert.strictEqual(isDate('01-1--2000', DateFormats.MMDDYYYY), false);
+    assert.strictEqual(isDate('not a date', DateFormats.MMDDYYYY), false);
+    assert.strictEqual(isDate(11012000 as any, DateFormats.MMDDYYYY), false);
+  });
 });

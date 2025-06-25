@@ -10,6 +10,11 @@ type ValidSeparators = typeof VALID_SEPARATORS[number]
 /**
  * Takes a date and a format and returns whether or not the date matches the specified format.
  * Optionally takes a separator that can be used instead of the default hyphen.
+ *
+ * Only accepts 2 digit month/day and 4 digit year
+ * @example 01-01-2000 -> True
+ * @example 01-1-2000 -> False
+ * @example 01-01-00 -> False
  */
 export function isDate(
   input: string,
@@ -17,6 +22,7 @@ export function isDate(
   separator: ValidSeparators = '-'
 ): boolean {
   if (typeof input !== "string") return false;
+  if (input.length !== 10) return false;
   // Ensure separator is supported
   if (![...VALID_SEPARATORS].includes(separator)) return false;
 
@@ -50,5 +56,13 @@ export function isDate(
 
   const { Y, M, D } = dateParts;
 
-  return !isNaN(Date.parse(`${Y}-${M}-${D}`))
+  const checkDate = new Date(Y, M - 1, D); // Months are 0 indexed
+  if (checkDate.toString() === 'Invalid Date') return false;
+
+  const isValid =
+    checkDate.getFullYear() === Y &&
+    checkDate.getMonth() === M - 1 &&
+    checkDate.getDate() === D
+
+  return isValid
 }
