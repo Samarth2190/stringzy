@@ -468,15 +468,19 @@ Checks if a string is a valid date.
 ```javascript
 import { isDate } from 'stringzy';
 
-isDate('2023-12-25'); // true
-isDate('12/25/2023'); // true
-isDate('invalid-date'); // false
-isDate('2023-13-45'); // false
+isDate('2023-12-25', DateFormat.YYYMMDD); // true
+isDate('12/25/2023', DateFormat.MMDDYYY, '/'); // true
+isDate('20-12-25', DateFormat.YYYMMDD); // false
+isDate('2023-12-1', DateFormat.YYYMMDD); // false
+isDate('invalid-date', DateFormat.YYYMMDD); // false
+isDate('2023-13-45', DateFormat.YYYMMDD); // false
 ```
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| text | string | required | The input string to validate as date |
+| input | string | required | The input string to validate as date |
+| format | DateFormats | required | The date format to validate against |
+| separator | string | optional | The separator to be used if it is not "-" |
 
 #### <a id="isempty"></a>`isEmpty(text)`
 
