@@ -1,3 +1,27 @@
+/**
+ * Analyzes the complexity of a string based on its length,
+ * and presence of lowercase, uppercase, numeric, and special characters.
+ *
+ * @param str - Input string
+ * @returns An object contains the complexity score, uniqueness ratio, and length.
+ * @throws {TypeError} If the input is not a string.
+ *
+ * @example
+ * complexity("abc123!@#");
+ * {
+ *    score: 0.86,
+ *    uniqueness: 0.89,
+ *    length: 9
+ * }
+ *
+ * complexity("aaaaaaaa");
+ * {
+ *    score: 0.35,
+ *    uniqueness: 0.12,
+ *    length: 8
+ * }
+ */
+
 export type ComplexityResult = {
     score: number;
     uniqueness: number;
