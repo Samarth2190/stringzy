@@ -100,6 +100,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [characterCount](#charactercount) - Counts the number of characters in a string
 - [characterFrequency](#characterfrequency) - Analyzes character frequency in a string
 - [stringSimilarity](#stringsimilarity) - Calculates the percentage similarity between two strings
+- [complexity](#complexity) - Analyzes string complexity including score, uniqueness, and length
+
 ###  Formatting
 - [capitalize](#capitalize) - Capitalizes the first letter of each word
 - [formatNumber](#formatnumber) - Formats a number string with thousand separators
@@ -637,6 +639,35 @@ stringSimilarity('flaw', 'lawn', 'Damerau-Levenshtein'); // Returns: 50
 | algorithm  | string | 'Levenshtein'        | The algorithm to use: 'Levenshtein' or 'Damerau-Levenshtein'.               |
 
 ---
+
+#### <a id="complexity"></a>`complexity(text)`
+
+Analyzes the complexity of a string, returning an object with detailed metrics.
+
+```javascript
+import { complexity } from 'stringzy';
+
+complexity('abc');
+// Returns: { score: [number], uniqueness: [number], length: 3 }
+
+complexity('aA1!aA1!');
+// Returns: { score: [number], uniqueness: [number], length: 8 }
+
+complexity('');
+// Returns: { score: 0, uniqueness: 0, length: 0 }
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| text | string | required | The input string to analyze complexity |
+
+**Returns:** An object containing:
+- `score` (number): Overall complexity score
+- `uniqueness` (number): Measure of character uniqueness
+- `length` (number): Length of the input string
+
+---
+
 
 ### 🎨 Formatting
 
