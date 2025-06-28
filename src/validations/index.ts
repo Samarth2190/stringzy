@@ -5,6 +5,7 @@ export { isSlug } from './isSlug';
 export { isURL } from './isURL';
 export { isIPv4 } from './isIPv4';
 export { isHexColor } from './isHexColor';
+export { isPalindrome } from './isPalindrome'
 
 import { isDate } from './isDate';
 import { isEmail } from './isEmail';
@@ -13,6 +14,7 @@ import { isSlug } from './isSlug';
 import { isURL } from './isURL';
 import { isIPv4 } from './isIPv4';
 import { isHexColor } from './isHexColor';
+import { isPalindrome } from './isPalindrome';
 
 export const validations = {
   isDate,
@@ -21,5 +23,6 @@ export const validations = {
   isSlug,
   isURL,
   isIPv4,
-  isHexColor
+  isHexColor,
+  isPalindrome
 };
