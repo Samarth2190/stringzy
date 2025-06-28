@@ -1,3 +1,16 @@
+/**
+ * Extracts the initials from a string, with an optional limit on how many initials to return.
+ *
+ * @param text - Input string
+ * @param limit - Maximum number of initials to return
+ * @returns A string containing the initials of the input text.
+ * @throws {Error} If the input is not a string
+ *
+ * @example
+ * initials("John Doe");            // "JD"
+ * initials("John Doe Doe", 2);     // "JD"
+ * initials("", 3);                 // ""
+ */
 export function initials(text: string, limit?: number): string {
     if (typeof text !== "string") {
         throw new Error("Input must be a string");
