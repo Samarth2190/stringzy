@@ -95,6 +95,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isTypeOf](#istypeof) - Checks if a file or URL has a valid extension for a given type
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
+- [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 
 ###  Analysis
 - [wordCount](#wordcount) - Counts the number of words in a string
@@ -596,6 +597,26 @@ isHexColor('blue');       // false
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | text | string | required | The input string to validate as Hex color |
+
+#### <a id="ispalindrome"></a>`isPalindrome(text)`
+
+Checks if a string is a palindrome.
+The check is case-insensitive and ignores spaces and punctuation.
+
+```javascript
+import { isPalindrome } from 'stringzy';
+
+isPalindrome('racecar');                            // true
+isPalindrome('A man, a plan, a canal: Panama');     // true
+isPalindrome('No lemon, no melon');                 // true
+isPalindrome('hello');                              // false
+isPalindrome('Was it a car or a cat I saw?');       // true
+```
+
+| Parameter | Type   | Default  | Description                              |
+| --------- | ------ | -------- | ---------------------------------------- |
+| text      | string | required | The input string to check for palindrome |
+
 
 ---
 
