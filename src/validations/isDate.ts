@@ -5,7 +5,7 @@ export enum DateFormats {
 }
 
 const VALID_SEPARATORS = ['.', '-', '/'] as const;
-type ValidSeparators = typeof VALID_SEPARATORS[number]
+type ValidSeparators = (typeof VALID_SEPARATORS)[number];
 
 /**
  * Takes a date and a format and returns whether or not the date matches the specified format.
@@ -21,7 +21,7 @@ export function isDate(
   format: DateFormats,
   separator: ValidSeparators = '-'
 ): boolean {
-  if (typeof input !== "string") return false;
+  if (typeof input !== 'string') return false;
   if (input.length !== 10) return false;
   // Ensure separator is supported
   if (![...VALID_SEPARATORS].includes(separator)) return false;
@@ -31,23 +31,23 @@ export function isDate(
       // Format: YYYY-MM-DD
       format: DateFormats.YYYYMMDD,
       regex: new RegExp(`^\\d{4}${separator}\\d{2}${separator}\\d{2}$`),
-      order: ["Y", "M", "D"],
+      order: ['Y', 'M', 'D'],
     },
     {
       // Format: MM-DD-YYYY
       format: DateFormats.MMDDYYYY,
       regex: new RegExp(`^\d{2}${separator}\d{2}${separator}\d{4}$/`),
-      order: ["M", "D", "Y"],
+      order: ['M', 'D', 'Y'],
     },
     {
       // Format: DD-MM-YYYY
       format: DateFormats.DDMMYYYY,
       regex: new RegExp(`^\d{2}${separator}\d{2}${separator}\d{4}$`),
-      order: ["D", "M", "Y"],
+      order: ['D', 'M', 'Y'],
     },
   ];
 
-  const targetFormat = formats.find(f => f.format === format);
+  const targetFormat = formats.find((f) => f.format === format);
   const parts = input.split(separator).map(Number);
   const dateParts: Record<string, number> = {};
   targetFormat?.order.forEach((k, i) => {
@@ -60,9 +60,7 @@ export function isDate(
   if (checkDate.toString() === 'Invalid Date') return false;
 
   const isValid =
-    checkDate.getFullYear() === Y &&
-    checkDate.getMonth() === M - 1 &&
-    checkDate.getDate() === D
+    checkDate.getFullYear() === Y && checkDate.getMonth() === M - 1 && checkDate.getDate() === D;
 
-  return isValid
+  return isValid;
 }

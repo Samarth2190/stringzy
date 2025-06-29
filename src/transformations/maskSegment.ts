@@ -11,23 +11,19 @@ export function maskSegment(
   text: string,
   maskStart: number = 0,
   maskEnd: number = text.length,
-  maskChar: string = "*"
+  maskChar: string = '*'
 ): string {
   if (maskStart < 0 || maskEnd > text.length || maskStart >= maskEnd) {
-    throw new Error("Invalid mask segment range");
+    throw new Error('Invalid mask segment range');
   }
 
   if (maskChar.length !== 1) {
-    throw new Error("Mask character must be a single character");
+    throw new Error('Mask character must be a single character');
   }
 
   if (maskStart === 0 && maskEnd === text.length) {
     return maskChar.repeat(text.length);
   }
 
-  return (
-    text.slice(0, maskStart) +
-    maskChar.repeat(maskEnd - maskStart) +
-    text.slice(maskEnd)
-  );
+  return text.slice(0, maskStart) + maskChar.repeat(maskEnd - maskStart) + text.slice(maskEnd);
 }

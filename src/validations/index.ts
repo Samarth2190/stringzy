@@ -21,5 +21,5 @@ export const validations = {
   isSlug,
   isURL,
   isIPv4,
-  isHexColor
+  isHexColor,
 };

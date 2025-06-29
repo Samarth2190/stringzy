@@ -25,7 +25,6 @@ describe('maskSegment', () => {
     assert.throws(() => maskSegment('abc', 0, 2, '**'));
   });
 
-
   it('handles empty string', () => {
     assert.throws(() => maskSegment('', 0, 1));
   });

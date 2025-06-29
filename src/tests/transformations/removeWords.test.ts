@@ -16,6 +16,9 @@ describe('removeWords', () => {
     assert.throws(() => removeWords(123 as any, 'foo'), /First parameter must be a string/);
   });
   it('throws if wordsToRemove is not string or array', () => {
-    assert.throws(() => removeWords('foo', 123 as any), /Second parameter must be a string or an array/);
+    assert.throws(
+      () => removeWords('foo', 123 as any),
+      /Second parameter must be a string or an array/
+    );
   });
 });

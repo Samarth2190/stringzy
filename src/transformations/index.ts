@@ -14,7 +14,6 @@ export { truncateText } from './truncateText';
 export { escapeHtml } from './escapeHTML';
 export { maskSegment } from './maskSegment';
 
-
 import { camelCase } from './camelCase';
 import { capitalizeWords } from './capitalizeWords';
 import { constantCase } from './constantCase';
@@ -33,20 +32,20 @@ import { maskSegment } from './maskSegment';
 import { deburr } from './deburr';
 
 export const transformations = {
-    camelCase,
-    capitalizeWords,
-    constantCase,
-    initials,
-    kebabCase,
-    pascalCase,
-    removeDuplicates,
-    removeSpecialChars,
-    removeWords,
-    snakeCase,
-    titleCase,
-    toSlug,
-    truncateText,
-    escapeHtml,
-    maskSegment,
-    deburr
+  camelCase,
+  capitalizeWords,
+  constantCase,
+  initials,
+  kebabCase,
+  pascalCase,
+  removeDuplicates,
+  removeSpecialChars,
+  removeWords,
+  snakeCase,
+  titleCase,
+  toSlug,
+  truncateText,
+  escapeHtml,
+  maskSegment,
+  deburr,
 };
