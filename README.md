@@ -83,8 +83,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [escapeHTML](#escapehtml) - Escapes HTML special characters to prevent XSS attacks
 - [maskSegment](#masksegment) - Masks a segment of a string by replacing characters between two indices with a specified character
 - [deburr](#deburr) – Removes accents and diacritical marks from a string
+- [splitChunks](#splitchunks) - Breaks a string down into chunks of specified length.
 - [pipeLine](#pipeline) - Can be used to chain multiple transformations, and powerful tools to manipulate data flow
-
 
 ###  Validations
 - [isURL](#isurl) - Checks if a string is a valid URL
@@ -571,6 +571,29 @@ console.log(result.output); // helloEvilCode
 | `restartAfterTransform`  | `(newInitial?: string) => void`                 | Restart pipeline after the effect has been called.                       |
 | `moveToPipeIndex`        | `(index: number) => void`                       | Jump to a specific transformation step and continue.                     |
 
+
+---
+
+#### <a id="splitchunks"></a>`splitChunks(text, chunkSize)`
+Takes a string and chunk size as the argument and splits the string into chunks of given size.
+
+```javascript
+import { splitChunks } from 'stringzy';
+
+splitChunks('helloworld', 2);
+// Returns: ['he', 'll', 'ow', 'or', 'ld']
+
+splitChunks('helloworld', 3);
+// Returns: ['hel', 'low', 'orl', 'd']
+
+splitChunks('helloworld');
+// Returns: ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
+
+```
+| Parameter |	Type | Default| Description | 
+|-----------|------|--------|-------------|
+|text	| string | required |	The input string that needs to be chunked|
+|chunkSize	|number|	`1`|	The size of each chunk in which the string is to be split|
 
 ---
 
