@@ -87,8 +87,10 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isDate](#isdate) - Checks if a string is a valid date
 - [isEmpty](#isempty) - Checks if a string is empty or contains only whitespace
 - [isSlug](#isslug) - Checks if a string is a valid slug
+- [isTypeOf](#istypeof) - Checks if a file or URL has a valid extension for a given type
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
+- [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 
 ### Analysis
 
@@ -534,6 +536,25 @@ isSlug('hello_world'); // false (underscore not allowed)
 | --------- | ------ | -------- | ------------------------------------ |
 | text      | string | required | The input string to validate as slug |
 
+#### <a id="istypeof"></a>`isTypeOf(input, type)`
+
+Checks if a file or URL has a valid extension for a given type
+
+```javascript
+isType("photo.PNG", "image");                    // true
+isType("https://example.com/logo.svg", "image"); // true
+isType({ name: "track.mp3" }, "audio");          // true
+isType("filewithoutextension", "image");         // false
+isType("document.zip", "document");              // false
+isType("video.mp4", "document");                 // false
+```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| input | string | required | The file name, URL string, or object with .name |
+| input | string | required | The file type category to validate (image, video, audio, document, archive) |
+
+
 #### <a id="isipv4"></a>`isIPv4(text)`
 
 Checks if a string is a valid IPv4 address.
@@ -571,6 +592,26 @@ isHexColor('blue'); // false
 | Parameter | Type   | Default  | Description                               |
 | --------- | ------ | -------- | ----------------------------------------- |
 | text      | string | required | The input string to validate as Hex color |
+
+#### <a id="ispalindrome"></a>`isPalindrome(text)`
+
+Checks if a string is a palindrome.
+The check is case-insensitive and ignores spaces and punctuation.
+
+```javascript
+import { isPalindrome } from 'stringzy';
+
+isPalindrome('racecar');                            // true
+isPalindrome('A man, a plan, a canal: Panama');     // true
+isPalindrome('No lemon, no melon');                 // true
+isPalindrome('hello');                              // false
+isPalindrome('Was it a car or a cat I saw?');       // true
+```
+
+| Parameter | Type   | Default  | Description                              |
+| --------- | ------ | -------- | ---------------------------------------- |
+| text      | string | required | The input string to check for palindrome |
+
 
 ---
 
