@@ -3,7 +3,6 @@
   
   ![Stringzy banner](./assets/stringzy-banner2.jpg)
 
-
 ![NPM Version](https://img.shields.io/npm/v/stringzy)
 ![Downloads](https://img.shields.io/npm/dt/stringzy)
 ![License](https://img.shields.io/npm/l/stringzy)
@@ -15,14 +14,9 @@
 
 [Checkout our Contributors!](#contri)
 
-
 [Join the Community!](#community)
 
-
-
-
 </div>
-
 
 ## ✨ Features
 
@@ -66,7 +60,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 
 ## 📋 Table of Contents
 
-###  Transformations
+### Transformations
+
 - [truncateText](#truncatetext) - Truncates text to a specified maximum length
 - [toSlug](#toslug) - Converts a string to a URL-friendly slug
 - [capitalizeWords](#capitalizewords) - Capitalizes the first letter of each word
@@ -76,7 +71,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [initials](#initials) - Extracts initials from a text string
 - [camelCase](#camelcase) - Converts the given string to Camel Case
 - [pascalCase](#pascalcase) - Converts the given string to Pascal Case
-- [snakeCase](#snakecase) - Converts the given string to Snake Case   
+- [snakeCase](#snakecase) - Converts the given string to Snake Case
 - [kebabCase](#kebabcase) - Converts the given string to Kebab Case
 - [titleCase](#titlecase) - Converts the given string to Title Case
 - [constantCase](#constantcase) - Converts the given string to Constant Case
@@ -86,16 +81,20 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [splitChunks](#splitchunks) - Breaks a string down into chunks of specified length.
 - [pipeLine](#pipeline) - Can be used to chain multiple transformations, and powerful tools to manipulate data flow
 
-###  Validations
+### Validations
+
 - [isURL](#isurl) - Checks if a string is a valid URL
 - [isEmail](#isemail) - Checks if a string is a valid email address
 - [isDate](#isdate) - Checks if a string is a valid date
 - [isEmpty](#isempty) - Checks if a string is empty or contains only whitespace
 - [isSlug](#isslug) - Checks if a string is a valid slug
+- [isTypeOf](#istypeof) - Checks if a file or URL has a valid extension for a given type
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
+- [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 
-###  Analysis
+### Analysis
+
 - [wordCount](#wordcount) - Counts the number of words in a string
 - [readingDuration](#readingduration) - Calculates the reading duration of a given string
 - [characterCount](#charactercount) - Counts the number of characters in a string
@@ -103,7 +102,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [stringSimilarity](#stringsimilarity) - Calculates the percentage similarity between two strings
 - [complexity](#complexity) - Analyzes string complexity including score, uniqueness, and length
 
-###  Formatting
+### Formatting
+
 - [capitalize](#capitalize) - Capitalizes the first letter of each word
 - [formatNumber](#formatnumber) - Formats a number string with thousand separators
 - [formatPhone](#formatphone) - Formats a phone number string to standard format
@@ -131,11 +131,11 @@ truncateText('Short', 10);
 // Returns: 'Short' (no truncation needed)
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to truncate |
+| Parameter | Type   | Default  | Description                                            |
+| --------- | ------ | -------- | ------------------------------------------------------ |
+| text      | string | required | The input string to truncate                           |
 | maxLength | number | required | Maximum length of the output string (excluding suffix) |
-| suffix | string | '...' | String to append if truncation occurs |
+| suffix    | string | '...'    | String to append if truncation occurs                  |
 
 #### <a id="toslug"></a>`toSlug(text)`
 
@@ -154,9 +154,9 @@ toSlug('Special $#@! characters');
 // Returns: 'special-characters'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to convert to a slug |
+| Parameter | Type   | Default  | Description                           |
+| --------- | ------ | -------- | ------------------------------------- |
+| text      | string | required | The input string to convert to a slug |
 
 #### <a id="capitalizewords"></a>`capitalizeWords(text)`
 
@@ -175,9 +175,9 @@ capitalizeWords('already Capitalized');
 // Returns: 'Already Capitalized'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to capitalize |
+| Parameter | Type   | Default  | Description                    |
+| --------- | ------ | -------- | ------------------------------ |
+| text      | string | required | The input string to capitalize |
 
 #### <a id="removespecialchars"></a>`removeSpecialChars(text, replacement = '')`
 
@@ -196,10 +196,10 @@ removeSpecialChars('Phone: (123) 456-7890', '-');
 // Returns: 'Phone-123-456-7890'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to process |
-| replacement | string | '' | String to replace special characters with |
+| Parameter   | Type   | Default  | Description                               |
+| ----------- | ------ | -------- | ----------------------------------------- |
+| text        | string | required | The input string to process               |
+| replacement | string | ''       | String to replace special characters with |
 
 #### <a id="removewords"></a>`removeWords(text, wordsToRemove)`
 
@@ -212,20 +212,20 @@ removeWords('Hello world this is a test', ['this', 'is']);
 // Returns: 'Hello world a test'
 
 removeWords('Remove The Quick BROWN fox', ['the', 'brown']);
-// Returns: 'Remove Quick fox' 
+// Returns: 'Remove Quick fox'
 
 removeWords('JavaScript is awesome and JavaScript rocks', ['JavaScript']);
 // Returns: 'is awesome and rocks'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to process |
+| Parameter     | Type     | Default  | Description                              |
+| ------------- | -------- | -------- | ---------------------------------------- |
+| text          | string   | required | The input string to process              |
 | wordsToRemove | string[] | required | Array of words to remove from the string |
 
 #### <a id="removeduplicates"></a>`removeDuplicates(text)`
 
-Removes duplicate case-sensitive words from a given text. 
+Removes duplicate case-sensitive words from a given text.
 
 ```javascript
 import { removeDuplicates } from 'stringzy';
@@ -234,15 +234,15 @@ removeDuplicates('Hello world this is a is a test');
 // Returns: 'Hello world this is a test'
 
 removeDuplicates('Remove me me me me or Me');
-// Returns: 'Remove me or Me' 
+// Returns: 'Remove me or Me'
 
 removeDuplicates('JavaScript is not bad and not awesome');
 // Returns: 'JavaScript is not bad and awesome'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to process |
+| Parameter | Type   | Default  | Description                 |
+| --------- | ------ | -------- | --------------------------- |
+| text      | string | required | The input string to process |
 
 #### <a id="initials"></a>`initials(text, limit)`
 
@@ -267,10 +267,10 @@ initials('  Multiple   Spaces   Between  ');
 // Returns: 'MSB'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to extract initials from |
-| limit | number | undefined | Maximum number of initials to return (optional) |
+| Parameter | Type   | Default   | Description                                     |
+| --------- | ------ | --------- | ----------------------------------------------- |
+| text      | string | required  | The input string to extract initials from       |
+| limit     | number | undefined | Maximum number of initials to return (optional) |
 
 #### <a id="camelcase"></a>`camelCase(text)`
 
@@ -280,43 +280,41 @@ Converts the given string to Camel Case.
 import { camelCase } from 'stringzy';
 
 camelCase('hello world'); // 'helloWorld'
-camelCase('this is a test'); // 'thisIsATest' 
-``` 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to convert to Camel Case |
+camelCase('this is a test'); // 'thisIsATest'
+```
 
+| Parameter | Type   | Default  | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| text      | string | required | The input string to convert to Camel Case |
 
 #### <a id="pascalcase"></a>`pascalCase(text)`
+
 Converts the given string to Pascal Case.
 
 ```javascript
 import { pascalCase } from 'stringzy';
 
-
 pascalCase('hello world'); // 'HelloWorld'
 pascalCase('this is a test'); // 'ThisIsATest'
 ```
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to convert to Pascal Case |
+
+| Parameter | Type   | Default  | Description                                |
+| --------- | ------ | -------- | ------------------------------------------ |
+| text      | string | required | The input string to convert to Pascal Case |
 
 #### <a id="snakecase"></a>`snakeCase(text)`
 
 Converts the given string to Snake Case.
 
-```javascript 
+```javascript
 import { snakeCase } from 'stringzy';
 snakeCase('hello world'); // 'hello_world'
 snakeCase('this is a test'); // 'this_is_a_test'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to convert to Snake Case |
-
-
-
+| Parameter | Type   | Default  | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| text      | string | required | The input string to convert to Snake Case |
 
 #### <a id="kebabcase"></a>`kebabCase(text)`
 
@@ -325,15 +323,13 @@ Converts the given string to Kebab Case.
 ```javascript
 import { kebabCase } from 'stringzy';
 
-
 kebabCase('hello world'); // 'hello-world'
 kebabCase('this is a test'); // 'this-is-a-test'
-``` 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to convert to Kebab Case |
+```
 
-
+| Parameter | Type   | Default  | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| text      | string | required | The input string to convert to Kebab Case |
 
 #### <a id="titlecase"></a>`titleCase(text)`
 
@@ -342,28 +338,28 @@ Converts the given string to Title Case.
 ```javascript
 import { titleCase } from 'stringzy';
 
-
 titleCase('hello world'); // 'Hello World'
 titleCase('this is a test'); // 'This Is A Test'
 ```
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to convert to Title Case |
+
+| Parameter | Type   | Default  | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| text      | string | required | The input string to convert to Title Case |
 
 #### <a id="constantcase"></a>`constantCase(text)`
+
 Converts the given string to Constant Case.
 
 ```javascript
 import { constantCase } from 'stringzy';
 
-
 constantCase('hello world'); // 'HELLO_WORLD'
 constantCase('this is a test'); // 'THIS_IS_A_TEST'
-
 ```
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to convert to Constant Case |
+
+| Parameter | Type   | Default  | Description                                  |
+| --------- | ------ | -------- | -------------------------------------------- |
+| text      | string | required | The input string to convert to Constant Case |
 
 #### <a id="escapehtml"></a>`escapeHTML(text)`
 
@@ -385,12 +381,13 @@ escapeHTML('Say "Hello" & it\'s < 5 > 2');
 // Returns: 'Say &quot;Hello&quot; &amp; it&#39;s &lt; 5 &gt; 2'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to escape HTML characters from |
+| Parameter | Type   | Default  | Description                                     |
+| --------- | ------ | -------- | ----------------------------------------------- |
+| text      | string | required | The input string to escape HTML characters from |
 
 #### <a id="masksegment"></a>`maskSegment(text, maskStart, maskEnd, maskChar?)`
-Masks a segment of a string by replacing characters between two indices with a specified character (default is '*').
+
+Masks a segment of a string by replacing characters between two indices with a specified character (default is '\*').
 
 ```javascript
 import { maskSegment } from 'stringzy';
@@ -403,16 +400,17 @@ maskSegment('abcdef', 1, 4, '#');
 
 maskSegment('token');
 // Returns: '*****'
-
 ```
-| Parameter |	Type | Default| Description | 
-|-----------|------|--------|-------------|
-|text	| string | required |	The input string to apply the masking to|
-|maskStart	|number|	`0`|	The start index (inclusive) of the segment to mask|
-|maskEnd	|number|	`text.length`|	The end index (exclusive) of the segment to mask|
-|maskChar	|string	|`'*'` |	The character to use for masking (must be one character)|
+
+| Parameter | Type   | Default       | Description                                              |
+| --------- | ------ | ------------- | -------------------------------------------------------- |
+| text      | string | required      | The input string to apply the masking to                 |
+| maskStart | number | `0`           | The start index (inclusive) of the segment to mask       |
+| maskEnd   | number | `text.length` | The end index (exclusive) of the segment to mask         |
+| maskChar  | string | `'*'`         | The character to use for masking (must be one character) |
 
 #### <a id="deburr"></a>deburr(text)
+
 Removes accents and diacritics from letters in a string (e.g. déjà vu → deja vu).
 
 ```javascript
@@ -426,9 +424,9 @@ deburr('Élève São Paulo');
 
 deburr('über cool');
 // Returns: 'uber cool'
-
 ```
-| Parameter | Type   | Default |  Description                               |
+
+| Parameter | Type   | Default  | Description                               |
 | --------- | ------ | -------- | ----------------------------------------- |
 | text      | string | required | The input string to strip diacritics from |
 
@@ -575,6 +573,7 @@ console.log(result.output); // helloEvilCode
 ---
 
 #### <a id="splitchunks"></a>`splitChunks(text, chunkSize)`
+
 Takes a string and chunk size as the argument and splits the string into chunks of given size.
 
 ```javascript
@@ -588,12 +587,12 @@ splitChunks('helloworld', 3);
 
 splitChunks('helloworld');
 // Returns: ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
-
 ```
-| Parameter |	Type | Default| Description | 
-|-----------|------|--------|-------------|
-|text	| string | required |	The input string that needs to be chunked|
-|chunkSize	|number|	`1`|	The size of each chunk in which the string is to be split|
+
+| Parameter | Type   | Default  | Description                                               |
+| --------- | ------ | -------- | --------------------------------------------------------- |
+| text      | string | required | The input string that needs to be chunked                 |
+| chunkSize | number | `1`      | The size of each chunk in which the string is to be split |
 
 ---
 
@@ -610,9 +609,9 @@ isURL('https://example.com'); // true
 isURL('not-a-url'); // false
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to validate as URL |
+| Parameter | Type   | Default  | Description                         |
+| --------- | ------ | -------- | ----------------------------------- |
+| text      | string | required | The input string to validate as URL |
 
 #### <a id="isemail"></a>`isEmail(text)`
 
@@ -623,9 +622,9 @@ isEmail('user@example.com'); // true
 isEmail('invalid-email'); // false
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to validate as email |
+| Parameter | Type   | Default  | Description                           |
+| --------- | ------ | -------- | ------------------------------------- |
+| text      | string | required | The input string to validate as email |
 
 #### <a id="isdate"></a>`isDate(text)`
 
@@ -642,11 +641,11 @@ isDate('invalid-date', DateFormat.YYYMMDD); // false
 isDate('2023-13-45', DateFormat.YYYMMDD); // false
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| input | string | required | The input string to validate as date |
-| format | DateFormats | required | The date format to validate against |
-| separator | string | optional | The separator to be used if it is not "-" |
+| Parameter | Type        | Default  | Description                               |
+| --------- | ----------- | -------- | ----------------------------------------- |
+| input     | string      | required | The input string to validate as date      |
+| format    | DateFormats | required | The date format to validate against       |
+| separator | string      | optional | The separator to be used if it is not "-" |
 
 #### <a id="isempty"></a>`isEmpty(text)`
 
@@ -657,26 +656,45 @@ isEmpty('   '); // true
 isEmpty('hello'); // false
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to check for emptiness |
+| Parameter | Type   | Default  | Description                             |
+| --------- | ------ | -------- | --------------------------------------- |
+| text      | string | required | The input string to check for emptiness |
 
 #### <a id="isslug"></a>`isSlug(text)`
 
 Checks if a string is a valid slug.
 
 ```javascript
-isSlug("hello-world");         // true
-isSlug("test-product-123");    // true
-isSlug("Hello-World");         // false (uppercase letters)
-isSlug("hello--world");        // false (consecutive hyphens)
-isSlug("-hello-world");        // false (starts with hyphen)
-isSlug("hello_world");         // false (underscore not allowed)
+isSlug('hello-world'); // true
+isSlug('test-product-123'); // true
+isSlug('Hello-World'); // false (uppercase letters)
+isSlug('hello--world'); // false (consecutive hyphens)
+isSlug('-hello-world'); // false (starts with hyphen)
+isSlug('hello_world'); // false (underscore not allowed)
+```
+
+| Parameter | Type   | Default  | Description                          |
+| --------- | ------ | -------- | ------------------------------------ |
+| text      | string | required | The input string to validate as slug |
+
+#### <a id="istypeof"></a>`isTypeOf(input, type)`
+
+Checks if a file or URL has a valid extension for a given type
+
+```javascript
+isType("photo.PNG", "image");                    // true
+isType("https://example.com/logo.svg", "image"); // true
+isType({ name: "track.mp3" }, "audio");          // true
+isType("filewithoutextension", "image");         // false
+isType("document.zip", "document");              // false
+isType("video.mp4", "document");                 // false
 ```
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| text | string | required | The input string to validate as slug |
+| input | string | required | The file name, URL string, or object with .name |
+| input | string | required | The file type category to validate (image, video, audio, document, archive) |
+
 
 #### <a id="isipv4"></a>`isIPv4(text)`
 
@@ -693,10 +711,9 @@ isIPv4('192.168.01.1'); // false (leading zeros)
 isIPv4('192.168.1.a'); // false (non-numeric)
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to validate as IPv4 address |
-
+| Parameter | Type   | Default  | Description                                  |
+| --------- | ------ | -------- | -------------------------------------------- |
+| text      | string | required | The input string to validate as IPv4 address |
 
 #### <a id="ishexcolor"></a>`isHexColor(text)`
 
@@ -705,20 +722,39 @@ Checks if a string is a valid Hex color.
 ```javascript
 import { isHexColor } from 'stringzy';
 
-isHexColor('#fff');       // true
-isHexColor('fff');        // true
-isHexColor('#a1b2c3');    // true
-isHexColor('123abc');     // true
-isHexColor('#1234');      // false
-isHexColor('blue');       // false
+isHexColor('#fff'); // true
+isHexColor('fff'); // true
+isHexColor('#a1b2c3'); // true
+isHexColor('123abc'); // true
+isHexColor('#1234'); // false
+isHexColor('blue'); // false
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to validate as Hex color |
+| Parameter | Type   | Default  | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| text      | string | required | The input string to validate as Hex color |
+
+#### <a id="ispalindrome"></a>`isPalindrome(text)`
+
+Checks if a string is a palindrome.
+The check is case-insensitive and ignores spaces and punctuation.
+
+```javascript
+import { isPalindrome } from 'stringzy';
+
+isPalindrome('racecar');                            // true
+isPalindrome('A man, a plan, a canal: Panama');     // true
+isPalindrome('No lemon, no melon');                 // true
+isPalindrome('hello');                              // false
+isPalindrome('Was it a car or a cat I saw?');       // true
+```
+
+| Parameter | Type   | Default  | Description                              |
+| --------- | ------ | -------- | ---------------------------------------- |
+| text      | string | required | The input string to check for palindrome |
+
 
 ---
-
 
 ### 📊 Analysis
 
@@ -731,21 +767,25 @@ Calculates the estimated reading duration for a given text based on an average r
 ```javascript
 import { readingDuration } from 'stringzy';
 
-readingDuration('This is a sample text with twenty-three words to test the reading duration function.');
+readingDuration(
+  'This is a sample text with twenty-three words to test the reading duration function.'
+);
 // Returns: 0 (23 words / 230 words per minute ≈ 0 minutes)
 
-readingDuration('This text contains fifty words. It is designed to test the reading duration function with a larger input.', 200);
+readingDuration(
+  'This text contains fifty words. It is designed to test the reading duration function with a larger input.',
+  200
+);
 // Returns: 1 (50 words / 200 words per minute ≈ 1 minute)
 
 readingDuration(Array(9999).fill('Word').join(' '));
 // Returns: 43 (9999 words / 230 words per minute ≈ 43 minutes)
 ```
 
-| Parameter      | Type     | Default | Description                                                                 |
-|----------------|----------|---------|-----------------------------------------------------------------------------|
-| text           | string   | required | The input text for which the reading duration is to be calculated           |
-| readingSpeed   | number   | 230     | The reading speed in words per minute. Defaults to 230 (average reading speed) |
-
+| Parameter    | Type   | Default  | Description                                                                    |
+| ------------ | ------ | -------- | ------------------------------------------------------------------------------ |
+| text         | string | required | The input text for which the reading duration is to be calculated              |
+| readingSpeed | number | 230      | The reading speed in words per minute. Defaults to 230 (average reading speed) |
 
 #### <a id="wordcount"></a>`wordCount(text)`
 
@@ -756,9 +796,9 @@ wordCount('Hello world'); // 2
 wordCount(''); // 0
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to count words in |
+| Parameter | Type   | Default  | Description                        |
+| --------- | ------ | -------- | ---------------------------------- |
+| text      | string | required | The input string to count words in |
 
 #### <a id="charactercount"></a>`characterCount(text)`
 
@@ -768,9 +808,9 @@ Counts the number of characters in a string.
 characterCount('Hello'); // 5
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to count characters in |
+| Parameter | Type   | Default  | Description                             |
+| --------- | ------ | -------- | --------------------------------------- |
+| text      | string | required | The input string to count characters in |
 
 #### <a id="characterfrequency"></a>`characterFrequency(text)`
 
@@ -780,14 +820,15 @@ Analyzes character frequency in a string (excluding spaces).
 characterFrequency('hello'); // { h: 1, e: 1, l: 2, o: 1 }
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to analyze character frequency |
+| Parameter | Type   | Default  | Description                                     |
+| --------- | ------ | -------- | ----------------------------------------------- |
+| text      | string | required | The input string to analyze character frequency |
 
 #### <a id="stringsimilarity"></a>`stringSimilarity(textA, textB, algorithm = 'Levenshtein')`
 
 Calculates the percentage similarity between two texts using the selected algorithm.
 Method returns a percentage (0–100) value indicating how similar the two strings are.
+
 ```javascript
 stringSimilarity('kitten', 'sitting'); // Returns: 57.14
 
@@ -796,11 +837,11 @@ stringSimilarity('hello', 'hello'); // Returns: 100
 stringSimilarity('flaw', 'lawn', 'Damerau-Levenshtein'); // Returns: 50
 ```
 
-| Parameter  | Type   | Default              | Description                                                                 |
-|------------|--------|----------------------|-----------------------------------------------------------------------------|
-| textA      | string | required             | The first text to compare.                                                  |
-| textB      | string | required             | The second text to compare.                                                 |
-| algorithm  | string | 'Levenshtein'        | The algorithm to use: 'Levenshtein' or 'Damerau-Levenshtein'.               |
+| Parameter | Type   | Default       | Description                                                   |
+| --------- | ------ | ------------- | ------------------------------------------------------------- |
+| textA     | string | required      | The first text to compare.                                    |
+| textB     | string | required      | The second text to compare.                                   |
+| algorithm | string | 'Levenshtein' | The algorithm to use: 'Levenshtein' or 'Damerau-Levenshtein'. |
 
 ---
 
@@ -821,17 +862,17 @@ complexity('');
 // Returns: { score: 0, uniqueness: 0, length: 0 }
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to analyze complexity |
+| Parameter | Type   | Default  | Description                            |
+| --------- | ------ | -------- | -------------------------------------- |
+| text      | string | required | The input string to analyze complexity |
 
 **Returns:** An object containing:
+
 - `score` (number): Overall complexity score
 - `uniqueness` (number): Measure of character uniqueness
 - `length` (number): Length of the input string
 
 ---
-
 
 ### 🎨 Formatting
 
@@ -846,9 +887,9 @@ capitalize('hello world'); // 'Hello World'
 capitalize('javaScript programming'); // 'Javascript Programming'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| text | string | required | The input string to capitalize |
+| Parameter | Type   | Default  | Description                    |
+| --------- | ------ | -------- | ------------------------------ |
+| text      | string | required | The input string to capitalize |
 
 #### <a id="formatnumber"></a>`formatNumber(number, separator = ',')`
 
@@ -859,10 +900,10 @@ formatNumber('1234567'); // '1,234,567'
 formatNumber('1234567', '.'); // '1.234.567'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| number | string\|number | required | The number to format |
-| separator | string | ',' | The separator to use for thousands |
+| Parameter | Type           | Default  | Description                        |
+| --------- | -------------- | -------- | ---------------------------------- |
+| number    | string\|number | required | The number to format               |
+| separator | string         | ','      | The separator to use for thousands |
 
 #### <a id="formatphone"></a>`formatPhone(phone, format = 'us')`
 
@@ -873,14 +914,15 @@ formatPhone('1234567890'); // '(123) 456-7890'
 formatPhone('11234567890', 'international'); // '+1 (123) 456-7890'
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| phone | string | required | The phone number string to format |
-| format | string | 'us' | Format type: 'us' or 'international' |
+| Parameter | Type   | Default  | Description                          |
+| --------- | ------ | -------- | ------------------------------------ |
+| phone     | string | required | The phone number string to format    |
+| format    | string | 'us'     | Format type: 'us' or 'international' |
 
 ## 🔧 Usage Patterns
 
 ### Individual Function Imports
+
 ```javascript
 import { isEmail, wordCount, capitalize } from 'stringzy';
 
@@ -891,6 +933,7 @@ if (isEmail(email)) {
 ```
 
 ### Namespace Imports
+
 ```javascript
 import { validate, analyze, format } from 'stringzy';
 
@@ -901,6 +944,7 @@ const formatted = format.capitalize('hello world');
 ```
 
 ### Default Import (All Functions)
+
 ```javascript
 import stringzy from 'stringzy';
 
@@ -941,19 +985,19 @@ import { validate } from 'stringzy';
 
 function validateForm(formData) {
   const errors = {};
-  
+
   if (!validate.isEmail(formData.email)) {
     errors.email = 'Please enter a valid email address';
   }
-  
+
   if (!validate.isURL(formData.website)) {
     errors.website = 'Please enter a valid URL';
   }
-  
+
   if (validate.isEmpty(formData.name)) {
     errors.name = 'Name is required';
   }
-  
+
   return errors;
 }
 ```
@@ -968,7 +1012,7 @@ function getContentStats(text) {
     words: analyze.wordCount(text),
     characters: analyze.characterCount(text),
     frequency: analyze.characterFrequency(text),
-    readingTime: Math.ceil(analyze.wordCount(text) / 200)
+    readingTime: Math.ceil(analyze.wordCount(text) / 200),
   };
 }
 ```
@@ -982,7 +1026,7 @@ function formatUserData(userData) {
   return {
     name: format.capitalize(userData.name),
     phone: format.formatPhone(userData.phone),
-    revenue: format.formatNumber(userData.revenue)
+    revenue: format.formatNumber(userData.revenue),
   };
 }
 ```
@@ -1005,7 +1049,7 @@ const formatted: string = format.capitalize('hello world');
 stringzy is organized into four specialized modules:
 
 - **`transformations.js`** - Core string transformations
-- **`validations.js`** - String validation utilities  
+- **`validations.js`** - String validation utilities
 - **`analysis.js`** - String analysis and metrics
 - **`formatting.js`** - String formatting functions
 
@@ -1014,7 +1058,6 @@ Each module can be imported individually or accessed through the main entry poin
 ## 🤝 Contributing
 
 Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTING.md) before submitting a pull request.
-
 
 ## <a id="contri"></a>`Contributors`
 
