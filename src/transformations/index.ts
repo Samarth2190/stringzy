@@ -15,7 +15,6 @@ export { escapeHtml } from './escapeHTML';
 export { maskSegment } from './maskSegment';
 export { numberToText } from './numberToText/main';
 
-
 import { camelCase } from './camelCase';
 import { capitalizeWords } from './capitalizeWords';
 import { constantCase } from './constantCase';
