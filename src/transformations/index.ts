@@ -13,6 +13,7 @@ export { toSlug } from './toSlug';
 export { truncateText } from './truncateText';
 export { escapeHtml } from './escapeHTML';
 export { maskSegment } from './maskSegment';
+export { numberToText } from './numberToText/main';
 
 
 import { camelCase } from './camelCase';
@@ -31,6 +32,7 @@ import { truncateText } from './truncateText';
 import { escapeHtml } from './escapeHTML';
 import { maskSegment } from './maskSegment';
 import { deburr } from './deburr';
+import { numberToText } from './numberToText/main';
 
 export const transformations = {
     camelCase,
@@ -48,5 +50,6 @@ export const transformations = {
     truncateText,
     escapeHtml,
     maskSegment,
-    deburr
+    deburr,
+    numberToText
 };

@@ -1,14 +1,19 @@
 import {describe} from "node:test";
 import assert from "node:assert";
-import {numberToText} from "../../transformations/numberToText";
+import {numberToText} from "../../transformations";
+import {NumberToTextLanguage} from "../../transformations/numberToText/types";
 
 
 describe("numberToText", () => {
         describe("Param error handling", () => {
             assert.throws(() => numberToText("aaaa" as any), /Num param should be number/i);
-            assert.throws(() => numberToText(123, "invalid" as any), /Lang param invalid/i);
             assert.throws(() => numberToText(1000000000001), RangeError);
             assert.throws(() => numberToText(-1000000000001), RangeError);
+
+            const validLanguages: NumberToTextLanguage[] = ['en', 'pl'];
+            const errorMessage = `Language must be one of: ${validLanguages.join(', ')}`;
+
+            assert.throws(() => numberToText(123, "invalid" as any), new RegExp(errorMessage, "i"));
         })
 
         describe("Conversion cases - en", () => {
@@ -49,7 +54,7 @@ describe("numberToText", () => {
             assert.strictEqual(numberToText(1000, 'pl'), "tysiąc");
             assert.strictEqual(numberToText(2023, 'pl'), "dwa tysiące dwadzieścia trzy");
             assert.strictEqual(numberToText(1000000, 'pl'), "milion");
-            assert.strictEqual(numberToText(1200000, 'pl'), "jeden milion dwieście tysięcy");
+            assert.strictEqual(numberToText(1200000, 'pl'), "milion dwieście tysięcy");
             assert.strictEqual(numberToText(1000000000, 'pl'), "miliard");
             assert.strictEqual(numberToText(1000000000000, 'pl'), "bilion");
 
