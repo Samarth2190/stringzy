@@ -79,6 +79,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [maskSegment](#masksegment) - Masks a segment of a string by replacing characters between two indices with a specified character
 - [deburr](#deburr) – Removes accents and diacritical marks from a string
 - [splitChunks](#splitchunks) - Breaks a string down into chunks of specified length.
+- [numberToText](#numbertotext) - Converts a number to its text representation in specified language
 
 ### Validations
 
@@ -454,6 +455,23 @@ splitChunks('helloworld');
 | chunkSize | number | `1`      | The size of each chunk in which the string is to be split |
 
 ---
+#### <a id="numbertotext"></a>`numberToText(num, lang)`
+Converts a number to its text representation in the specified language.
+
+```javascript
+import { numberToText } from 'stringzy';
+numberToText(12345); // Returns: 'twelve thousand three hundred forty-five'
+numberToText(12345, 'en'); // Returns: 'twelve thousand three hundred forty-five'
+numberToText(12345, 'pl'); // Returns: 'dwanaście tysięcy trzysta czterdzieści pięć'
+```
+
+| Parameter | Type   | Default | Description |
+|-----------|--------|---------|-------------|
+| num       | number | required | The number to convert to text |
+| lang      | string | 'en'    | The language code for the text representation (e.g., 'en' for English, 'pl' for Polish) |
+
+Available languages: en (English), pl (Polish).
+
 
 ### ✅ Validations
 

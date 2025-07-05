@@ -13,6 +13,7 @@ export { toSlug } from './toSlug';
 export { truncateText } from './truncateText';
 export { escapeHtml } from './escapeHTML';
 export { maskSegment } from './maskSegment';
+export { numberToText } from './numberToText/main';
 
 import { camelCase } from './camelCase';
 import { capitalizeWords } from './capitalizeWords';
@@ -30,22 +31,24 @@ import { truncateText } from './truncateText';
 import { escapeHtml } from './escapeHTML';
 import { maskSegment } from './maskSegment';
 import { deburr } from './deburr';
+import { numberToText } from './numberToText/main';
 
 export const transformations = {
-  camelCase,
-  capitalizeWords,
-  constantCase,
-  initials,
-  kebabCase,
-  pascalCase,
-  removeDuplicates,
-  removeSpecialChars,
-  removeWords,
-  snakeCase,
-  titleCase,
-  toSlug,
-  truncateText,
-  escapeHtml,
-  maskSegment,
-  deburr,
+    camelCase,
+    capitalizeWords,
+    constantCase,
+    initials,
+    kebabCase,
+    pascalCase,
+    removeDuplicates,
+    removeSpecialChars,
+    removeWords,
+    snakeCase,
+    titleCase,
+    toSlug,
+    truncateText,
+    escapeHtml,
+    maskSegment,
+    deburr,
+    numberToText
 };
