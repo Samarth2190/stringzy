@@ -30,6 +30,7 @@ import { truncateText } from './truncateText';
 import { escapeHtml } from './escapeHTML';
 import { maskSegment } from './maskSegment';
 import { deburr } from './deburr';
+import { pipe, pipeLine } from './pipe';
 
 export const transformations = {
   camelCase,
@@ -48,4 +49,6 @@ export const transformations = {
   escapeHtml,
   maskSegment,
   deburr,
+  pipeLine,
+  pipe
 };
