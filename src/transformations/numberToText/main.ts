@@ -23,14 +23,15 @@ export function numberToText(num: number, lang: NumberToTextLanguage = 'en'): st
     validateNumber(num);
     validateLanguage(lang);
 
-    switch (lang) {
-        case 'en':
-            return numberToTextEn(num);
-        case 'pl':
-            return numberToTextPl(num);
-        default:
-            throw new TypeError('Unsupported language');
+    const langMap: Record<NumberToTextLanguage, (num: number) => string> = {
+        en: numberToTextEn,
+        pl: numberToTextPl,
+    };
+
+    if (!langMap[lang]) {
+        throw new TypeError('Unsupported language');
     }
+    return langMap[lang](num);
 }
 
 /////////////////////////////////////////
