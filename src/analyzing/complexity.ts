@@ -4,6 +4,39 @@ export type ComplexityResult = {
   length: number;
 };
 
+/**
+ * Evaluates the complexity of a given string based on length, character uniqueness,
+ * and character type diversity (lowercase, uppercase, numbers, symbols).
+ *
+ * The returned score ranges from 0 to 1, where a higher score indicates greater complexity.
+ * It also returns the raw length of the string and its uniqueness ratio (unique chars / total length).
+ *
+ * - `uniqueness`: Measures how varied the characters are.
+ * - `score`: Combines uniqueness, type diversity, and length into a weighted value.
+ * - `length`: The total number of characters in the input.
+ *
+ * Throws a `TypeError` if the input is not a string.
+ *
+ * @param {string} str - The input string to evaluate.
+ * @returns {ComplexityResult} An object containing `score`, `uniqueness`, and `length`.
+ * @throws {TypeError} If the input is not a string.
+ *
+ * @example
+ * complexity("abcABC123!");
+ * // {
+ * //   score: 0.93,
+ * //   uniqueness: 1.00,
+ * //   length: 10
+ * // }
+ *
+ * @example
+ * complexity("aaaa");
+ * // {
+ * //   score: 0.25,
+ * //   uniqueness: 0.25,
+ * //   length: 4
+ * // }
+ */
 export function complexity(str: string): ComplexityResult {
   if (!str) return { score: 0, uniqueness: 0, length: 0 };
 
