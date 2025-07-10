@@ -1,6 +1,6 @@
 <div align="center">
-  
-  
+
+
   ![Stringzy banner](./assets/stringzy-banner2.jpg)
 
 ![NPM Version](https://img.shields.io/npm/v/stringzy)
@@ -92,6 +92,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
+- [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
 
 ### Analysis
 
@@ -629,6 +630,23 @@ isPalindrome('Was it a car or a cat I saw?');       // true
 | Parameter | Type   | Default  | Description                              |
 | --------- | ------ | -------- | ---------------------------------------- |
 | text      | string | required | The input string to check for palindrome |
+
+#### <a id="iscoordinates"></a>`isCoordinates(latitude, longitude)`
+
+Checks if given latitude and longitude are valid coordinates.
+
+```javascript
+import { isCoordinates } from 'stringzy';
+
+isCoordinates(48.8582, 2.2945); // true
+isCoordinates(40.748817, -73.985428); // true
+isCoordinates(9999, -9999); // false
+```
+
+| Parameter | Type        | Default  | Description                               |
+| --------- | ----------- | -------- | ----------------------------------------- |
+| latitude  | number      | required | Latitude to validate                      |
+| longitude | number      | required | Longitude to validate                     |
 
 
 ---
