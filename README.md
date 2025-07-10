@@ -92,7 +92,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
-- [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are both valid
+- [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
 
 ### Analysis
 
