@@ -633,7 +633,7 @@ isPalindrome('Was it a car or a cat I saw?');       // true
 
 #### <a id="iscoordinates"></a>`isCoordinates(latitude, longitude)`
 
-Checks if given latitude and longitude are both valid.
+Checks if given latitude and longitude are valid coordinates.
 
 ```javascript
 import { isCoordinates } from 'stringzy';

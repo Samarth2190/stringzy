@@ -1,5 +1,5 @@
 /**
- * Checks if given latitude and longitude are both valid.
+ * Checks if given latitude and longitude are valid coordinates.
  *
  * @param {number} lat - The latitude to check.
  * @param {number} long - The longitude to check.
