@@ -1,3 +1,4 @@
+export { isCoordinates } from './isCoordinates';
 export { isDate } from './isDate';
 export { isEmail } from './isEmail';
 export { isEmpty } from './isEmpty';
@@ -7,6 +8,7 @@ export { isIPv4 } from './isIPv4';
 export { isHexColor } from './isHexColor';
 export { isPalindrome } from './isPalindrome'
 
+import { isCoordinates } from './isCoordinates';
 import { isDate } from './isDate';
 import { isEmail } from './isEmail';
 import { isEmpty } from './isEmpty';
@@ -17,6 +19,7 @@ import { isHexColor } from './isHexColor';
 import { isPalindrome } from './isPalindrome';
 
 export const validations = {
+  isCoordinates,
   isDate,
   isEmail,
   isEmpty,
