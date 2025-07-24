@@ -14,24 +14,7 @@ export { truncateText } from './truncateText';
 export { escapeHtml } from './escapeHTML';
 export { maskSegment } from './maskSegment';
 export { numberToText } from './numberToText/main';
-
-import { camelCase } from './camelCase';
-import { capitalizeWords } from './capitalizeWords';
-import { constantCase } from './constantCase';
-import { initials } from './initials';
-import { kebabCase } from './kebabCase';
-import { pascalCase } from './pascalCase';
-import { removeDuplicates } from './removeDuplicates';
-import { removeSpecialChars } from './removeSpecialChars';
-import { removeWords } from './removeWords';
-import { snakeCase } from './snakeCase';
-import { titleCase } from './titleCase';
-import { toSlug } from './toSlug';
-import { truncateText } from './truncateText';
-import { escapeHtml } from './escapeHTML';
-import { maskSegment } from './maskSegment';
-import { deburr } from './deburr';
-import { numberToText } from './numberToText/main';
+import { pipe, pipeLine } from './pipe';
 
 export const transformations = {
     camelCase,
@@ -50,5 +33,7 @@ export const transformations = {
     escapeHtml,
     maskSegment,
     deburr,
-    numberToText
+    numberToText,
+    pipeLine,
+    pipe
 };
