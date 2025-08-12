@@ -6,7 +6,6 @@
 ![NPM Version](https://img.shields.io/npm/v/stringzy)
 ![Downloads](https://img.shields.io/npm/dt/stringzy)
 ![License](https://img.shields.io/npm/l/stringzy)
-![Bundle Size](https://img.shields.io/bundlephobia/min/stringzy)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
