@@ -101,6 +101,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [characterFrequency](#characterfrequency) - Analyzes character frequency in a string
 - [stringSimilarity](#stringsimilarity) - Calculates the percentage similarity between two strings
 - [complexity](#complexity) - Analyzes string complexity including score, uniqueness, and length
+- [patternCount](#patterncount) - calculates the number of times a specific pattern occurs in a given text
+
 
 ### Formatting
 
