@@ -737,7 +737,7 @@ stringSimilarity('flaw', 'lawn', 'Damerau-Levenshtein'); // Returns: 50
 | textB     | string | required      | The second text to compare.                                   |
 | algorithm | string | 'Levenshtein' | The algorithm to use: 'Levenshtein' or 'Damerau-Levenshtein'. |
 
----
+
 
 #### <a id="complexity"></a>`complexity(text)`
 
@@ -765,6 +765,25 @@ complexity('');
 - `score` (number): Overall complexity score
 - `uniqueness` (number): Measure of character uniqueness
 - `length` (number): Length of the input string
+
+
+
+#### <a id="patterncount"></a>`patternCount(text, pattern)`
+
+Counts the number of times a substring (pattern) occurs in a string, including overlapping occurrences.  
+This function uses the **Knuth–Morris–Pratt (KMP)** algorithm for efficient matching.
+
+```javascript
+patternCount('aaaa', 'aa'); // 3
+patternCount('abababa', 'aba'); // 3
+patternCount('hello world', 'o'); // 2
+patternCount('hello world', 'x'); // 0
+```
+
+| Parameter | Type   | Default  | Description                                    |
+| --------- | ------ | -------- | ---------------------------------------------- |
+| text      | string | required | The input string to search in                  |
+| pattern   | string | required | The substring (pattern) to count (overlapping) |
 
 ---
 
