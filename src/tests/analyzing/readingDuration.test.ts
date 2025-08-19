@@ -1,5 +1,3 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
 import { readingDuration } from '../../analyzing/readingDuration';
 
 describe('readingDuration', () => {
@@ -21,22 +19,22 @@ describe('readingDuration', () => {
       expectedDuration: 0, // 50 words
     },
     {
-      text: Array(9999).fill('Word').join(' '), // Generates a text with 9999 words
-      expectedDuration: 43, // 9999 words / 230 words per minute ≈ 43 minutes
+      text: Array(9999).fill('Word').join(' '), // 9999 words
+      expectedDuration: 43, // 9999 / 230 ≈ 43 minutes
     },
     {
-      text: Array(230).fill('Word').join(' '), // Generates a text with 230 words
-      expectedDuration: 1, // 230 words / 230 words per minute = 1 minute
+      text: Array(230).fill('Word').join(' '), // 230 words
+      expectedDuration: 1,
     },
     {
-      text: Array(460).fill('Word').join(' '), // Generates a text with 460 words
-      expectedDuration: 2, // 460 words / 230 words per minute = 2 minutes
+      text: Array(460).fill('Word').join(' '), // 460 words
+      expectedDuration: 2,
     },
   ];
 
   testCases.forEach(({ text, expectedDuration }) => {
     it(`returns ${expectedDuration} for text with ${text.split(' ').length} words`, () => {
-      assert.strictEqual(readingDuration(text), expectedDuration);
+      expect(readingDuration(text)).toBe(expectedDuration);
     });
   });
 });

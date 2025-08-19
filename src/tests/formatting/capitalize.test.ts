@@ -1,18 +1,19 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
 import { capitalize } from '../../formatting/capitalize';
 
 describe('capitalize', () => {
   it('capitalizes each word', () => {
-    assert.strictEqual(capitalize('hello world'), 'Hello World');
+    expect(capitalize('hello world')).toBe('Hello World');
   });
+
   it('handles single word', () => {
-    assert.strictEqual(capitalize('foo'), 'Foo');
+    expect(capitalize('foo')).toBe('Foo');
   });
+
   it('handles empty string', () => {
-    assert.strictEqual(capitalize(''), '');
+    expect(capitalize('')).toBe('');
   });
+
   it('throws if input is not a string', () => {
-    assert.throws(() => capitalize(123 as any), /Input must be a string/);
+    expect(() => capitalize(123 as any)).toThrow(/Input must be a string/);
   });
 });

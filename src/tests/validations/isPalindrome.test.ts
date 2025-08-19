@@ -1,41 +1,39 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
-import { isPalindrome } from '../../validations/isPalindrome';
+import { isPalindrome } from "../../validations/isPalindrome";
 
-describe('isPalindrome', () => {
-  it('returns true for simple palindromes', () => {
-    assert.strictEqual(isPalindrome('racecar'), true);
-    assert.strictEqual(isPalindrome('madam'), true);
+describe("isPalindrome", () => {
+  it("returns true for simple palindromes", () => {
+    expect(isPalindrome("racecar")).toBe(true);
+    expect(isPalindrome("madam")).toBe(true);
   });
 
-  it('returns false for non-palindromes', () => {
-    assert.strictEqual(isPalindrome('hello'), false);
-    assert.strictEqual(isPalindrome('world'), false);
+  it("returns false for non-palindromes", () => {
+    expect(isPalindrome("hello")).toBe(false);
+    expect(isPalindrome("world")).toBe(false);
   });
 
-  it('is case-insensitive', () => {
-    assert.strictEqual(isPalindrome('RaceCar'), true);
-    assert.strictEqual(isPalindrome('MadAm'), true);
+  it("is case-insensitive", () => {
+    expect(isPalindrome("RaceCar")).toBe(true);
+    expect(isPalindrome("MadAm")).toBe(true);
   });
 
-  it('ignores punctuation and spaces', () => {
-    assert.strictEqual(isPalindrome('A man, a plan, a canal: Panama'), true);
-    assert.strictEqual(isPalindrome('No lemon, no melon!'), true);
+  it("ignores punctuation and spaces", () => {
+    expect(isPalindrome("A man, a plan, a canal: Panama")).toBe(true);
+    expect(isPalindrome("No lemon, no melon!")).toBe(true);
   });
 
-  it('returns true for empty string and single characters', () => {
-    assert.strictEqual(isPalindrome(''), true);
-    assert.strictEqual(isPalindrome('x'), true);
+  it("returns true for empty string and single characters", () => {
+    expect(isPalindrome("")).toBe(true);
+    expect(isPalindrome("x")).toBe(true);
   });
 
-  it('handles strings with only special characters', () => {
-    assert.strictEqual(isPalindrome('?!'), true); // cleans to ''
-    assert.strictEqual(isPalindrome('!@#$$#@!'), true); // also cleans to ''
+  it("handles strings with only special characters", () => {
+    expect(isPalindrome("?!")).toBe(true); // cleans to ''
+    expect(isPalindrome("!@#$$#@!")).toBe(true); // also cleans to ''
   });
 
-  it('throws an error if input is not a string', () => {
-    assert.throws(() => isPalindrome(123 as any), /Input must be a string/);
-    assert.throws(() => isPalindrome(null as any), /Input must be a string/);
-    assert.throws(() => isPalindrome(undefined as any), /Input must be a string/);
+  it("throws an error if input is not a string", () => {
+    expect(() => isPalindrome(123 as any)).toThrow(/Input must be a string/);
+    expect(() => isPalindrome(null as any)).toThrow(/Input must be a string/);
+    expect(() => isPalindrome(undefined as any)).toThrow(/Input must be a string/);
   });
 });

@@ -1,24 +1,25 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
 import { complexity } from '../../analyzing/complexity';
 
 describe('complexity', () => {
   it('returns 0s for empty string', () => {
-    assert.deepStrictEqual(complexity(''), { score: 0, uniqueness: 0, length: 0 });
+    expect(complexity('')).toEqual({ score: 0, uniqueness: 0, length: 0 });
   });
+
   it('returns correct result for simple string', () => {
     const result = complexity('abc');
-    assert.strictEqual(typeof result.score, 'number');
-    assert.strictEqual(typeof result.uniqueness, 'number');
-    assert.strictEqual(result.length, 3);
+    expect(typeof result.score).toBe('number');
+    expect(typeof result.uniqueness).toBe('number');
+    expect(result.length).toBe(3);
   });
+
   it('returns correct result for complex string', () => {
     const result = complexity('aA1!aA1!');
-    assert.ok(result.score > 0);
-    assert.ok(result.uniqueness > 0);
-    assert.strictEqual(result.length, 8);
+    expect(result.score).toBeGreaterThan(0);
+    expect(result.uniqueness).toBeGreaterThan(0);
+    expect(result.length).toBe(8);
   });
+
   it('throws if input is not a string', () => {
-    assert.throws(() => complexity(123 as any), /Input must be a string/);
+    expect(() => complexity(123 as any)).toThrow(/Input must be a string/);
   });
 });

@@ -1,15 +1,18 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
 import { capitalizeWords } from '../../transformations/capitalizeWords';
 
 describe('capitalizeWords', () => {
   it('capitalizes each word', () => {
-    assert.strictEqual(capitalizeWords('hello world'), 'Hello World');
+    expect(capitalizeWords('hello world')).toBe('Hello World');
+    expect(capitalizeWords('foo bar baz')).toBe('Foo Bar Baz');
   });
+
   it('handles empty string', () => {
-    assert.strictEqual(capitalizeWords(''), '');
+    expect(capitalizeWords('')).toBe('');
   });
+
   it('throws if input is not a string', () => {
-    assert.throws(() => capitalizeWords(123 as any), /Invalid argument/);
+    expect(() => capitalizeWords(123 as any)).toThrow(/Invalid argument/);
+    expect(() => capitalizeWords(null as any)).toThrow(/Invalid argument/);
+    expect(() => capitalizeWords(undefined as any)).toThrow(/Invalid argument/);
   });
 });
