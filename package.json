@@ -5,7 +5,11 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && node --test",
+    "test:node": "node --test",
+    "test:jest": "jest --coverage",
+    "test": "npm run build && npm run test:node && npm run test:jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "prepublishOnly": "npm run build",
     "format": "prettier --write ."
   },
@@ -45,8 +49,11 @@
     "url": "git+https://github.com/Samarth2190/stringzy.git"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^24.0.4",
+    "jest": "^30.0.5",
     "prettier": "^3.6.2",
+    "ts-jest": "^29.4.1",
     "typescript": "^5.8.3"
   }
 }
