@@ -102,6 +102,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [stringSimilarity](#stringsimilarity) - Calculates the percentage similarity between two strings
 - [complexity](#complexity) - Analyzes string complexity including score, uniqueness, and length
 - [patternCount](#patterncount) - calculates the number of times a specific pattern occurs in a given text
+- [vowelConsonantCount](#vowelconsonantcount) - Counts the number of vowels and consonants in a given string 
 
 
 ### Formatting
@@ -786,6 +787,26 @@ patternCount('hello world', 'x'); // 0
 | --------- | ------ | -------- | ---------------------------------------------- |
 | text      | string | required | The input string to search in                  |
 | pattern   | string | required | The substring (pattern) to count (overlapping) |
+
+#### <a id="vowelconsonantcount"></a>`vowelConsonantCount(str)`
+
+Counts the number of vowels and consonants in a given string.  
+This function is case-insensitive and ignores non-alphabetic characters.
+
+```javascript
+vowelConsonantCount('hello'); 
+// { vowels: 2, consonants: 3 }
+
+vowelConsonantCount('stringzy');
+// { vowels: 1, consonants: 7 }
+
+vowelConsonantCount('');
+// { vowels: 0, consonants: 0 }
+```
+
+| Parameter | Type   | Default  | Description                                        |
+| --------- | ------ | -------- | -------------------------------------------------- |
+| str       | string | required | The input string to count vowels and consonants in |
 
 ---
 
