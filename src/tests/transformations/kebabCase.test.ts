@@ -1,15 +1,15 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
 import { kebabCase } from '../../transformations/kebabCase';
 
 describe('kebabCase', () => {
   it('converts text to kebab-case', () => {
-    assert.strictEqual(kebabCase('hello world'), 'hello-world');
+    expect(kebabCase('hello world')).toBe('hello-world');
   });
+
   it('handles camelCase', () => {
-    assert.strictEqual(kebabCase('helloWorld'), 'hello-world');
+    expect(kebabCase('helloWorld')).toBe('hello-world');
   });
+
   it('returns empty string for null', () => {
-    assert.strictEqual(kebabCase(null as any), '');
+    expect(kebabCase(null as any)).toBe('');
   });
 });

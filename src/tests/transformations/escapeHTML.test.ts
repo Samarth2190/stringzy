@@ -1,59 +1,55 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
 import { escapeHtml } from '../../transformations/escapeHTML';
 
 describe('escapeHtml', () => {
   it('escapes ampersand', () => {
-    assert.strictEqual(escapeHtml('Tom & Jerry'), 'Tom &amp; Jerry');
+    expect(escapeHtml('Tom & Jerry')).toBe('Tom &amp; Jerry');
   });
 
   it('escapes less than', () => {
-    assert.strictEqual(escapeHtml('5 < 10'), '5 &lt; 10');
+    expect(escapeHtml('5 < 10')).toBe('5 &lt; 10');
   });
 
   it('escapes greater than', () => {
-    assert.strictEqual(escapeHtml('10 > 5'), '10 &gt; 5');
+    expect(escapeHtml('10 > 5')).toBe('10 &gt; 5');
   });
 
   it('escapes double quotes', () => {
-    assert.strictEqual(escapeHtml('Say "Hello"'), 'Say &quot;Hello&quot;');
+    expect(escapeHtml('Say "Hello"')).toBe('Say &quot;Hello&quot;');
   });
 
   it('escapes single quotes', () => {
-    assert.strictEqual(escapeHtml("It's working"), 'It&#39;s working');
+    expect(escapeHtml("It's working")).toBe('It&#39;s working');
   });
 
   it('escapes all special characters together', () => {
-    assert.strictEqual(escapeHtml(`&<>"'`), '&amp;&lt;&gt;&quot;&#39;');
+    expect(escapeHtml(`&<>"'`)).toBe('&amp;&lt;&gt;&quot;&#39;');
   });
 
   it('escapes script tag', () => {
-    assert.strictEqual(
-      escapeHtml('<script>alert("XSS")</script>'),
+    expect(escapeHtml('<script>alert("XSS")</script>')).toBe(
       '&lt;script&gt;alert(&quot;XSS&quot;)&lt;/script&gt;'
     );
   });
 
   it('escapes HTML with attributes', () => {
-    assert.strictEqual(
-      escapeHtml('<div class="test">content</div>'),
+    expect(escapeHtml('<div class="test">content</div>')).toBe(
       '&lt;div class=&quot;test&quot;&gt;content&lt;/div&gt;'
     );
   });
 
   it('handles empty string', () => {
-    assert.strictEqual(escapeHtml(''), '');
+    expect(escapeHtml('')).toBe('');
   });
 
   it('handles string with no special characters', () => {
-    assert.strictEqual(escapeHtml('Hello World'), 'Hello World');
+    expect(escapeHtml('Hello World')).toBe('Hello World');
   });
 
   it('escapes repeated characters', () => {
-    assert.strictEqual(escapeHtml('<<>>'), '&lt;&lt;&gt;&gt;');
+    expect(escapeHtml('<<>>')).toBe('&lt;&lt;&gt;&gt;');
   });
 
   it('preserves whitespace', () => {
-    assert.strictEqual(escapeHtml('  <  >  '), '  &lt;  &gt;  ');
+    expect(escapeHtml('  <  >  ')).toBe('  &lt;  &gt;  ');
   });
 });

@@ -1,18 +1,19 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
 import { toSlug } from '../../transformations/toSlug';
 
 describe('toSlug', () => {
   it('converts text to slug', () => {
-    assert.strictEqual(toSlug('Hello World!'), 'hello-world');
+    expect(toSlug('Hello World!')).toBe('hello-world');
   });
+
   it('handles already slugged text', () => {
-    assert.strictEqual(toSlug('already-slugged'), 'already-slugged');
+    expect(toSlug('already-slugged')).toBe('already-slugged');
   });
+
   it('removes special characters', () => {
-    assert.strictEqual(toSlug('foo@bar#baz'), 'foobarbaz');
+    expect(toSlug('foo@bar#baz')).toBe('foobarbaz');
   });
+
   it('throws if input is not a string', () => {
-    assert.throws(() => toSlug(123 as any), /Invalid argument/);
+    expect(() => toSlug(123 as any)).toThrow(/Invalid argument/);
   });
 });
