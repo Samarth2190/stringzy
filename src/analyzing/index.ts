@@ -5,12 +5,18 @@ export { readingDuration } from './readingDuration';
 export { wordCount } from './wordCount';
 export { stringSimilarity } from './stringSimilarity';
 
+export { functionWordCount } from './functionWordCount';
+export { contentWordCount } from './contentWordCount';
+
+
 import { characterCount } from './characterCount';
 import { characterFrequency } from './characterFrequency';
 import { complexity } from './complexity';
 import { readingDuration } from './readingDuration';
 import { wordCount } from './wordCount';
 import { stringSimilarity } from './stringSimilarity';
+
+
 
 export const analyzing = {
   characterCount,

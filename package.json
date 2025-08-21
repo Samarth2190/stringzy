@@ -48,5 +48,8 @@
     "@types/node": "^24.0.4",
     "prettier": "^3.6.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "stringzy": "^3.0.0"
   }
 }
