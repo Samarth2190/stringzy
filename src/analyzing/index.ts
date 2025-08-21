@@ -6,6 +6,10 @@ export { wordCount } from './wordCount';
 export { stringSimilarity } from './stringSimilarity';
 export { patternCount } from './patternCount';
 
+export { functionWordCount } from './functionWordCount';
+export { contentWordCount } from './contentWordCount';
+
+
 import { characterCount } from './characterCount';
 import { characterFrequency } from './characterFrequency';
 import { complexity } from './complexity';
@@ -13,6 +17,8 @@ import { readingDuration } from './readingDuration';
 import { wordCount } from './wordCount';
 import { stringSimilarity } from './stringSimilarity';
 import { patternCount } from './patternCount';
+
+
 
 export const analyzing = {
   characterCount,
