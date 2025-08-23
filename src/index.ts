@@ -8,6 +8,9 @@ import { formatting } from './formatting';
 import { transformations } from './transformations';
 import { validations } from './validations';
 
+//importing the extension to ensure String prototype is extended
+import './extension';
+
 export default {
   analyzing,
   formatting,
