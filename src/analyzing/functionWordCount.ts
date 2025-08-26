@@ -25,6 +25,10 @@ export function functionWordCount(text: string): number {
     'who', 'whom', 'which', 'what', 'when', 'where', 'why', 'how'
   ]);
 
-  const words = text.toLowerCase().trim().split(/\s+/);
+  // ✅ Normalize text: lowercase + remove punctuation
+  const cleanedText = text.toLowerCase().replace(/[^\w\s]/g, '');
+
+  const words = cleanedText.trim().split(/\s+/);
+
   return words.filter(word => functionWords.has(word)).length;
 }

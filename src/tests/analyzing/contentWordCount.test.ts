@@ -1,20 +1,19 @@
-import { contentWordCount } from "../analyzing/contentWordCount";
+import test from "node:test";
+import assert from "node:assert/strict";
+import { contentWordCount } from "../../analyzing/contentWordCount.js";
 
-describe("contentWordCount", () => {
-  test("counts only content words in a sentence", () => {
-    expect(contentWordCount("This is a test of the system")).toBe(2);
-    // "This" and "test" are content words
-  });
+test("counts content words in a normal sentence", () => {
+  assert.equal(contentWordCount("This is a test of the system"), 2);
+});
 
-  test("counts all words when no function words are present", () => {
-    expect(contentWordCount("Elephants run fast")).toBe(3);
-  });
+test("returns 0 when there are no content words", () => {
+  assert.equal(contentWordCount("is the at of"), 0);
+});
 
-  test("ignores case and punctuation", () => {
-    expect(contentWordCount("Beautiful, BEAUTIFUL, beautiful!")).toBe(3);
-  });
+test("ignores case and punctuation", () => {
+  assert.equal(contentWordCount("Elephants, ELEPHANTS, elephants!"), 3);
+});
 
-  test("returns 0 for empty string", () => {
-    expect(contentWordCount("")).toBe(0);
-  });
+test("returns 0 for empty string", () => {
+  assert.equal(contentWordCount(""), 0);
 });
