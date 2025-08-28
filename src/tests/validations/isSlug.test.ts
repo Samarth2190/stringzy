@@ -1,18 +1,19 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
-import { isSlug } from '../../validations/isSlug';
+import { isSlug } from "../../validations/isSlug";
 
-describe('isSlug', () => {
-  it('returns true for valid slug', () => {
-    assert.strictEqual(isSlug('foo-bar-baz'), true);
+describe("isSlug", () => {
+  it("returns true for valid slug", () => {
+    expect(isSlug("foo-bar-baz")).toBe(true);
   });
-  it('returns false for string with spaces', () => {
-    assert.strictEqual(isSlug('foo bar'), false);
+
+  it("returns false for string with spaces", () => {
+    expect(isSlug("foo bar")).toBe(false);
   });
-  it('returns false for empty string', () => {
-    assert.strictEqual(isSlug(''), false);
+
+  it("returns false for empty string", () => {
+    expect(isSlug("")).toBe(false);
   });
-  it('returns false for non-string input', () => {
-    assert.strictEqual(isSlug(123 as any), false);
+
+  it("returns false for non-string input", () => {
+    expect(isSlug(123 as any)).toBe(false);
   });
 });

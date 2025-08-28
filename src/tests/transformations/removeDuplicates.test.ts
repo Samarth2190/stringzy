@@ -1,15 +1,15 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert';
 import { removeDuplicates } from '../../transformations/removeDuplicates';
 
 describe('removeDuplicates', () => {
   it('removes duplicate words', () => {
-    assert.strictEqual(removeDuplicates('foo bar foo'), 'foo bar');
+    expect(removeDuplicates('foo bar foo')).toBe('foo bar');
   });
+
   it('returns input if no duplicates', () => {
-    assert.strictEqual(removeDuplicates('foo bar'), 'foo bar');
+    expect(removeDuplicates('foo bar')).toBe('foo bar');
   });
+
   it('throws if input is not a string', () => {
-    assert.throws(() => removeDuplicates(123 as any), /Input must be a string/);
+    expect(() => removeDuplicates(123 as any)).toThrow(/Input must be a string/);
   });
 });
