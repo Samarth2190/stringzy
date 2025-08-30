@@ -4,6 +4,7 @@
   ![Stringzy banner](./assets/stringzy-banner2.jpg)
 
 ![NPM Version](https://img.shields.io/npm/v/stringzy)
+![Typescript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
 ![Downloads](https://img.shields.io/npm/dt/stringzy)
 ![License](https://img.shields.io/npm/l/stringzy)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
@@ -1099,6 +1100,68 @@ Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTIN
                     <br />
                     <sub>
                         <b>Abdul Arham</b>
+                    </sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Thenlie">
+                    <img src="https://avatars.githubusercontent.com/Thenlie" width="100px;"
+                        alt="Thenlie" />
+                    <br />
+                    <sub>
+                        <b>Leithen</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/rickyryden">
+                    <img src="https://avatars.githubusercontent.com/rickyryden" width="100px;"
+                        alt="Ricky Ryden" />
+                    <br />
+                    <sub>
+                        <b>Ricky Ryden</b>
+                    </sub>
+                </a>
+            </td>
+      </tr>
+      <tr>
+        <td align="center">
+                <a href="https://github.com/adityaatre26">
+                    <img src="https://avatars.githubusercontent.com/adityaatre26" width="100px;"
+                        alt="Aditya Atre" />
+                    <br />
+                    <sub>
+                        <b>Aditya Atre</b>
+                    </sub>
+                </a>
+            </td>
+         <td align="center">
+                <a href="https://github.com/kittenwarrior-qb">
+                    <img src="https://avatars.githubusercontent.com/kittenwarrior-qb" width="100px;"
+                        alt="quocbui05" />
+                    <br />
+                    <sub>
+                        <b>quocbui05</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/MariamEwas">
+                    <img src="https://avatars.githubusercontent.com/MariamEwas" width="100px;"
+                        alt="Mariam Hasan" />
+                    <br />
+                    <sub>
+                        <b>Mariam Hasan</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/milendrakumarbaghel">
+                    <img src="https://avatars.githubusercontent.com/milendrakumarbaghel" width="100px;"
+                        alt="Mariam Hasan" />
+                    <br />
+                    <sub>
+                        <b>Milendra Kumar Baghel</b>
                     </sub>
                 </a>
             </td>
