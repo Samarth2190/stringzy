@@ -96,8 +96,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 ### Analysis
 
 - [wordCount](#wordcount) - Counts the number of words in a string
-- [contentWordCount](#contentwordcount)
-- [functionWordCount](#functionwordcount)
+- [contentWordCount](#contentwordcount)- Counts the number of content words (nouns, verbs, adjectives, adverbs, etc.) in a string.
+- [functionWordCount](#functionwordcount)- Counts the number of function words (prepositions, pronouns, conjunctions, articles, etc.) in a string.
 - [readingDuration](#readingduration) - Calculates the reading duration of a given string
 - [characterCount](#charactercount) - Counts the number of characters in a string
 - [characterFrequency](#characterfrequency) - Analyzes character frequency in a string
@@ -772,7 +772,7 @@ complexity('');
 - `length` (number): Length of the input string
 
 
-<a id="contentwordcount"></a>contentWordCount(text)
+#### <a id="contentwordcount"></a>contentWordCount(text)
 
 Counts the number of content words (nouns, verbs, adjectives, adverbs, etc.) in a string.
 
@@ -780,39 +780,50 @@ Counts the number of content words (nouns, verbs, adjectives, adverbs, etc.) in 
 
 import { contentWordCount } from 'stringzy';
 
-contentWordCount("The quick brown fox jumps over the lazy dog");
-// Returns: 5
+contentWordCount("Learning JavaScript improves coding skills!");
+// Returns: { count: 5 }
 
-contentWordCount("");
-// Returns: 0
+contentWordCount("The cat sleeps on the warm windowsill.");
+// Returns: { count: 5 }
 
-Parameter	Type	Default	Description
-text	string	required	The input string to analyze content words
+contentWordCount("Wow! Such a beautiful day.");
+// Returns: { count: 4 }
+```
 
-Returns:
+| Parameter | Type   | Default  | Description                            |
+| --------- | ------ | -------- | -------------------------------------- |
+| text      | string | required | The input string to analyze content words |
 
-number: The count of content words in the text.
+**Returns:** An object containing:
 
-<a id="functionwordcount"></a>functionWordCount(text)
+- `count` (number): Total number of content words in the string
+
+
+#### <a id="functionwordcount"></a>functionWordCount(text)
 
 Counts the number of function words (prepositions, pronouns, conjunctions, articles, etc.) in a string.
 
+```javascript
 
 import { functionWordCount } from 'stringzy';
 
-functionWordCount("The quick brown fox jumps over the lazy dog");
-// Returns: 4
+functionWordCount("She and I are going to the park.");
+// Returns: { count: 7 }
 
-functionWordCount("");
-// Returns: 0
+functionWordCount("It is an example of proper grammar usage.");
+// Returns: { count: 8 }
 
-Parameter	Type	Default	Description
-text	string	required	The input string to analyze function words
+functionWordCount("Can you see the stars tonight?");
+// Returns: { count: 5 }
+```
 
-Returns:
+| Parameter | Type   | Default  | Description                            |
+| --------- | ------ | -------- | -------------------------------------- |
+| text      | string | required | The input string to analyze function words |
 
-number: The count of function words in the text.
+**Returns:** An object containing:
 
+- `count` (number): Total number of function words in the string
 
 
 #### <a id="patterncount"></a>`patternCount(text, pattern)`
