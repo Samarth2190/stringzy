@@ -79,6 +79,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [deburr](#deburr) – Removes accents and diacritical marks from a string
 - [splitChunks](#splitchunks) - Breaks a string down into chunks of specified length.
 - [numberToText](#numbertotext) - Converts a number to its text representation in specified language
+- [pipeLine](#pipeline) - Can be used to chain multiple transformations, and powerful tools to manipulate data flow
 
 ### Validations
 
@@ -432,6 +433,146 @@ deburr('über cool');
 | Parameter | Type   | Default  | Description                               |
 | --------- | ------ | -------- | ----------------------------------------- |
 | text      | string | required | The input string to strip diacritics from |
+
+#### <a id="pipeLine"></a>`pipeLine(args)`
+Apply multiple transformations in any order and add effects that detect
+changes during transformation process.
+
+```typescript
+pipeLine({
+    initial: "Hello World!",
+    pipes: [ camelCase, capitalize ]
+}).output; // Helloworld
+```
+Optionally, an effect callback can be added to have more effects in-between transformations.
+
+```typescript
+pipeLine({
+    initial: "Evil Code Exceeding So Much Space!",
+    pipe: [camelCase, removeDuplicates],
+    effect({ target, restartBeforeTransform }) {
+
+        if (target.length > 10) {
+            //evil code
+            restartBeforeTransform(target.slice(0, -1))
+        }
+
+    }
+}).output // evilcodeex
+```
+
+#### `pipeLine` Parameters
+
+| Parameter  | Type                                   | Default   | Description                                                                 |
+|------------|----------------------------------------|-----------|-----------------------------------------------------------------------------|
+| `initial`  | `string`                               | required  | The initial input string to be processed.                                   |
+| `pipe`     | `Array<(data: string) => string>`      | required  | Transformation functions applied sequentially to the input string.          |
+| `effect`   | `(args: EffectArgs) => any`            | optional  | Optional effect function with access to transformation context and control. |
+
+#### `effect` Function Context (`EffectArgs`)
+
+| Property                | Type                                              | Description                                                                 |
+|------------------------|---------------------------------------------------|-----------------------------------------------------------------------------|
+| `history`              | `Array<{ operation: string, value: string }>`     | A log of each transformation step and its result.                          |
+| `first`                | `string`                                          | The original string before any transformations.                            |
+| `target`               | `string`                                          | The final string after all transformations are complete.                   |
+| `pipe`                 | `Array<(data: string) => string>`                 | The original array of transformation functions.                            |
+| `abort`                | `() => any`                                       | Stops pipeline execution immediately.                                      |
+| `forceStop`            | `(last: string) => any`                           | Halts processing and returns the current result.                           |
+| `next`                 | `(string: string) => any`                         | Continues pipeline execution from the next transformation.                 |
+| `restartBeforeTransform` | `(string?: string) => any`                     | Restarts the pipeline before calling the effect; optionally with new input.|
+| `restartAfterTransform`  | `(string?: string) => any`                     | Restarts the pipeline after calling the effect; optionally with new input. |
+| `moveToPipeIndex`      | `(index: number) => any`                          | Jumps to a specific transformation index to resume processing.             |
+
+#### <a id="pipe"></a>`pipe(initial)`
+
+Lightweight and framework-agnostic string transformer with optional effect hooks and full pipeline control. Chain `.flow()` to get output or `.raw()` for transformation metadata.
+
+```ts
+pipe("Evil Code Exceeding So Much Space!")
+    .effect(({ target, restartBeforeTransform }) => {
+
+        if (target.length > 10) {
+            restartBeforeTransform(target.slice(0, -1))
+        }
+
+    })
+    .flow(camelCase, removeDuplicates) // evilcodeex
+```
+
+| Parameter | Type   | Default  | Description                          |
+|-----------|--------|----------|--------------------------------------|
+| initial   | string | required | The input string to be transformed.  |
+
+---
+
+#### <a id="pipe.flow"></a>`pipe().flow(...pipe)`
+
+Applies all transformation functions in order and returns the final output string.
+
+```ts
+pipe("quick brown fox").flow(trim, camelCase); // quickBrownFox
+```
+
+| Parameter | Type                                   | Default  | Description                                    |
+|-----------|----------------------------------------|----------|------------------------------------------------|
+| pipe      | `((data: string) => string)[]`         | required | List of transformation functions to apply.     |
+
+---
+
+#### <a id="pipe.effect"></a>`pipe().effect(callback)`
+
+Registers an effect hook that runs after transformation with full context and pipeline controls.
+
+```ts
+pipe("too long string!!")
+  .effect(({ target, restartBeforeTransform }) => {
+    if (target.length > 10) {
+      restartBeforeTransform(target.slice(0, 10));
+    }
+  })
+  .flow(removeSymbols); // toolongstr
+```
+
+| Parameter | Type           | Default  | Description                                  |
+|-----------|----------------|----------|----------------------------------------------|
+| callback  | `EffectArgs`   | required | Hook with full access to pipeline control.   |
+
+---
+
+#### <a id="pipe.raw"></a>`pipe().raw(...pipe)`
+
+Same as `.flow()`, but returns a full result object including the transformation history and utilities.
+
+```ts
+const result = pipe("hello evil evil code")
+  .effect(({ history }) => console.log(history))
+  .raw(removeDuplicates);
+
+console.log(result.output); // helloEvilCode
+```
+
+| Parameter | Type                                   | Default  | Description                                  |
+|-----------|----------------------------------------|----------|----------------------------------------------|
+| pipe      | `((data: string) => string)[]`         | required | List of transformation functions to apply.   |
+
+---
+
+#### <a id="EffectArgs"></a>`EffectArgs` (effect context)
+
+| Property                  | Type                                            | Description                                                              |
+|--------------------------|-------------------------------------------------|--------------------------------------------------------------------------|
+| `history`                | `Array<{ operation: string, value: string }>`   | Log of each transformation step and its result.                          |
+| `first`                  | `string`                                        | Original string before any transformations.                              |
+| `target`                 | `string`                                        | Final result after transformations.                                      |
+| `pipe`                   | `((data: string) => string)[]`                  | The transformation pipeline.                                             |
+| `abort`                  | `() => void`                                    | Stop pipeline execution immediately.                                     |
+| `forceStop`              | `(last: string) => void`                        | Stop execution and return a specific value.                              |
+| `next`                   | `(newString: string) => void`                   | Continue to the next step with a different string.                       |
+| `restartBeforeTransform` | `(newInitial?: string) => void`                 | Restart pipeline from beginning before calling the effect.               |
+| `restartAfterTransform`  | `(newInitial?: string) => void`                 | Restart pipeline after the effect has been called.                       |
+| `moveToPipeIndex`        | `(index: number) => void`                       | Jump to a specific transformation step and continue.                     |
+
 
 ---
 
