@@ -7,6 +7,8 @@ export { isURL } from './isURL';
 export { isIPv4 } from './isIPv4';
 export { isHexColor } from './isHexColor';
 export { isPalindrome } from './isPalindrome'
+export {isLowerCase} from './isLowerCase';
+export {isUpperCase} from './isUpperCase';
 
 import { isCoordinates } from './isCoordinates';
 import { isDate } from './isDate';
@@ -17,6 +19,8 @@ import { isURL } from './isURL';
 import { isIPv4 } from './isIPv4';
 import { isHexColor } from './isHexColor';
 import { isPalindrome } from './isPalindrome';
+import { isLowerCase } from './isLowerCase';
+import { isUpperCase } from './isUpperCase';
 
 export const validations = {
   isCoordinates,
@@ -27,5 +31,7 @@ export const validations = {
   isURL,
   isIPv4,
   isHexColor,
-  isPalindrome
+  isPalindrome,
+  isLowerCase,
+  isUpperCase
 };
