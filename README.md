@@ -93,6 +93,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 - [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
+- [isLowerCase](#islowercase) - Checks if given string only has lower case characters.
+- [isUpperCase](#isuppercase) - Checks if given string only has upper case characters.
 
 ### Analysis
 
@@ -651,6 +653,41 @@ isCoordinates(9999, -9999); // false
 | latitude  | number      | required | Latitude to validate                      |
 | longitude | number      | required | Longitude to validate                     |
 
+#### <a id="islowercase"></a>`isLowerCase(str)`
+
+Checks whether the given string contains only lowercase alphabetic characters.
+Ignores digits, special characters, white spaces.
+
+```javascript
+import { isLowerCase } from 'stringzy';
+
+isLowerCase('hello');      // true
+isLowerCase('hello123!');  // true
+isLowerCase('Hello');      // false
+isLowerCase('12345');      // false
+```
+
+| Parameter | Type   | Default  | Description                                                                  |
+| --------- | ------ | -------- | ---------------------------------------------------------------------------- |
+| str       | string | required | The input string to validate as containing lowercase alphabetic letters |
+
+#### <a id="isuppercase"></a>`isUpperCase(str)`
+
+Checks whether the given string contains only uppercase alphabetic characters.
+Ignores digits, special characters, white spaces.
+
+```javascript
+import { isUpperCase } from 'stringzy';
+
+isUpperCase('HELLO');      // true
+isUpperCase('HELLO123!');  // true
+isUpperCase('Hello');      // false
+isUpperCase('12345');      // false
+```
+
+| Parameter | Type   | Default  | Description                                                                  |
+| --------- | ------ | -------- | ---------------------------------------------------------------------------- |
+| str       | string | required | The input string to validate as containing uppercase alphabetic letters |
 
 ---
 
