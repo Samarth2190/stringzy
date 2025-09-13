@@ -9,6 +9,8 @@ export { isHexColor } from './isHexColor';
 export { isPalindrome } from './isPalindrome'
 export {isLowerCase} from './isLowerCase';
 export {isUpperCase} from './isUpperCase';
+export { isAlphabetic } from './isAlphabetic';
+export { isAlphaNumeric } from './isAlphaNumeric';
 
 import { isCoordinates } from './isCoordinates';
 import { isDate } from './isDate';
@@ -21,6 +23,8 @@ import { isHexColor } from './isHexColor';
 import { isPalindrome } from './isPalindrome';
 import { isLowerCase } from './isLowerCase';
 import { isUpperCase } from './isUpperCase';
+import { isAlphabetic } from './isAlphabetic';
+import { isAlphaNumeric } from './isAlphaNumeric';
 
 export const validations = {
   isCoordinates,
@@ -33,5 +37,7 @@ export const validations = {
   isHexColor,
   isPalindrome,
   isLowerCase,
-  isUpperCase
+  isUpperCase,
+  isAlphabetic,
+  isAlphaNumeric
 };
