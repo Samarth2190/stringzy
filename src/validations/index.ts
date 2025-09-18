@@ -11,6 +11,7 @@ export {isLowerCase} from './isLowerCase';
 export {isUpperCase} from './isUpperCase';
 export { isAlphabetic } from './isAlphabetic';
 export { isAlphaNumeric } from './isAlphaNumeric';
+export { isAnagram } from './isAnagram';
 
 import { isCoordinates } from './isCoordinates';
 import { isDate } from './isDate';
@@ -25,6 +26,7 @@ import { isLowerCase } from './isLowerCase';
 import { isUpperCase } from './isUpperCase';
 import { isAlphabetic } from './isAlphabetic';
 import { isAlphaNumeric } from './isAlphaNumeric';
+import { isAnagram } from './isAnagram';
 
 export const validations = {
   isCoordinates,
@@ -39,5 +41,6 @@ export const validations = {
   isLowerCase,
   isUpperCase,
   isAlphabetic,
-  isAlphaNumeric
+  isAlphaNumeric,
+  isAnagram
 };
