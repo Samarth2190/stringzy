@@ -96,6 +96,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isUpperCase](#isuppercase) - Checks if given string only has upper case characters.
 - [isAlphabetic](#isalphabetic) - Checks if input string contains only Alphabets (case insensitive)
 - [isAlphaNumeric](#isalphanumeric) - Checks if input string contains only Alphabets and Digits (case insensitive)
+- [isAnagram](#isanagram)- Checks if both strings are anagrams of each other. (ignores case and punctuations)
 
 ### Analysis
 
@@ -729,6 +730,29 @@ isAlphaNumeric(''); // false
 | Parameter | Type   | Default  | Description                                     |
 | --------- | ------ | -------- | ----------------------------------------------- |
 | text      | string | required | The input string to check for alphanumeric only |
+
+#### <a id="isanagram"></a>`isAnagram(str1, str2)`
+
+Checks whether two strings are anagrams of each other (contain the same characters in the same frequency, regardless of order).  
+- Comparison is case-insensitive.  
+- Spaces and punctuation are ignored.  
+- Throws an error if either input is not a string.  
+
+```javascript
+import { isAnagram } from 'stringzy';
+
+isAnagram('listen', 'silent');       // true
+isAnagram('Debit Card', 'Bad Credit'); // true
+isAnagram('Astronomer', 'Moon starer'); // true
+isAnagram('hello', 'world');         // false
+isAnagram('a', 'b');                 // false
+isAnagram('', '');                   // true
+```
+
+| Parameter | Type   | Default  | Description                              |
+| --------- | ------ | -------- | ---------------------------------------- |
+| str1      | string | required | The first string to check as an anagram  |
+| str2      | string | required | The second string to check as an anagram |
 
 ---
 
