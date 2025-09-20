@@ -108,6 +108,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [complexity](#complexity) - Analyzes string complexity including score, uniqueness, and length
 - [patternCount](#patterncount) - calculates the number of times a specific pattern occurs in a given text
 - [vowelConsonantCount](#vowelconsonantcount) - Counts the number of vowels and consonants in a given string
+- [checkMultiplePatterns](#checkmultiplepatterns) - Finds occurrences of multiple patterns within a given text using Rabin–Karp algorithm (case sensitive)
 
 ### Formatting
 
@@ -906,6 +907,29 @@ vowelConsonantCount('');
 | Parameter | Type   | Default  | Description                                        |
 | --------- | ------ | -------- | -------------------------------------------------- |
 | str       | string | required | The input string to count vowels and consonants in |
+
+#### <a id="checkmultiplepatterns"></a>checkMultiplePatterns(text, patterns)
+
+Finds occurrences of multiple patterns within a given text using the Rabin–Karp algorithm. <br>
+Accepts an array of patterns.<br>
+Returns all matches of each pattern along with starting indices.<br>
+Handles hash collisions by verifying actual substrings.<br>
+Pattern matching is case sensitive.
+
+```javascript
+checkMultiplePatterns('abracadabra', ['abra', 'cad']);
+// { abra: [0, 7], cad: [4] }
+
+checkMultiplePatterns('aaaa', ['aa', 'aaa']);
+// { aa: [0, 1, 2], aaa: [0, 1] }
+
+checkMultiplePatterns('hello world', ['xyz', '123']);
+// { xyz: [], 123: [] }
+```
+| Parameter | Type      | Default  | Description                                                 |
+| --------- | --------- | -------- | ----------------------------------------------------------- |
+| text      | string    | required | The text to search within.                                  |
+| patterns  | string\[ ] | required | An array of patterns to search for (each must be a string). |
 
 ---
 
