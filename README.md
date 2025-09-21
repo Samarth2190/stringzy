@@ -1,9 +1,9 @@
 <div align="center">
 
-
-  ![Stringzy banner](./assets/stringzy-banner2.jpg)
+![Stringzy banner](./assets/stringzy-banner2.jpg)
 
 ![NPM Version](https://img.shields.io/npm/v/stringzy)
+![Typescript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
 ![Downloads](https://img.shields.io/npm/dt/stringzy)
 ![License](https://img.shields.io/npm/l/stringzy)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
@@ -92,6 +92,11 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 - [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
+- [isLowerCase](#islowercase) - Checks if given string only has lower case characters.
+- [isUpperCase](#isuppercase) - Checks if given string only has upper case characters.
+- [isAlphabetic](#isalphabetic) - Checks if input string contains only Alphabets (case insensitive)
+- [isAlphaNumeric](#isalphanumeric) - Checks if input string contains only Alphabets and Digits (case insensitive)
+- [isAnagram](#isanagram)- Checks if both strings are anagrams of each other. (ignores case and punctuations)
 
 ### Analysis
 
@@ -104,8 +109,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [stringSimilarity](#stringsimilarity) - Calculates the percentage similarity between two strings
 - [complexity](#complexity) - Analyzes string complexity including score, uniqueness, and length
 - [patternCount](#patterncount) - calculates the number of times a specific pattern occurs in a given text
-- [vowelConsonantCount](#vowelconsonantcount) - Counts the number of vowels and consonants in a given string 
-
+- [vowelConsonantCount](#vowelconsonantcount) - Counts the number of vowels and consonants in a given string
+- [checkMultiplePatterns](#checkmultiplepatterns) - Finds occurrences of multiple patterns within a given text using Rabin–Karp algorithm (case sensitive)
 
 ### Formatting
 
@@ -460,7 +465,9 @@ splitChunks('helloworld');
 | chunkSize | number | `1`      | The size of each chunk in which the string is to be split |
 
 ---
+
 #### <a id="numbertotext"></a>`numberToText(num, lang)`
+
 Converts a number to its text representation in the specified language.
 
 ```javascript
@@ -470,13 +477,12 @@ numberToText(12345, 'en'); // Returns: 'twelve thousand three hundred forty-five
 numberToText(12345, 'pl'); // Returns: 'dwanaście tysięcy trzysta czterdzieści pięć'
 ```
 
-| Parameter | Type   | Default | Description |
-|-----------|--------|---------|-------------|
-| num       | number | required | The number to convert to text |
-| lang      | string | 'en'    | The language code for the text representation (e.g., 'en' for English, 'pl' for Polish) |
+| Parameter | Type   | Default  | Description                                                                             |
+| --------- | ------ | -------- | --------------------------------------------------------------------------------------- |
+| num       | number | required | The number to convert to text                                                           |
+| lang      | string | 'en'     | The language code for the text representation (e.g., 'en' for English, 'pl' for Polish) |
 
 Available languages: en (English), pl (Polish).
-
 
 ### ✅ Validations
 
@@ -564,19 +570,18 @@ isSlug('hello_world'); // false (underscore not allowed)
 Checks if a file or URL has a valid extension for a given type
 
 ```javascript
-isType("photo.PNG", "image");                    // true
-isType("https://example.com/logo.svg", "image"); // true
-isType({ name: "track.mp3" }, "audio");          // true
-isType("filewithoutextension", "image");         // false
-isType("document.zip", "document");              // false
-isType("video.mp4", "document");                 // false
+isType('photo.PNG', 'image'); // true
+isType('https://example.com/logo.svg', 'image'); // true
+isType({ name: 'track.mp3' }, 'audio'); // true
+isType('filewithoutextension', 'image'); // false
+isType('document.zip', 'document'); // false
+isType('video.mp4', 'document'); // false
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| input | string | required | The file name, URL string, or object with .name |
-| input | string | required | The file type category to validate (image, video, audio, document, archive) |
-
+| Parameter | Type   | Default  | Description                                                                 |
+| --------- | ------ | -------- | --------------------------------------------------------------------------- |
+| input     | string | required | The file name, URL string, or object with .name                             |
+| input     | string | required | The file type category to validate (image, video, audio, document, archive) |
 
 #### <a id="isipv4"></a>`isIPv4(text)`
 
@@ -624,11 +629,11 @@ The check is case-insensitive and ignores spaces and punctuation.
 ```javascript
 import { isPalindrome } from 'stringzy';
 
-isPalindrome('racecar');                            // true
-isPalindrome('A man, a plan, a canal: Panama');     // true
-isPalindrome('No lemon, no melon');                 // true
-isPalindrome('hello');                              // false
-isPalindrome('Was it a car or a cat I saw?');       // true
+isPalindrome('racecar'); // true
+isPalindrome('A man, a plan, a canal: Panama'); // true
+isPalindrome('No lemon, no melon'); // true
+isPalindrome('hello'); // false
+isPalindrome('Was it a car or a cat I saw?'); // true
 ```
 
 | Parameter | Type   | Default  | Description                              |
@@ -647,11 +652,110 @@ isCoordinates(40.748817, -73.985428); // true
 isCoordinates(9999, -9999); // false
 ```
 
-| Parameter | Type        | Default  | Description                               |
-| --------- | ----------- | -------- | ----------------------------------------- |
-| latitude  | number      | required | Latitude to validate                      |
-| longitude | number      | required | Longitude to validate                     |
+| Parameter | Type   | Default  | Description           |
+| --------- | ------ | -------- | --------------------- |
+| latitude  | number | required | Latitude to validate  |
+| longitude | number | required | Longitude to validate |
 
+#### <a id="islowercase"></a>`isLowerCase(str)`
+
+Checks whether the given string contains only lowercase alphabetic characters.
+Ignores digits, special characters, white spaces.
+
+```javascript
+import { isLowerCase } from 'stringzy';
+
+isLowerCase('hello');      // true
+isLowerCase('hello123!');  // true
+isLowerCase('Hello');      // false
+isLowerCase('12345');      // false
+```
+
+| Parameter | Type   | Default  | Description                                                                  |
+| --------- | ------ | -------- | ---------------------------------------------------------------------------- |
+| str       | string | required | The input string to validate as containing lowercase alphabetic letters |
+
+#### <a id="isuppercase"></a>`isUpperCase(str)`
+
+Checks whether the given string contains only uppercase alphabetic characters.
+Ignores digits, special characters, white spaces.
+
+```javascript
+import { isUpperCase } from 'stringzy';
+
+isUpperCase('HELLO');      // true
+isUpperCase('HELLO123!');  // true
+isUpperCase('Hello');      // false
+isUpperCase('12345');      // false
+```
+
+| Parameter | Type   | Default  | Description                                                                  |
+| --------- | ------ | -------- | ---------------------------------------------------------------------------- |
+| str       | string | required | The input string to validate as containing uppercase alphabetic letters |
+
+#### <a id="isalphabetic"></a>`isAlphabetic(text)`
+
+Checks if a string contains only alphabetic characters (a-z, A-Z).
+Throws an error if the input is not a string.
+
+```javascript
+import { isAlphabetic } from 'stringzy';
+
+isAlphabetic('hello'); // true
+isAlphabetic('World'); // true
+isAlphabetic('helloWORLD'); // true
+isAlphabetic('abc123'); // false
+isAlphabetic('hello!'); // false
+isAlphabetic(''); // false
+```
+
+| Parameter | Type   | Default  | Description                                   |
+| --------- | ------ | -------- | --------------------------------------------- |
+| text      | string | required | The input string to check for alphabetic only |
+
+#### <a id="isalphanumeric"></a>`isAlphaNumeric(text)`
+
+Checks if a string contains only alphanumeric characters (letters and digits).
+Throws an error if the input is not a string.
+
+```javascript
+import { isAlphaNumeric } from 'stringzy';
+
+isAlphaNumeric('abc123'); // true
+isAlphaNumeric('A1B2C3'); // true
+isAlphaNumeric('123'); // true
+isAlphaNumeric('hello'); // true
+isAlphaNumeric('hello!'); // false
+isAlphaNumeric('123 456'); // false
+isAlphaNumeric(''); // false
+```
+
+| Parameter | Type   | Default  | Description                                     |
+| --------- | ------ | -------- | ----------------------------------------------- |
+| text      | string | required | The input string to check for alphanumeric only |
+
+#### <a id="isanagram"></a>`isAnagram(str1, str2)`
+
+Checks whether two strings are anagrams of each other (contain the same characters in the same frequency, regardless of order).  
+- Comparison is case-insensitive.  
+- Spaces and punctuation are ignored.  
+- Throws an error if either input is not a string.  
+
+```javascript
+import { isAnagram } from 'stringzy';
+
+isAnagram('listen', 'silent');       // true
+isAnagram('Debit Card', 'Bad Credit'); // true
+isAnagram('Astronomer', 'Moon starer'); // true
+isAnagram('hello', 'world');         // false
+isAnagram('a', 'b');                 // false
+isAnagram('', '');                   // true
+```
+
+| Parameter | Type   | Default  | Description                              |
+| --------- | ------ | -------- | ---------------------------------------- |
+| str1      | string | required | The first string to check as an anagram  |
+| str2      | string | required | The second string to check as an anagram |
 
 ---
 
@@ -742,8 +846,6 @@ stringSimilarity('flaw', 'lawn', 'Damerau-Levenshtein'); // Returns: 50
 | textB     | string | required      | The second text to compare.                                   |
 | algorithm | string | 'Levenshtein' | The algorithm to use: 'Levenshtein' or 'Damerau-Levenshtein'. |
 
-
-
 #### <a id="complexity"></a>`complexity(text)`
 
 Analyzes the complexity of a string, returning an object with detailed metrics.
@@ -771,6 +873,7 @@ complexity('');
 - `uniqueness` (number): Measure of character uniqueness
 - `length` (number): Length of the input string
 
+feature/content-words
 
 #### <a id="contentwordcount"></a>contentWordCount(text)
 
@@ -826,6 +929,8 @@ functionWordCount("Can you see the stars tonight?");
 - `count` (number): Total number of function words in the string
 
 
+
+
 #### <a id="patterncount"></a>`patternCount(text, pattern)`
 
 Counts the number of times a substring (pattern) occurs in a string, including overlapping occurrences.  
@@ -849,7 +954,7 @@ Counts the number of vowels and consonants in a given string.
 This function is case-insensitive and ignores non-alphabetic characters.
 
 ```javascript
-vowelConsonantCount('hello'); 
+vowelConsonantCount('hello');
 // { vowels: 2, consonants: 3 }
 
 vowelConsonantCount('stringzy');
@@ -862,6 +967,31 @@ vowelConsonantCount('');
 | Parameter | Type   | Default  | Description                                        |
 | --------- | ------ | -------- | -------------------------------------------------- |
 | str       | string | required | The input string to count vowels and consonants in |
+
+feature/content-words
+
+#### <a id="checkmultiplepatterns"></a>checkMultiplePatterns(text, patterns)
+
+Finds occurrences of multiple patterns within a given text using the Rabin–Karp algorithm. <br>
+Accepts an array of patterns.<br>
+Returns all matches of each pattern along with starting indices.<br>
+Handles hash collisions by verifying actual substrings.<br>
+Pattern matching is case sensitive.
+
+```javascript
+checkMultiplePatterns('abracadabra', ['abra', 'cad']);
+// { abra: [0, 7], cad: [4] }
+
+checkMultiplePatterns('aaaa', ['aa', 'aaa']);
+// { aa: [0, 1, 2], aaa: [0, 1] }
+
+checkMultiplePatterns('hello world', ['xyz', '123']);
+// { xyz: [], 123: [] }
+```
+| Parameter | Type      | Default  | Description                                                 |
+| --------- | --------- | -------- | ----------------------------------------------------------- |
+| text      | string    | required | The text to search within.                                  |
+| patterns  | string\[ ] | required | An array of patterns to search for (each must be a string). |
 
 
 ---
@@ -1155,6 +1285,68 @@ Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTIN
                     <br />
                     <sub>
                         <b>Abdul Arham</b>
+                    </sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Thenlie">
+                    <img src="https://avatars.githubusercontent.com/Thenlie" width="100px;"
+                        alt="Thenlie" />
+                    <br />
+                    <sub>
+                        <b>Leithen</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/rickyryden">
+                    <img src="https://avatars.githubusercontent.com/rickyryden" width="100px;"
+                        alt="Ricky Ryden" />
+                    <br />
+                    <sub>
+                        <b>Ricky Ryden</b>
+                    </sub>
+                </a>
+            </td>
+      </tr>
+      <tr>
+        <td align="center">
+                <a href="https://github.com/adityaatre26">
+                    <img src="https://avatars.githubusercontent.com/adityaatre26" width="100px;"
+                        alt="Aditya Atre" />
+                    <br />
+                    <sub>
+                        <b>Aditya Atre</b>
+                    </sub>
+                </a>
+            </td>
+         <td align="center">
+                <a href="https://github.com/kittenwarrior-qb">
+                    <img src="https://avatars.githubusercontent.com/kittenwarrior-qb" width="100px;"
+                        alt="quocbui05" />
+                    <br />
+                    <sub>
+                        <b>quocbui05</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/MariamEwas">
+                    <img src="https://avatars.githubusercontent.com/MariamEwas" width="100px;"
+                        alt="Mariam Hasan" />
+                    <br />
+                    <sub>
+                        <b>Mariam Hasan</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/milendrakumarbaghel">
+                    <img src="https://avatars.githubusercontent.com/milendrakumarbaghel" width="100px;"
+                        alt="Mariam Hasan" />
+                    <br />
+                    <sub>
+                        <b>Milendra Kumar Baghel</b>
                     </sub>
                 </a>
             </td>
