@@ -111,6 +111,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [patternCount](#patterncount) - calculates the number of times a specific pattern occurs in a given text
 - [vowelConsonantCount](#vowelconsonantcount) - Counts the number of vowels and consonants in a given string
 - [checkMultiplePatterns](#checkmultiplepatterns) - Finds occurrences of multiple patterns within a given text using Rabin–Karp algorithm (case sensitive)
+- [checkSubsequence](#checksubsequence) - Checks whether the second string is a subsequence of the first string (case sensitive)
 
 ### Formatting
 
@@ -992,6 +993,37 @@ checkMultiplePatterns('hello world', ['xyz', '123']);
 | --------- | --------- | -------- | ----------------------------------------------------------- |
 | text      | string    | required | The text to search within.                                  |
 | patterns  | string\[ ] | required | An array of patterns to search for (each must be a string). |
+
+#### <a id="checksubsequence"></a>checkSubsequence(str, sub)
+
+Checks whether a given string sub is a subsequence of another string str.
+A subsequence maintains the relative order of characters, but they do not need to be consecutive.
+Case-sensitive comparison is performed.
+Spaces and all characters are treated literally.
+
+```javascript
+isSubsequence('abcde', 'ace');
+// true  → 'a', 'c', 'e' appear in order
+
+isSubsequence('abracadabra', 'aaa');
+// true  → multiple 'a's in correct order
+
+isSubsequence('abcde', 'aec');
+// false → order is broken (e comes before c)
+
+isSubsequence('anything', '');
+// true  → empty subsequence is always valid
+
+isSubsequence('AbC', 'AC');
+// true  → exact case matches
+
+isSubsequence('a b c', 'abc');
+// false → spaces count as characters
+```
+| Parameter | Type   | Default  | Description                                     |
+| --------- | ------ | -------- | ----------------------------------------------- |
+| str       | string | required | The main string to check within.                |
+| sub       | string | required | The subsequence string to verify against `str`. |
 
 
 ---

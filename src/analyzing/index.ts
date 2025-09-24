@@ -7,6 +7,7 @@ export { stringSimilarity } from './stringSimilarity';
 export { patternCount } from './patternCount';
 export { vowelConsonantCount } from './vowelConsonantCount';
 export { checkMultiplePatterns } from './checkMultiplePatterns';
+export { checkSubsequence } from './checkSubsequence';
 
 export { functionWordCount } from './functionWordCount';
 export { contentWordCount } from './contentWordCount';
@@ -21,6 +22,7 @@ import { stringSimilarity } from './stringSimilarity';
 import { patternCount } from './patternCount';
 import { vowelConsonantCount } from './vowelConsonantCount';
 import { checkMultiplePatterns } from './checkMultiplePatterns';
+import { checkSubsequence } from './checkSubsequence';
 
 
 
@@ -33,5 +35,6 @@ export const analyzing = {
   stringSimilarity,
   patternCount,
   vowelConsonantCount,
-  checkMultiplePatterns
+  checkMultiplePatterns,
+  checkSubsequence
 };
