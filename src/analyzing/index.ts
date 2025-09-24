@@ -9,6 +9,10 @@ export { vowelConsonantCount } from './vowelConsonantCount';
 export { checkMultiplePatterns } from './checkMultiplePatterns';
 export { checkSubsequence } from './checkSubsequence';
 
+export { functionWordCount } from './functionWordCount';
+export { contentWordCount } from './contentWordCount';
+
+
 import { characterCount } from './characterCount';
 import { characterFrequency } from './characterFrequency';
 import { complexity } from './complexity';
@@ -19,6 +23,8 @@ import { patternCount } from './patternCount';
 import { vowelConsonantCount } from './vowelConsonantCount';
 import { checkMultiplePatterns } from './checkMultiplePatterns';
 import { checkSubsequence } from './checkSubsequence';
+
+
 
 export const analyzing = {
   characterCount,

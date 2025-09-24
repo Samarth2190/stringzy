@@ -101,6 +101,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 ### Analysis
 
 - [wordCount](#wordcount) - Counts the number of words in a string
+- [contentWordCount](#contentwordcount)- Counts the number of content words (nouns, verbs, adjectives, adverbs, etc.) in a string.
+- [functionWordCount](#functionwordcount)- Counts the number of function words (prepositions, pronouns, conjunctions, articles, etc.) in a string.
 - [readingDuration](#readingduration) - Calculates the reading duration of a given string
 - [characterCount](#charactercount) - Counts the number of characters in a string
 - [characterFrequency](#characterfrequency) - Analyzes character frequency in a string
@@ -872,6 +874,64 @@ complexity('');
 - `uniqueness` (number): Measure of character uniqueness
 - `length` (number): Length of the input string
 
+feature/content-words
+
+#### <a id="contentwordcount"></a>contentWordCount(text)
+
+Counts the number of content words (nouns, verbs, adjectives, adverbs, etc.) in a string.
+
+```javascript
+
+import { contentWordCount } from 'stringzy';
+
+contentWordCount("Learning JavaScript improves coding skills!");
+// Returns: { count: 5 }
+
+contentWordCount("The cat sleeps on the warm windowsill.");
+// Returns: { count: 5 }
+
+contentWordCount("Wow! Such a beautiful day.");
+// Returns: { count: 4 }
+```
+
+| Parameter | Type   | Default  | Description                            |
+| --------- | ------ | -------- | -------------------------------------- |
+| text      | string | required | The input string to analyze content words |
+
+**Returns:** An object containing:
+
+- `count` (number): Total number of content words in the string
+
+
+#### <a id="functionwordcount"></a>functionWordCount(text)
+
+Counts the number of function words (prepositions, pronouns, conjunctions, articles, etc.) in a string.
+
+```javascript
+
+import { functionWordCount } from 'stringzy';
+
+functionWordCount("She and I are going to the park.");
+// Returns: { count: 7 }
+
+functionWordCount("It is an example of proper grammar usage.");
+// Returns: { count: 8 }
+
+functionWordCount("Can you see the stars tonight?");
+// Returns: { count: 5 }
+```
+
+| Parameter | Type   | Default  | Description                            |
+| --------- | ------ | -------- | -------------------------------------- |
+| text      | string | required | The input string to analyze function words |
+
+**Returns:** An object containing:
+
+- `count` (number): Total number of function words in the string
+
+
+
+
 #### <a id="patterncount"></a>`patternCount(text, pattern)`
 
 Counts the number of times a substring (pattern) occurs in a string, including overlapping occurrences.  
@@ -908,6 +968,8 @@ vowelConsonantCount('');
 | Parameter | Type   | Default  | Description                                        |
 | --------- | ------ | -------- | -------------------------------------------------- |
 | str       | string | required | The input string to count vowels and consonants in |
+
+feature/content-words
 
 #### <a id="checkmultiplepatterns"></a>checkMultiplePatterns(text, patterns)
 
@@ -962,6 +1024,7 @@ isSubsequence('a b c', 'abc');
 | --------- | ------ | -------- | ----------------------------------------------- |
 | str       | string | required | The main string to check within.                |
 | sub       | string | required | The subsequence string to verify against `str`. |
+
 
 ---
 
