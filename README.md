@@ -79,6 +79,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [deburr](#deburr) – Removes accents and diacritical marks from a string
 - [splitChunks](#splitchunks) - Breaks a string down into chunks of specified length.
 - [numberToText](#numbertotext) - Converts a number to its text representation in specified language
+- [reverseWordsInString](#reversewordsinstring) - Reverses the order of words in a given string
 
 ### Validations
 
@@ -484,6 +485,26 @@ numberToText(12345, 'pl'); // Returns: 'dwanaście tysięcy trzysta czterdzieśc
 | lang      | string | 'en'     | The language code for the text representation (e.g., 'en' for English, 'pl' for Polish) |
 
 Available languages: en (English), pl (Polish).
+
+#### <a id="reversewordsinstring"></a>reverseWordsInString(str)
+Reverses the order of words in a string and reverses the position of surrounding whitespace (leading becomes trailing and vice-versa). 
+Reverses the order of words in a string while preserving the exact original spacing between each word.
+```javascript
+import { reverseWordsInString } from 'stringzy';
+
+reverseWordsInString('Hello   world from stringzy');
+// Returns: 'stringzy from world   Hello'
+
+// Note how the double and triple spaces are preserved:
+reverseWordsInString('  leading  spaces   and trailing  ');
+// Returns: '  trailing  and   spaces leading  '
+
+reverseWordsInString('single-word');
+// Returns: 'single-word'
+```
+| Parameter | Type   | Default  | Description                 |
+| --------- | ------ | -------- | --------------------------- |
+| str       | string | required | The input string to reverse |
 
 ### ✅ Validations
 
