@@ -42,5 +42,5 @@ export const validations = {
   isUpperCase,
   isAlphabetic,
   isAlphaNumeric,
-  isAnagram
+  isAnagram,
 };
