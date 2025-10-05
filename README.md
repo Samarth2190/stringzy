@@ -99,6 +99,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isAlphaNumeric](#isalphanumeric) - Checks if input string contains only Alphabets and Digits (case insensitive)
 - [isAnagram](#isanagram)- Checks if both strings are anagrams of each other. (ignores case and punctuations)
 - [isMacAddress](#ismacaddress)- Checks if a given string is a valid MAC address.
+- [isPanagram](#ispanagram)- Checks if a given string is a pangram (contains every letter of the English alphabet at least once).
+
 
 ### Analysis
 
@@ -806,7 +808,27 @@ isMacAddress("");                    // false (empty string)
 | --------- | ------ | -------- | --------------------------------------- |
 | str       | string | required | The string to validate as a MAC address |
 
+#### <a id="ispanagram"></a>`isPangram(str)`
 
+- Checks if a given string is a **pangram** (i.e., contains every letter of the English alphabet at least once).
+- The check is **case-insensitive**, and non-alphabetic characters (numbers, punctuation, spaces) are ignored. An empty string is not considered a pangram.
+- Throws an error if the input is not a string.
+
+```javascript
+import { isPangram } from 'stringzy';
+
+isPangram("The quick brown fox jumps over the lazy dog."); // true
+isPangram("This is not a pangram."); // false
+isPangram("Abcdefghijklmnopqrstuvwxyz"); // true
+isPangram("AbCdEfGhIjKlMnOpQrStUvWxYz"); // true
+isPangram("A-B-C-D-E-F-G-H-I-J-K-L-M-N-O-P-Q-R-S-T-U-V-W-X-Y-Z"); // true
+isPangram(""); // false
+isPangram("Hello world"); // false
+```
+
+| Parameter | Type   | Default  | Description                                           |
+| --------- | ------ | -------- | ----------------------------------------------------- |
+| str       | string | required | The input string to check for pangram characteristics |
 ---
 
 ### 📊 Analysis
