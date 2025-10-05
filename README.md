@@ -98,6 +98,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isAlphabetic](#isalphabetic) - Checks if input string contains only Alphabets (case insensitive)
 - [isAlphaNumeric](#isalphanumeric) - Checks if input string contains only Alphabets and Digits (case insensitive)
 - [isAnagram](#isanagram)- Checks if both strings are anagrams of each other. (ignores case and punctuations)
+- [isMacAddress](#ismacaddress)- Checks if a given string is a valid MAC address.
 
 ### Analysis
 
@@ -778,6 +779,33 @@ isAnagram('', '');                   // true
 | --------- | ------ | -------- | ---------------------------------------- |
 | str1      | string | required | The first string to check as an anagram  |
 | str2      | string | required | The second string to check as an anagram |
+
+#### <a id="ismacaddress"></a>`isMacAddress(str)`
+
+Checks whether a given string is a valid **MAC address**.
+- A valid MAC address consists of six pairs of hexadecimal digits (`0–9`, `A–F`, case-insensitive).
+- Returns `true` if the string is a valid MAC address, otherwise `false`.
+- Throws an error if input is not a string.
+
+```javascript
+import { isMacAddress } from 'stringzy';
+
+isMacAddress("00:1A:2B:3C:4D:5E");   // true
+isMacAddress("00-1A-2B-3C-4D-5E");   // true
+isMacAddress("aa:bb:cc:dd:ee:ff");   // true
+isMacAddress("FF-FF-FF-FF-FF-FF");   // true
+
+isMacAddress("00:1G:2B:3C:4D:5E");   // false (invalid hex digit)
+isMacAddress("00:1A-2B:3C-4D:5E");   // false (mixed separators)
+isMacAddress("001A:2B:3C:4D:5E");    // false (wrong group length)
+isMacAddress("hello-world-mac");     // false (invalid format)
+isMacAddress("");                    // false (empty string)
+```
+
+| Parameter | Type   | Default  | Description                             |
+| --------- | ------ | -------- | --------------------------------------- |
+| str       | string | required | The string to validate as a MAC address |
+
 
 ---
 
