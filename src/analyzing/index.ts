@@ -8,10 +8,9 @@ export { patternCount } from './patternCount';
 export { vowelConsonantCount } from './vowelConsonantCount';
 export { checkMultiplePatterns } from './checkMultiplePatterns';
 export { checkSubsequence } from './checkSubsequence';
-
 export { functionWordCount } from './functionWordCount';
 export { contentWordCount } from './contentWordCount';
-
+export { checkStringRotations } from './stringRotation';
 
 import { characterCount } from './characterCount';
 import { characterFrequency } from './characterFrequency';
@@ -23,8 +22,7 @@ import { patternCount } from './patternCount';
 import { vowelConsonantCount } from './vowelConsonantCount';
 import { checkMultiplePatterns } from './checkMultiplePatterns';
 import { checkSubsequence } from './checkSubsequence';
-
-
+import { checkStringRotations } from './stringRotation';
 
 export const analyzing = {
   characterCount,
@@ -36,5 +34,6 @@ export const analyzing = {
   patternCount,
   vowelConsonantCount,
   checkMultiplePatterns,
-  checkSubsequence
+  checkSubsequence,
+  checkStringRotations
 };
