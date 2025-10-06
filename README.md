@@ -80,6 +80,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [splitChunks](#splitchunks) - Breaks a string down into chunks of specified length.
 - [numberToText](#numbertotext) - Converts a number to its text representation in specified language
 - [reverseWordsInString](#reversewordsinstring) - Reverses the order of words in a given string
+- [stringPermutations](#stringpermutations) -  Generates all unique permutations of a given string.
 
 ### Validations
 
@@ -507,6 +508,37 @@ reverseWordsInString('single-word');
 | Parameter | Type   | Default  | Description                 |
 | --------- | ------ | -------- | --------------------------- |
 | str       | string | required | The input string to reverse |
+
+#### <a id="stringpermutations"></a>stringPermutations(str)
+
+Generates all unique permutations of a given string.
+Repeated characters are handled by ensuring only unique permutations are included in the output array.
+The order of permutations is not guaranteed.
+
+```javascript
+stringPermutations('ab');
+// ['ab', 'ba']
+
+stringPermutations('abc');
+// ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+
+stringPermutations('aab');
+// ['aab', 'aba', 'baa']
+
+stringPermutations('');
+// ['']
+
+stringPermutations('a');
+// ['a']
+
+stringPermutations('a1!');
+// ['a1!', 'a!1', '1a!', '1!a', '!a1', '!1a']
+```
+
+| Parameter | Type   | Default  | Description                                           |
+| --------- | ------ | -------- | ----------------------------------------------------- |
+| str       | string | required | The input string to generate all unique permutations. |
+
 
 ### ✅ Validations
 
