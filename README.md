@@ -101,7 +101,6 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isMacAddress](#ismacaddress)- Checks if a given string is a valid MAC address.
 - [isPanagram](#ispanagram)- Checks if a given string is a pangram (contains every letter of the English alphabet at least once).
 
-
 ### Analysis
 
 - [wordCount](#wordcount) - Counts the number of words in a string
@@ -116,7 +115,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [vowelConsonantCount](#vowelconsonantcount) - Counts the number of vowels and consonants in a given string
 - [checkMultiplePatterns](#checkmultiplepatterns) - Finds occurrences of multiple patterns within a given text using Rabin–Karp algorithm (case sensitive)
 - [checkSubsequence](#checksubsequence) - Checks whether the second string is a subsequence of the first string (case sensitive)
-
+- [stringRotation](#stringrotation) -  Checks if one string is a rotation of another (case sensitive).
 ### Formatting
 
 - [capitalize](#capitalize) - Capitalizes the first letter of each word
@@ -1000,9 +999,6 @@ functionWordCount("Can you see the stars tonight?");
 
 - `count` (number): Total number of function words in the string
 
-
-
-
 #### <a id="patterncount"></a>`patternCount(text, pattern)`
 
 Counts the number of times a substring (pattern) occurs in a string, including overlapping occurrences.  
@@ -1096,6 +1092,38 @@ isSubsequence('a b c', 'abc');
 | str       | string | required | The main string to check within.                |
 | sub       | string | required | The subsequence string to verify against `str`. |
 
+#### <a id="stringrotation"></a>checkStringRotations(str1, str2)
+Checks whether a given string `str2` is a rotation of another string `str1`.
+Case-sensitive comparison is performed. Both strings must be of equal length to be considered rotations.
+Spaces and all characters are treated literally.
+
+```javascript
+isRotation('waterbottle', 'erbottlewat');
+// true  → rotation at position 3
+
+isRotation('abcde', 'cdeab');
+// true  → rotation at position 2
+
+isRotation('abc', 'abc');
+// true  → no rotation, identical strings
+
+isRotation('abc', 'cab');
+// true  → rotation at position 2
+
+isRotation('abc', 'bac');
+// false → not a valid rotation
+
+isRotation('ArB', 'Bar');
+// false → case-sensitive mismatch
+
+isRotation('abcd', 'abc');
+// false → lengths differ
+```
+
+| Parameter | Type   | Default  | Description                                         |
+| --------- | ------ | -------- | --------------------------------------------------- |
+| str1      | string | required | The original string.                                |
+| str2      | string | required | The string to verify if it is a rotation of `str1`. |
 
 ---
 
