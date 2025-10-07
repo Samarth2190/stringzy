@@ -425,7 +425,7 @@ maskSegment('token');
 | maskEnd   | number | `text.length` | The end index (exclusive) of the segment to mask         |
 | maskChar  | string | `'*'`         | The character to use for masking (must be one character) |
 
-#### <a id="deburr"></a>deburr(text)
+#### <a id="deburr"></a>`deburr(text)`
 
 Removes accents and diacritics from letters in a string (e.g. déjà vu → deja vu).
 
@@ -490,7 +490,7 @@ numberToText(12345, 'pl'); // Returns: 'dwanaście tysięcy trzysta czterdzieśc
 
 Available languages: en (English), pl (Polish).
 
-#### <a id="reversewordsinstring"></a>reverseWordsInString(str)
+#### <a id="reversewordsinstring"></a>`reverseWordsInString(str)`
 Reverses the order of words in a string and reverses the position of surrounding whitespace (leading becomes trailing and vice-versa). 
 Reverses the order of words in a string while preserving the exact original spacing between each word.
 ```javascript
@@ -510,7 +510,7 @@ reverseWordsInString('single-word');
 | --------- | ------ | -------- | --------------------------- |
 | str       | string | required | The input string to reverse |
 
-#### <a id="stringpermutations"></a>stringPermutations(str)
+#### <a id="stringpermutations"></a>`stringPermutations(str)`
 
 Generates all unique permutations of a given string.
 Repeated characters are handled by ensuring only unique permutations are included in the output array.
@@ -540,7 +540,7 @@ stringPermutations('a1!');
 | --------- | ------ | -------- | ----------------------------------------------------- |
 | str       | string | required | The input string to generate all unique permutations. |
 
-#### <a id="stringcombinations"></a>stringCombinations(str)
+#### <a id="stringcombinations"></a>`stringCombinations(str)`
 
 Generates all unique combinations (subsequences) of a given string, including the empty string.  
 Duplicate characters are handled by ensuring only unique combinations are returned.  
@@ -1009,7 +1009,7 @@ complexity('');
 
 feature/content-words
 
-#### <a id="contentwordcount"></a>contentWordCount(text)
+#### <a id="contentwordcount"></a>`contentWordCount(text)`
 
 Counts the number of content words (nouns, verbs, adjectives, adverbs, etc.) in a string.
 
@@ -1036,7 +1036,7 @@ contentWordCount("Wow! Such a beautiful day.");
 - `count` (number): Total number of content words in the string
 
 
-#### <a id="functionwordcount"></a>functionWordCount(text)
+#### <a id="functionwordcount"></a>`functionWordCount(text)`
 
 Counts the number of function words (prepositions, pronouns, conjunctions, articles, etc.) in a string.
 
@@ -1101,7 +1101,7 @@ vowelConsonantCount('');
 
 feature/content-words
 
-#### <a id="checkmultiplepatterns"></a>checkMultiplePatterns(text, patterns)
+#### <a id="checkmultiplepatterns"></a>`checkMultiplePatterns(text, patterns)`
 
 Finds occurrences of multiple patterns within a given text using the Rabin–Karp algorithm. <br>
 Accepts an array of patterns.<br>
@@ -1124,7 +1124,7 @@ checkMultiplePatterns('hello world', ['xyz', '123']);
 | text      | string    | required | The text to search within.                                  |
 | patterns  | string\[ ] | required | An array of patterns to search for (each must be a string). |
 
-#### <a id="checksubsequence"></a>checkSubsequence(str, sub)
+#### <a id="checksubsequence"></a>`checkSubsequence(str, sub)`
 
 Checks whether a given string sub is a subsequence of another string str.
 A subsequence maintains the relative order of characters, but they do not need to be consecutive.
@@ -1155,7 +1155,7 @@ isSubsequence('a b c', 'abc');
 | str       | string | required | The main string to check within.                |
 | sub       | string | required | The subsequence string to verify against `str`. |
 
-#### <a id="stringrotation"></a>checkStringRotations(str1, str2)
+#### <a id="stringrotation"></a>`checkStringRotations(str1, str2)`
 Checks whether a given string `str2` is a rotation of another string `str1`.
 Case-sensitive comparison is performed. Both strings must be of equal length to be considered rotations.
 Spaces and all characters are treated literally.
@@ -1537,10 +1537,42 @@ Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTIN
         <td align="center">
                 <a href="https://github.com/milendrakumarbaghel">
                     <img src="https://avatars.githubusercontent.com/milendrakumarbaghel" width="100px;"
-                        alt="Mariam Hasan" />
+                        alt="Milendra Kumar Baghel" />
                     <br />
                     <sub>
                         <b>Milendra Kumar Baghel</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/Farkhanda-Dalal">
+                    <img src="https://avatars.githubusercontent.com/Farkhanda-Dalal" width="100px;"
+                        alt="Farkhanda Dalal" />
+                    <br />
+                    <sub>
+                        <b>Farkhanda Dalal</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/S">
+                    <img src="https://avatars.githubusercontent.com/satyasrisundarapalli" width="100px;"
+                        alt="Sundarapalli Lakshmi Satya Sri" />
+                    <br />
+                    <sub>
+                        <b>Sundarapalli Lakshmi Satya Sri</b>
+                    </sub>
+                </a>
+            </td>
+      </tr>
+      <tr>
+         <td align="center">
+                <a href="https://github.com/S">
+                    <img src="https://avatars.githubusercontent.com/itspavant" width="100px;"
+                        alt="T Pavan Teja" />
+                    <br />
+                    <sub>
+                        <b>T Pavan Teja</b>
                     </sub>
                 </a>
             </td>
