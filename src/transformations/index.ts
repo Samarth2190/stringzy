@@ -16,6 +16,7 @@ export { maskSegment } from './maskSegment';
 export { numberToText } from './numberToText/main';
 export { reverseWordsInString } from './reverseWordsInString ';
 export { stringPermutations } from './stringPermutations';
+export { stringCombinations } from './stringCombinations';
 
 import { camelCase } from './camelCase';
 import { capitalizeWords } from './capitalizeWords';
@@ -36,6 +37,7 @@ import { deburr } from './deburr';
 import { numberToText } from './numberToText/main';
 import { reverseWordsInString } from './reverseWordsInString ';
 import { stringPermutations } from './stringPermutations';
+import { stringCombinations } from './stringCombinations';
 
 export const transformations = {
     camelCase,
@@ -56,5 +58,6 @@ export const transformations = {
     deburr,
     numberToText,
     reverseWordsInString,
-    stringPermutations
+    stringPermutations,
+    stringCombinations
 };
