@@ -11,6 +11,7 @@ export { checkSubsequence } from './checkSubsequence';
 export { functionWordCount } from './functionWordCount';
 export { contentWordCount } from './contentWordCount';
 export { checkStringRotations } from './stringRotation';
+export { lexicographicalRank } from './lexicographicalRank';
 
 import { characterCount } from './characterCount';
 import { characterFrequency } from './characterFrequency';
@@ -23,6 +24,7 @@ import { vowelConsonantCount } from './vowelConsonantCount';
 import { checkMultiplePatterns } from './checkMultiplePatterns';
 import { checkSubsequence } from './checkSubsequence';
 import { checkStringRotations } from './stringRotation';
+import { lexicographicalRank } from './lexicographicalRank';
 
 export const analyzing = {
   characterCount,
@@ -35,5 +37,6 @@ export const analyzing = {
   vowelConsonantCount,
   checkMultiplePatterns,
   checkSubsequence,
-  checkStringRotations
+  checkStringRotations,
+  lexicographicalRank
 };
