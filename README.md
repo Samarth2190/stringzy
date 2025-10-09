@@ -118,6 +118,8 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [checkMultiplePatterns](#checkmultiplepatterns) - Finds occurrences of multiple patterns within a given text using Rabin–Karp algorithm (case sensitive)
 - [checkSubsequence](#checksubsequence) - Checks whether the second string is a subsequence of the first string (case sensitive)
 - [stringRotation](#stringrotation) -  Checks if one string is a rotation of another (case sensitive).
+- [lexicographicalRank](#lexicographicalrank) - Calculates the lexicographical rank of a string among all its unique permutations.
+
 ### Formatting
 
 - [capitalize](#capitalize) - Capitalizes the first letter of each word
@@ -1187,6 +1189,36 @@ isRotation('abcd', 'abc');
 | --------- | ------ | -------- | --------------------------------------------------- |
 | str1      | string | required | The original string.                                |
 | str2      | string | required | The string to verify if it is a rotation of `str1`. |
+
+#### <a id="lexicographicalrank"></a>`lexicographicalRank(str)`
+
+Calculates the lexicographic rank of a string among all its unique permutations sorted alphabetically.  
+The rank is **1-based** (first permutation has rank 1).  
+Handles duplicate characters by correctly adjusting ranks.
+
+```javascript
+lexicographicRank("acb");
+// 2 → permutations: ["abc", "acb", "bac", "bca", "cab", "cba"]
+
+lexicographicRank("string");
+// 598
+
+lexicographicRank("cba");
+// 6 → permutations: ["abc", "acb", "bac", "bca", "cab", "cba"]
+
+lexicographicRank("aba");
+// 2 → permutations: ["aab", "aba", "baa"]
+
+lexicographicRank("a");
+// 1
+
+lexicographicRank("");
+// 1 → edge case, empty string considered rank 1
+```
+
+| Parameter | Type   | Default  | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| str       | string | required | The input string to calculate the rank of |
 
 ---
 
