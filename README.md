@@ -125,6 +125,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [capitalize](#capitalize) - Capitalizes the first letter of each word
 - [formatNumber](#formatnumber) - Formats a number string with thousand separators
 - [formatPhone](#formatphone) - Formats a phone number string to standard format
+- [formatDuration](#formatduration) - Converts a duration in seconds or milliseconds into a human-readable string
 
 ## 📋 API Reference
 
@@ -1266,6 +1267,27 @@ formatPhone('11234567890', 'international'); // '+1 (123) 456-7890'
 | --------- | ------ | -------- | ------------------------------------ |
 | phone     | string | required | The phone number string to format    |
 | format    | string | 'us'     | Format type: 'us' or 'international' |
+
+#### <a id="formatduration"></a>`formatDuration(input, options)`
+
+Converts a duration in seconds or milliseconds into a human-readable string.
+
+```javascript
+formatDuration(60);        // "1m"
+formatDuration(61);        // "1m 1s"
+formatDuration(3661);      // "1h 1m 1s"
+formatDuration(7325);      // "2h 2m 5s"
+formatDuration(1234567, { unit: 'milliseconds', includeMs: true }); // "20m 34s 567ms"
+```
+
+| Parameter | Type   | Default     | Description                                           |
+| --------- | ------ | ----------- | ----------------------------------------------------- |
+| input     | number | required    | The duration in seconds or milliseconds               |
+| options   | object | `{}`        | Optional configuration object                         |
+| - unit    | string | 'seconds'   | Input unit: 'seconds' or 'milliseconds'              |
+| - format  | string | 'short'     | Output format: 'short', 'medium', or 'long'          |
+| - includeMs | boolean | false    | Whether to include milliseconds in output             |
+| - delimiter | string | ' '       | The delimiter between time units                      |
 
 ## 🔧 Usage Patterns
 
