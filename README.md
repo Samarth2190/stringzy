@@ -126,6 +126,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [formatNumber](#formatnumber) - Formats a number string with thousand separators
 - [formatPhone](#formatphone) - Formats a phone number string to standard format
 - [formatDuration](#formatduration) - Converts a duration in seconds or milliseconds into a human-readable string
+- [trim](#trim) - Removes unnecessary whitespace from a string.
 
 ## 📋 API Reference
 
@@ -1288,6 +1289,18 @@ formatDuration(1234567, { unit: 'milliseconds', includeMs: true }); // "20m 34s 
 | - format  | string | 'short'     | Output format: 'short', 'medium', or 'long'          |
 | - includeMs | boolean | false    | Whether to include milliseconds in output             |
 | - delimiter | string | ' '       | The delimiter between time units                      |
+
+#### <a id="trim"></a>`trim(str)`
+
+Removes unnecessary whitespace from a string, including leading/trailing spaces, multiple spaces between words, tabs, and line breaks.
+
+```javascript
+trim('  hello   world  '); // 'hello world'
+trim('line \n breaks\tand tabs'); // 'line breaks and tabs'
+```
+| Parameter | Type   | Default  | Description                          |
+| --------- | ------ | -------- | ------------------------------------ |
+| str       | string | required | The input string to trim and normalize.|
 
 ## 🔧 Usage Patterns
 
