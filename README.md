@@ -127,6 +127,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [formatPhone](#formatphone) - Formats a phone number string to standard format
 - [formatDuration](#formatduration) - Converts a duration in seconds or milliseconds into a human-readable string
 - [trim](#trim) - Removes unnecessary whitespace from a string.
+- [formatRomanNumeral](#formatromannumeral) - Converts a positive integer into its Roman numeral representation.
 
 ## 📋 API Reference
 
@@ -1301,6 +1302,28 @@ trim('line \n breaks\tand tabs'); // 'line breaks and tabs'
 | Parameter | Type   | Default  | Description                          |
 | --------- | ------ | -------- | ------------------------------------ |
 | str       | string | required | The input string to trim and normalize.|
+
+#### <a id="formatromannumeral"></a>formatRomanNumeral(num)
+Converts a positive integer into its Roman numeral representation (supports values from 1 to 3999).
+Throws an error for invalid, non-numeric, zero, or negative inputs.
+
+```javascript
+import { formatRomanNumeral } from 'stringzy';
+
+formatRomanNumeral(1);     // "I"
+formatRomanNumeral(4);     // "IV"
+formatRomanNumeral(9);     // "IX"
+formatRomanNumeral(58);    // "LVIII"
+formatRomanNumeral(1994);  // "MCMXCIV"
+
+// Invalid cases
+formatRomanNumeral(0);     // RangeError
+formatRomanNumeral(-5);    // RangeError
+formatRomanNumeral('123'); // TypeError
+```
+| Parameter | Type   | Default  | Description                                          |
+| --------- | ------ | -------- | ---------------------------------------------------- |
+| num       | number | required | The integer (1–3999) to convert into Roman numerals. |
 
 ## 🔧 Usage Patterns
 
