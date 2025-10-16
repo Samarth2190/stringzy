@@ -128,6 +128,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [formatDuration](#formatduration) - Converts a duration in seconds or milliseconds into a human-readable string
 - [trim](#trim) - Removes unnecessary whitespace from a string.
 - [formatRomanNumeral](#formatromannumeral) - Converts a positive integer into its Roman numeral representation.
+- [formatPercentage](#formatpercentage) - Converts a number into a percentage string with configurable decimal precision.
 
 ## 📋 API Reference
 
@@ -1324,6 +1325,32 @@ formatRomanNumeral('123'); // TypeError
 | Parameter | Type   | Default  | Description                                          |
 | --------- | ------ | -------- | ---------------------------------------------------- |
 | num       | number | required | The integer (1–3999) to convert into Roman numerals. |
+
+#### <a id="formatpercentage"></a>formatPercentage(num, precision)
+Converts a number into a percentage string with configurable decimal precision. </br>
+Supports positive, negative, and whole numbers. </br>
+Throws an error for invalid or non-numeric inputs.
+
+```javascript
+import { formatPercentage } from 'stringzy';
+
+formatPercentage(0.567);       // "56.70%"
+formatPercentage(0.567, 1);    // "56.7%"
+formatPercentage(0.5, 0);      // "50%"
+formatPercentage(1);           // "100%"
+formatPercentage(-0.25);       // "-25%"
+formatPercentage(50);          // "5000%"
+
+// Invalid cases
+formatPercentage('0.5');       // TypeError
+formatPercentage(null);        // TypeError
+formatPercentage(0.5, -1);     // TypeError
+```
+
+| Parameter | Type   | Default  | Description                                            |
+| --------- | ------ | -------- | ------------------------------------------------------ |
+| num       | number | required | The number to convert into a percentage string.        |
+| precision | number | 2        | The number of decimal places to include in the output. |
 
 ## 🔧 Usage Patterns
 
