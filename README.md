@@ -129,6 +129,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [trim](#trim) - Removes unnecessary whitespace from a string.
 - [formatRomanNumeral](#formatromannumeral) - Converts a positive integer into its Roman numeral representation.
 - [formatPercentage](#formatpercentage) - Converts a number into a percentage string with configurable decimal precision.
+- [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
 
 ## 📋 API Reference
 
@@ -1351,6 +1352,32 @@ formatPercentage(0.5, -1);     // TypeError
 | --------- | ------ | -------- | ------------------------------------------------------ |
 | num       | number | required | The number to convert into a percentage string.        |
 | precision | number | 2        | The number of decimal places to include in the output. |
+
+#### <a id="formatfilesize"></a>formatFileSize(bytes, precision)
+Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB). </br>
+Automatically scales the unit based on the size and supports configurable decimal precision.</br>
+Throws an error for invalid, non-numeric, or negative inputs.</br>
+
+```javascript
+import { formatFileSize } from 'stringzy';
+
+formatFileSize(123);          // "123 B"
+formatFileSize(1024);         // "1 KB"
+formatFileSize(1048576);      // "1 MB"
+formatFileSize(1073741824);   // "1 GB"
+formatFileSize(1572864);      // "1.5 MB"
+formatFileSize(1500, 3);      // "1.465 KB"
+
+// Invalid cases
+formatFileSize(-1024);        // RangeError
+formatFileSize('1024');       // TypeError
+formatFileSize(1024, -1);     // TypeError
+```
+
+| Parameter | Type   | Default  | Description                                                     |
+| --------- | ------ | -------- | --------------------------------------------------------------- |
+| bytes     | number | required | The number of bytes to convert into a human-readable file size. |
+| precision | number | 2        | The number of decimal places for fractional sizes.              |
 
 ## 🔧 Usage Patterns
 
