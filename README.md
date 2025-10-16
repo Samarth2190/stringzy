@@ -131,6 +131,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [formatPercentage](#formatpercentage) - Converts a number into a percentage string with configurable decimal precision.
 - [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
 - [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
+- [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
 
 ## 📋 API Reference
 
