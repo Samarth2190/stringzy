@@ -1409,6 +1409,29 @@ formatOrdinal(null);  // TypeError
 | --------- | ------ | -------- | ----------------------------------- |
 | num       | number | required | The number to format as an ordinal. |
 
+#### <a id="formatlist"></a>formatList(arr)
+
+Formats an array of strings into a human-readable list using commas and "and".
+Automatically applies the Oxford comma for lists of three or more items.
+Returns an empty string for empty arrays and throws a TypeError for invalid inputs.
+
+```javascript
+import { formatList } from 'stringzy';
+
+formatList(['apples', 'bananas', 'cherries']);  // "apples, bananas, and cherries"
+formatList(['apples', 'bananas']);              // "apples and bananas"
+formatList(['apple']);                          // "apple"
+formatList([]);                                 // ""
+
+// Invalid cases
+formatList('apple');                            // TypeError
+formatList(['apple', 123]);                     // TypeError
+```
+
+| Parameter | Type     | Default  | Description                               |
+| --------- | -------- | -------- | ----------------------------------------- |
+| arr       | string[] | required | The array of strings to format as a list. |
+
 ## 🔧 Usage Patterns
 
 ### Individual Function Imports
