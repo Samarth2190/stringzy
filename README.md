@@ -130,6 +130,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [formatRomanNumeral](#formatromannumeral) - Converts a positive integer into its Roman numeral representation.
 - [formatPercentage](#formatpercentage) - Converts a number into a percentage string with configurable decimal precision.
 - [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
+- [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
 
 ## 📋 API Reference
 
@@ -1378,6 +1379,35 @@ formatFileSize(1024, -1);     // TypeError
 | --------- | ------ | -------- | --------------------------------------------------------------- |
 | bytes     | number | required | The number of bytes to convert into a human-readable file size. |
 | precision | number | 2        | The number of decimal places for fractional sizes.              |
+
+#### <a id="formatordinal"></a>formatOrdinal(num)
+Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd"). </br>
+Handles special cases for numbers ending in 11, 12, and 13.</br>
+Throws a TypeError if the input is not a number.</br>
+
+```javascript
+import { formatOrdinal } from 'stringzy';
+
+formatOrdinal(1);     // "1st"
+formatOrdinal(2);     // "2nd"
+formatOrdinal(3);     // "3rd"
+formatOrdinal(4);     // "4th"
+formatOrdinal(11);    // "11th"
+formatOrdinal(12);    // "12th"
+formatOrdinal(13);    // "13th"
+formatOrdinal(21);    // "21st"
+formatOrdinal(22);    // "22nd"
+formatOrdinal(23);    // "23rd"
+formatOrdinal(24);    // "24th"
+
+// Invalid cases
+formatOrdinal('21');  // TypeError
+formatOrdinal(null);  // TypeError
+```
+
+| Parameter | Type   | Default  | Description                         |
+| --------- | ------ | -------- | ----------------------------------- |
+| num       | number | required | The number to format as an ordinal. |
 
 ## 🔧 Usage Patterns
 

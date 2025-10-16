@@ -6,6 +6,7 @@ export { trim } from './trim';
 export { formatRomanNumeral } from './romanNumerals';
 export { formatPercentage } from './percentage';
 export { formatFileSize } from './fileSize';
+export { formatOrdinal } from './ordinal';
 
 import { capitalize } from './capitalize';
 import { formatNumber } from './number';
@@ -15,6 +16,7 @@ import { trim } from './trim';
 import { formatRomanNumeral } from './romanNumerals';
 import { formatPercentage } from './percentage';
 import { formatFileSize } from './fileSize';
+import { formatOrdinal } from './ordinal';
 
 export const formatting = {
   capitalize,
@@ -24,5 +26,6 @@ export const formatting = {
   trim,
   formatRomanNumeral,
   formatPercentage,
-  formatFileSize
+  formatFileSize,
+  formatOrdinal
 };
