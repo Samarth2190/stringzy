@@ -132,6 +132,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
 - [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
+- [formatTitle](#formattitle) -  Converts a given string into proper Title Case.
 
 ## 📋 API Reference
 
@@ -1432,6 +1433,29 @@ formatList(['apple', 123]);                     // TypeError
 | Parameter | Type     | Default  | Description                               |
 | --------- | -------- | -------- | ----------------------------------------- |
 | arr       | string[] | required | The array of strings to format as a list. |
+
+#### <a id="formattitle"></a>formatTitle(title)
+
+Formats a string into proper title case, capitalizing main words while keeping short words like a, an, the, of, in, on, with lowercase — except when they appear at the start or end of the title.
+
+```javascript
+
+import { formatTitle } from 'stringzy';
+
+formatTitle('the lord of the rings');  // "The Lord of the Rings"
+formatTitle('a tale of two cities');   // "A Tale of Two Cities"
+formatTitle('gone with the wind');     // "Gone With the Wind"
+
+// Preserves punctuation
+formatTitle('the man, the myth, the legend'); // "The Man, the Myth, the Legend"
+
+// Invalid input
+formatTitle(42); // TypeError
+```
+
+| Parameter | Type   | Default  | Description                                       |
+| --------- | ------ | -------- | ------------------------------------------------- |
+| title     | string | required | The input title string to format into title case. |
 
 ## 🔧 Usage Patterns
 
