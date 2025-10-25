@@ -1545,6 +1545,23 @@ function formatUserData(userData) {
 }
 ```
 
+### String Transformations
+```js
+import { removeDuplicates, toTitleCase, camelToSnake } from 'stringzy';
+
+const text = 'hello hello world';
+console.log(toTitleCase(removeDuplicates(text)));
+
+const user = { firstName: 'Bob', lastName: 'Lee' };
+const apiData = {
+  [camelToSnake('firstName')]: user.firstName,
+  [camelToSnake('lastName')]: user.lastName,
+};
+
+console.log(apiData);
+
+```
+
 ## 🔄 TypeScript Support
 
 The package includes TypeScript type definitions for all functions.
