@@ -57,6 +57,15 @@ const isValid = stringzy.validate.isEmail('user@example.com'); // true
 const count = stringzy.analyze.wordCount('Hello world'); // 2
 ```
 
+## ✨ What’s new (perf update)
+
+This release contains a performance-focused update to the permutations utilities:
+
+- `stringPermutations(input: string)` — rewritten to use an optimized iterative approach to reduce recursion overhead and peak memory usage for longer strings.
+- `stringPermutationsGenerator(input: string)` — a new generator-based API that yields permutations lazily so you can iterate large permutation sets without allocating the full result array in memory.
+
+These changes improve throughput and reduce memory pressure when working with larger inputs. Note: complexity remains O(n!) — this update optimizes allocation and recursion overhead. If your code relied on a precise ordering from a previous implementation, run your test-suite as ordering may differ in edge cases.
+
 ## 📋 Table of Contents
 
 ### Transformations
@@ -80,8 +89,9 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [splitChunks](#splitchunks) - Breaks a string down into chunks of specified length.
 - [numberToText](#numbertotext) - Converts a number to its text representation in specified language
 - [reverseWordsInString](#reversewordsinstring) - Reverses the order of words in a given string
-- [stringPermutations](#stringpermutations) -  Generates all unique permutations of a given string.
-- [stringCombinations](#stringcombinations) -  Generates all unique combinations of a given string.
+- [stringPermutations](#stringpermutations) - Generates all unique permutations of a given string.
+- [stringPermutationsGenerator](#stringpermutationsgenerator) - Generator-based permutations API for lazy iteration.
+- [stringCombinations](#stringcombinations) - Generates all unique combinations of a given string.
 
 ### Validations
 
@@ -519,13 +529,16 @@ reverseWordsInString('single-word');
 | --------- | ------ | -------- | --------------------------- |
 | str       | string | required | The input string to reverse |
 
-#### <a id="stringpermutations"></a>`stringPermutations(str)`
+#### <a id="stringpermutations"></a>`stringPermutations(input: string): string[]`
 
-Generates all unique permutations of a given string.
-Repeated characters are handled by ensuring only unique permutations are included in the output array.
-The order of permutations is not guaranteed.
+Generates all unique permutations of the given string. Repeated characters are handled by ensuring only unique permutations are included in the returned array.
+
+- Uses an optimized iterative algorithm under the hood to reduce recursion depth and intermediate allocations (lower peak memory usage and faster runtime for many practical inputs).
+- Note: complexity remains O(n!) — this is an optimization of allocation/recursion overhead, not the factorial growth.
 
 ```javascript
+import { stringPermutations } from 'stringzy';
+
 stringPermutations('ab');
 // ['ab', 'ba']
 
@@ -534,20 +547,34 @@ stringPermutations('abc');
 
 stringPermutations('aab');
 // ['aab', 'aba', 'baa']
-
-stringPermutations('');
-// ['']
-
-stringPermutations('a');
-// ['a']
-
-stringPermutations('a1!');
-// ['a1!', 'a!1', '1a!', '1!a', '!a1', '!1a']
 ```
 
 | Parameter | Type   | Default  | Description                                           |
 | --------- | ------ | -------- | ----------------------------------------------------- |
-| str       | string | required | The input string to generate all unique permutations. |
+| input     | string | required | The input string to generate all unique permutations. |
+
+#### <a id="stringpermutationsgenerator"></a>`stringPermutationsGenerator(input: string): Generator<string, void, unknown>`
+
+Generator-based API that yields permutations one-by-one. Use this when you only need to process permutations sequentially or when the full result set would not fit in memory.
+
+- Lazily produces permutations; does not allocate the entire permutation set in memory.
+- Particularly useful for memory-sensitive workflows or streaming processing.
+
+```javascript
+import { stringPermutationsGenerator } from 'stringzy';
+
+for (const p of stringPermutationsGenerator('abcd')) {
+  console.log(p);
+  // process each permutation without building a giant array in memory
+}
+
+// If you must collect them all:
+const perms = Array.from(stringPermutationsGenerator('abcd'));
+```
+
+| Parameter | Type   | Default  | Description                                            |
+| --------- | ------ | -------- | ------------------------------------------------------ |
+| input     | string | required | The input string to generate permutations from.        |
 
 #### <a id="stringcombinations"></a>`stringCombinations(str)`
 
@@ -869,7 +896,7 @@ isMacAddress("aa:bb:cc:dd:ee:ff");   // true
 isMacAddress("FF-FF-FF-FF-FF-FF");   // true
 
 isMacAddress("00:1G:2B:3C:4D:5E");   // false (invalid hex digit)
-isMacAddress("00:1A-2B:3C-4D:5E");   // false (mixed separators)
+isMacAddress("00:1A-2B:3C:4D:5E");   // false (mixed separators)
 isMacAddress("001A:2B:3C:4D:5E");    // false (wrong group length)
 isMacAddress("hello-world-mac");     // false (invalid format)
 isMacAddress("");                    // false (empty string)
