@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import { formatTemperature } from '../../formatting/temperature';
 
-describe.only('formatTemperature', () => {
+describe('formatTemperature', () => {
     it('should convert Celsius to Fahrenheit', () => {
         assert.strictEqual(formatTemperature(0, { from: 'C', to: 'F' }), '32.00°F');
     });
