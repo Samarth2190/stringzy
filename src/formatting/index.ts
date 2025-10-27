@@ -8,6 +8,7 @@ export { formatPercentage } from './percentage';
 export { formatFileSize } from './fileSize';
 export { formatOrdinal } from './ordinal';
 export { formatList } from './listToString';
+export { formatToOctal } from './octal';
 
 import { capitalize } from './capitalize';
 import { formatNumber } from './number';
@@ -19,6 +20,7 @@ import { formatPercentage } from './percentage';
 import { formatFileSize } from './fileSize';
 import { formatOrdinal } from './ordinal';
 import { formatList } from './listToString';
+import { formatToOctal } from './octal';
 
 export const formatting = {
   capitalize,
@@ -30,5 +32,6 @@ export const formatting = {
   formatPercentage,
   formatFileSize,
   formatOrdinal,
-  formatList
+  formatList,
+  formatToOctal
 };
