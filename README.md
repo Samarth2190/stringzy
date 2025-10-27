@@ -142,6 +142,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
 - [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
+- [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
 
 ## 📋 API Reference
 
@@ -1459,6 +1460,29 @@ formatList(['apple', 123]);                     // TypeError
 | Parameter | Type     | Default  | Description                               |
 | --------- | -------- | -------- | ----------------------------------------- |
 | arr       | string[] | required | The array of strings to format as a list. |
+
+#### <a id="formattemperature"></a>`formatTemperature(value, options)`
+
+Converts a temperature value between Celsius (C), Fahrenheit (F), and Kelvin (K), with configurable decimal precision.
+
+```javascript
+formatTemperature(0,   { from: 'C', to: 'F' });               // "32.00°F"
+formatTemperature(32,  { from: 'F', to: 'C', precision: 1 }); // "0.0°C"
+formatTemperature(25,  { from: 'C', to: 'K' });               // "298.15K"
+formatTemperature(300, { from: 'K', to: 'F' });               // "80.33°F"
+```
+
+| Parameter       | Type   | Default | Description                                      |
+| -------------- | ------ | ------- | ------------------------------------------------ |
+| value          | number | required| Temperature to convert                           |
+| options        | object | required| Conversion settings                              |
+| - from         | string | required| Source unit: 'C' | 'F' | 'K'                     |
+| - to           | string | required| Target unit: 'C' | 'F' | 'K'                     |
+| - precision    | number | 2       | Number of decimal places in the output           |
+
+Notes:
+- Kelvin values are rendered without the degree symbol (e.g., "298.15K").
+- An error is thrown for invalid conversions or non-numeric input values.
 
 ## 🔧 Usage Patterns
 
