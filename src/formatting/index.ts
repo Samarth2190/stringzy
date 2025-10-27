@@ -9,6 +9,7 @@ export { formatFileSize } from './fileSize';
 export { formatOrdinal } from './ordinal';
 export { formatList } from './listToString';
 export { formatTemperature } from './temperature';
+export { formatToBinary } from './binary';
 
 import { capitalize } from './capitalize';
 import { formatNumber } from './number';
@@ -21,6 +22,7 @@ import { formatFileSize } from './fileSize';
 import { formatOrdinal } from './ordinal';
 import { formatList } from './listToString';
 import { formatTemperature } from './temperature';
+import { formatToBinary } from './binary';
 
 export const formatting = {
   capitalize,
@@ -33,5 +35,6 @@ export const formatting = {
   formatFileSize,
   formatOrdinal,
   formatList,
-  formatTemperature
+  formatTemperature,
+  formatToBinary
 };

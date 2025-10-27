@@ -143,6 +143,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
 - [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+- [formatToBinary](#formattobinary) - Converts a decimal integer to a binary string with optional bit grouping.
 
 ## 📋 API Reference
 
@@ -1483,6 +1484,37 @@ formatTemperature(300, { from: 'K', to: 'F' });               // "80.33°F"
 Notes:
 - Kelvin values are rendered without the degree symbol (e.g., "298.15K").
 - An error is thrown for invalid conversions or non-numeric input values.
+
+#### <a id="formattobinary"></a>`formatToBinary(num, options)`
+
+Converts a decimal integer to its binary (base-2) string representation with optional grouping from the least significant bit for readability. Supports negative numbers.
+
+```javascript
+import { formatToBinary } from 'stringzy';
+
+// Basic conversions
+formatToBinary(5);      // "101"
+formatToBinary(10);     // "1010"
+formatToBinary(255);    // "11111111"
+formatToBinary(0);      // "0"
+formatToBinary(-5);     // "-101"
+
+// Grouping from right to left (no left-padding)
+formatToBinary(255, { group: 4 }); // "1111 1111"
+formatToBinary(10,  { group: 2 }); // "10 10"
+formatToBinary(-255, { group: 4 }); // "-1111 1111"
+
+// Invalid cases
+formatToBinary(3.14);            // TypeError (must be an integer)
+formatToBinary('5');              // TypeError (input must be a number)
+formatToBinary(10, { group: 0 }); // TypeError (group must be positive integer)
+```
+
+| Parameter | Type   | Default | Description                                      |
+| --------- | ------ | ------- | ------------------------------------------------ |
+| num       | number | required| The decimal integer to convert to binary.       |
+| options   | object | `{}`    | Optional configuration.                         |
+| - group   | number | —       | Positive integer; bits per group (right-to-left) |
 
 ## 🔧 Usage Patterns
 
