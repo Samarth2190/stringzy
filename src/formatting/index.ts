@@ -35,6 +35,6 @@ export const formatting = {
   formatFileSize,
   formatOrdinal,
   formatList,
-  formatToOctal
+  formatToOctal,
   formatTemperature
 };
