@@ -145,6 +145,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
 - [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
 - [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+- [formatToDecimal](#formattodecimal) - Converts base-2/8/16 strings to decimal.
 
 ## 📋 API Reference
 
@@ -1528,6 +1529,42 @@ formatTemperature(300, { from: 'K', to: 'F' });               // "80.33°F"
 Notes:
 - Kelvin values are rendered without the degree symbol (e.g., "298.15K").
 - An error is thrown for invalid conversions or non-numeric input values.
+
+#### <a id="formattodecimal"></a>`formatToDecimal(value, options)`
+
+Converts a binary, octal, or hexadecimal string into its decimal (base‑10) number. Supports optional standard prefixes and trims whitespace. Hex accepts uppercase and lowercase.
+
+```javascript
+import { formatToDecimal } from 'stringzy';
+
+// Binary (base 2)
+formatToDecimal('1010', { base: 2 });   // 10
+formatToDecimal('0b111', { base: 2 });  // 7
+
+// Octal (base 8)
+formatToDecimal('12', { base: 8 });     // 10
+formatToDecimal('0o377', { base: 8 });  // 255
+
+// Hexadecimal (base 16)
+formatToDecimal('FF', { base: 16 });    // 255
+formatToDecimal('0x10', { base: 16 });  // 16
+
+// Trimming and sign handling
+formatToDecimal('  +0xFF  ', { base: 16 }); // 255
+formatToDecimal('-0b10', { base: 2 });      // -2
+
+// Invalid cases (throw TypeError)
+// formatToDecimal('102', { base: 2 });
+// formatToDecimal('89', { base: 8 });
+// formatToDecimal('0xG1', { base: 16 });
+// formatToDecimal('10', { base: 10 });
+```
+
+| Parameter | Type          | Default  | Description                                        |
+| --------- | ------------- | -------- | -------------------------------------------------- |
+| value     | string        | required | The numeric string to convert (may include prefix) |
+| options   | object        | required | Configuration for conversion                        |
+| - base    | 2 \| 8 \| 16 | required | The base of the input string                        |
 
 ## 🔧 Usage Patterns
 

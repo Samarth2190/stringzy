@@ -10,6 +10,7 @@ export { formatOrdinal } from './ordinal';
 export { formatList } from './listToString';
 export { formatToOctal } from './octal';
 export { formatTemperature } from './temperature';
+export { formatToDecimal } from './decimal';
 
 import { capitalize } from './capitalize';
 import { formatNumber } from './number';
@@ -23,6 +24,7 @@ import { formatOrdinal } from './ordinal';
 import { formatList } from './listToString';
 import { formatToOctal } from './octal';
 import { formatTemperature } from './temperature';
+import { formatToDecimal } from './decimal';
 
 export const formatting = {
   capitalize,
@@ -35,6 +37,7 @@ export const formatting = {
   formatFileSize,
   formatOrdinal,
   formatList,
-  formatToOctal,
-  formatTemperature
+  formatTemperature,
+  formatToDecimal,
+  formatToOctal
 };
