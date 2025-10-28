@@ -57,6 +57,15 @@ const isValid = stringzy.validate.isEmail('user@example.com'); // true
 const count = stringzy.analyze.wordCount('Hello world'); // 2
 ```
 
+## ✨ What’s new (perf update)
+
+This release contains a performance-focused update to the permutations utilities:
+
+- `stringPermutations(input: string)` — rewritten to use an optimized iterative approach to reduce recursion overhead and peak memory usage for longer strings.
+- `stringPermutationsGenerator(input: string)` — a new generator-based API that yields permutations lazily so you can iterate large permutation sets without allocating the full result array in memory.
+
+These changes improve throughput and reduce memory pressure when working with larger inputs. Note: complexity remains O(n!) — this update optimizes allocation and recursion overhead. If your code relied on a precise ordering from a previous implementation, run your test-suite as ordering may differ in edge cases.
+
 ## 📋 Table of Contents
 
 ### Transformations
@@ -80,8 +89,9 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [splitChunks](#splitchunks) - Breaks a string down into chunks of specified length.
 - [numberToText](#numbertotext) - Converts a number to its text representation in specified language
 - [reverseWordsInString](#reversewordsinstring) - Reverses the order of words in a given string
-- [stringPermutations](#stringpermutations) -  Generates all unique permutations of a given string.
-- [stringCombinations](#stringcombinations) -  Generates all unique combinations of a given string.
+- [stringPermutations](#stringpermutations) - Generates all unique permutations of a given string.
+- [stringPermutationsGenerator](#stringpermutationsgenerator) - Generator-based permutations API for lazy iteration.
+- [stringCombinations](#stringcombinations) - Generates all unique combinations of a given string.
 
 ### Validations
 
@@ -92,6 +102,7 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isSlug](#isslug) - Checks if a string is a valid slug
 - [isTypeOf](#istypeof) - Checks if a file or URL has a valid extension for a given type
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
+- [isIPv6](#isipv6) - Checks if a string is a valid IPv6 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 - [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
@@ -133,7 +144,11 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
 - [formatCreditCard](#formatcreditcard) - Formats a credit card number by grouping digits into readable parts.
-
+- [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
+- [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+- [formatToBinary](#formattobinary) - Converts a decimal integer to a binary string with optional bit grouping.
+- [formatToHexadecimal](#formattohexadecimal) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+- [formatToDecimal](#formattodecimal) - Converts base-2/8/16 strings to decimal.
 
 ## 📋 API Reference
 
@@ -521,13 +536,16 @@ reverseWordsInString('single-word');
 | --------- | ------ | -------- | --------------------------- |
 | str       | string | required | The input string to reverse |
 
-#### <a id="stringpermutations"></a>`stringPermutations(str)`
+#### <a id="stringpermutations"></a>`stringPermutations(input: string): string[]`
 
-Generates all unique permutations of a given string.
-Repeated characters are handled by ensuring only unique permutations are included in the output array.
-The order of permutations is not guaranteed.
+Generates all unique permutations of the given string. Repeated characters are handled by ensuring only unique permutations are included in the returned array.
+
+- Uses an optimized iterative algorithm under the hood to reduce recursion depth and intermediate allocations (lower peak memory usage and faster runtime for many practical inputs).
+- Note: complexity remains O(n!) — this is an optimization of allocation/recursion overhead, not the factorial growth.
 
 ```javascript
+import { stringPermutations } from 'stringzy';
+
 stringPermutations('ab');
 // ['ab', 'ba']
 
@@ -536,20 +554,34 @@ stringPermutations('abc');
 
 stringPermutations('aab');
 // ['aab', 'aba', 'baa']
-
-stringPermutations('');
-// ['']
-
-stringPermutations('a');
-// ['a']
-
-stringPermutations('a1!');
-// ['a1!', 'a!1', '1a!', '1!a', '!a1', '!1a']
 ```
 
 | Parameter | Type   | Default  | Description                                           |
 | --------- | ------ | -------- | ----------------------------------------------------- |
-| str       | string | required | The input string to generate all unique permutations. |
+| input     | string | required | The input string to generate all unique permutations. |
+
+#### <a id="stringpermutationsgenerator"></a>`stringPermutationsGenerator(input: string): Generator<string, void, unknown>`
+
+Generator-based API that yields permutations one-by-one. Use this when you only need to process permutations sequentially or when the full result set would not fit in memory.
+
+- Lazily produces permutations; does not allocate the entire permutation set in memory.
+- Particularly useful for memory-sensitive workflows or streaming processing.
+
+```javascript
+import { stringPermutationsGenerator } from 'stringzy';
+
+for (const p of stringPermutationsGenerator('abcd')) {
+  console.log(p);
+  // process each permutation without building a giant array in memory
+}
+
+// If you must collect them all:
+const perms = Array.from(stringPermutationsGenerator('abcd'));
+```
+
+| Parameter | Type   | Default  | Description                                            |
+| --------- | ------ | -------- | ------------------------------------------------------ |
+| input     | string | required | The input string to generate permutations from.        |
 
 #### <a id="stringcombinations"></a>`stringCombinations(str)`
 
@@ -699,6 +731,25 @@ isIPv4('192.168.1.a'); // false (non-numeric)
 | Parameter | Type   | Default  | Description                                  |
 | --------- | ------ | -------- | -------------------------------------------- |
 | text      | string | required | The input string to validate as IPv4 address |
+
+#### <a id="isipv6"></a>`isIPv6(text)`
+
+Checks if a string is a valid IPv6 address.
+
+```javascript
+import { isIPv6 } from 'stringzy';
+
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334'); // true
+isIPv6('0:0:0:0:0:0:0:1'); // true
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334:1234'); // false (too many groups)
+isIPv6('2001:db8:::1'); // false (invalid use of shorthand)
+isIPv6('12345::abcd'); // false (out of range)
+isIPv6('2001:db8::g1'); // false (non-hex character)
+```
+
+| Parameter | Type   | Default  | Description                                  |
+| --------- | ------ | -------- | -------------------------------------------- |
+| text      | string | required | The input string to validate as IPv6 address |
 
 #### <a id="ishexcolor"></a>`isHexColor(text)`
 
@@ -871,7 +922,7 @@ isMacAddress("aa:bb:cc:dd:ee:ff");   // true
 isMacAddress("FF-FF-FF-FF-FF-FF");   // true
 
 isMacAddress("00:1G:2B:3C:4D:5E");   // false (invalid hex digit)
-isMacAddress("00:1A-2B:3C-4D:5E");   // false (mixed separators)
+isMacAddress("00:1A-2B:3C:4D:5E");   // false (mixed separators)
 isMacAddress("001A:2B:3C:4D:5E");    // false (wrong group length)
 isMacAddress("hello-world-mac");     // false (invalid format)
 isMacAddress("");                    // false (empty string)
@@ -1456,6 +1507,158 @@ formatCreditCard('');    // "" (empty string)
 | ---------- | ------ | -------- | ------------------------------------------------------------------- |
 | cardNumber | string | required | The credit card number to format. Can include non-digit characters. |
 
+#### <a id="formattotoctal"></a>formatToOctal(num, options?)
+
+Converts a decimal number to its octal (base-8) string representation. Supports negatives and an optional `0o` prefix.
+
+```javascript
+import { formatToOctal } from 'stringzy';
+
+formatToOctal(8);                      // "10"
+formatToOctal(10);                     // "12"
+formatToOctal(255);                    // "377"
+formatToOctal(0);                      // "0"
+formatToOctal(255, { prefix: true });  // "0o377"
+formatToOctal(-255, { prefix: true }); // "-0o377"
+
+// Invalid cases
+// formatToOctal('10');  // TypeError
+// formatToOctal(NaN);   // TypeError
+```
+
+| Parameter | Type    | Default | Description                                   |
+| --------- | ------- | ------- | --------------------------------------------- |
+| num       | number  | required| The decimal number to convert                 |
+| options   | object  | {}      | Optional settings                             |
+| - prefix  | boolean | false   | If true, prepend the result with `0o`         |
+#### <a id="formattemperature"></a>`formatTemperature(value, options)`
+
+Converts a temperature value between Celsius (C), Fahrenheit (F), and Kelvin (K), with configurable decimal precision.
+
+```javascript
+formatTemperature(0,   { from: 'C', to: 'F' });               // "32.00°F"
+formatTemperature(32,  { from: 'F', to: 'C', precision: 1 }); // "0.0°C"
+formatTemperature(25,  { from: 'C', to: 'K' });               // "298.15K"
+formatTemperature(300, { from: 'K', to: 'F' });               // "80.33°F"
+```
+
+| Parameter       | Type   | Default | Description                                      |
+| -------------- | ------ | ------- | ------------------------------------------------ |
+| value          | number | required| Temperature to convert                           |
+| options        | object | required| Conversion settings                              |
+| - from         | string | required| Source unit: 'C' | 'F' | 'K'                     |
+| - to           | string | required| Target unit: 'C' | 'F' | 'K'                     |
+| - precision    | number | 2       | Number of decimal places in the output           |
+
+Notes:
+- Kelvin values are rendered without the degree symbol (e.g., "298.15K").
+- An error is thrown for invalid conversions or non-numeric input values.
+
+#### <a id="formattobinary"></a>`formatToBinary(num, options)`
+
+Converts a decimal integer to its binary (base-2) string representation with optional grouping from the least significant bit for readability. Supports negative numbers.
+
+```javascript
+import { formatToBinary } from 'stringzy';
+
+// Basic conversions
+formatToBinary(5);      // "101"
+formatToBinary(10);     // "1010"
+formatToBinary(255);    // "11111111"
+formatToBinary(0);      // "0"
+formatToBinary(-5);     // "-101"
+
+// Grouping from right to left (no left-padding)
+formatToBinary(255, { group: 4 }); // "1111 1111"
+formatToBinary(10,  { group: 2 }); // "10 10"
+formatToBinary(-255, { group: 4 }); // "-1111 1111"
+
+// Invalid cases
+formatToBinary(3.14);            // TypeError (must be an integer)
+formatToBinary('5');              // TypeError (input must be a number)
+formatToBinary(10, { group: 0 }); // TypeError (group must be positive integer)
+```
+
+| Parameter | Type   | Default | Description                                      |
+| --------- | ------ | ------- | ------------------------------------------------ |
+| num       | number | required| The decimal integer to convert to binary.       |
+| options   | object | `{}`    | Optional configuration.                         |
+| - group   | number | —       | Positive integer; bits per group (right-to-left) |
+#### <a id="formattohexadecimal"></a>formatToHexadecimal(num, options)
+Converts a decimal number into its hexadecimal (base-16) string representation.</br>
+Supports optional prefix "0x" and lowercase formatting.</br>
+Handles negative numbers by adding a - sign before the output.</br>
+Throws a TypeError if the input is not a valid number.</br>
+
+```javascript
+import { formatToHexadecimal } from 'stringzy';
+
+formatToHexadecimal(10);          // "A"
+formatToHexadecimal(15);          // "F"
+formatToHexadecimal(255);         // "FF"
+formatToHexadecimal(4095);        // "FFF"
+
+// Negative numbers
+formatToHexadecimal(-255);        // "-FF"
+
+// With prefix
+formatToHexadecimal(255, { prefix: true }); // "0xFF"
+formatToHexadecimal(-255, { prefix: true }); // "-0xFF"
+
+// Lowercase output
+formatToHexadecimal(255, { lowercase: true }); // "ff"
+
+// Prefix + lowercase
+formatToHexadecimal(255, { prefix: true, lowercase: true }); // "0xff"
+
+// Invalid cases
+formatToHexadecimal('255');      // TypeError
+formatToHexadecimal(null);       // TypeError
+formatToHexadecimal(NaN);        // TypeError
+```
+
+| Parameter         | Type                | Default  | Description                                               |
+| ----------------- | ------------------- | -------- | --------------------------------------------------------- |
+| num               | number              | required | The decimal number to convert to hexadecimal.             |
+| options           | object *(optional)* | `{}`     | Formatting options.                                       |
+| options.prefix    | boolean             | `false`  | Adds `"0x"` before the result (or `"-0x"` for negatives). |
+| options.lowercase | boolean             | `false`  | Outputs letters in lowercase (`"ff"` instead of `"FF"`).  |
+
+#### <a id="formattodecimal"></a>`formatToDecimal(value, options)`
+
+Converts a binary, octal, or hexadecimal string into its decimal (base‑10) number. Supports optional standard prefixes and trims whitespace. Hex accepts uppercase and lowercase.
+
+```javascript
+import { formatToDecimal } from 'stringzy';
+
+// Binary (base 2)
+formatToDecimal('1010', { base: 2 });   // 10
+formatToDecimal('0b111', { base: 2 });  // 7
+
+// Octal (base 8)
+formatToDecimal('12', { base: 8 });     // 10
+formatToDecimal('0o377', { base: 8 });  // 255
+
+// Hexadecimal (base 16)
+formatToDecimal('FF', { base: 16 });    // 255
+formatToDecimal('0x10', { base: 16 });  // 16
+
+// Trimming and sign handling
+formatToDecimal('  +0xFF  ', { base: 16 }); // 255
+formatToDecimal('-0b10', { base: 2 });      // -2
+
+// Invalid cases (throw TypeError)
+// formatToDecimal('102', { base: 2 });
+// formatToDecimal('89', { base: 8 });
+// formatToDecimal('0xG1', { base: 16 });
+// formatToDecimal('10', { base: 10 });
+```
+
+| Parameter | Type          | Default  | Description                                        |
+| --------- | ------------- | -------- | -------------------------------------------------- |
+| value     | string        | required | The numeric string to convert (may include prefix) |
+| options   | object        | required | Configuration for conversion                        |
+| - base    | 2 \| 8 \| 16 | required | The base of the input string                        |
 
 ## 🔧 Usage Patterns
 

@@ -9,6 +9,11 @@ export { formatFileSize } from './fileSize';
 export { formatOrdinal } from './ordinal';
 export { formatList } from './listToString';
 export { formatCreditCard } from './creditCard';
+export { formatToOctal } from './octal';
+export { formatTemperature } from './temperature';
+export { formatToBinary } from './binary';
+export { formatToHexadecimal } from './hexadecimal';
+export { formatToDecimal } from './decimal';
 
 import { capitalize } from './capitalize';
 import { formatNumber } from './number';
@@ -21,6 +26,11 @@ import { formatFileSize } from './fileSize';
 import { formatOrdinal } from './ordinal';
 import { formatList } from './listToString';
 import { formatCreditCard } from './creditCard';
+import { formatToOctal } from './octal';
+import { formatTemperature } from './temperature';
+import { formatToBinary } from './binary';
+import { formatToHexadecimal } from './hexadecimal';
+import { formatToDecimal } from './decimal';
 
 export const formatting = {
   capitalize,
@@ -33,5 +43,10 @@ export const formatting = {
   formatFileSize,
   formatOrdinal,
   formatList,
-  formatCreditCard
+  formatCreditCard,
+  formatTemperature,
+  formatToBinary,
+  formatToHexadecimal,
+  formatToOctal,
+  formatToDecimal
 };
