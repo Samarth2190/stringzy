@@ -146,6 +146,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatCreditCard](#formatcreditcard) - Formats a credit card number by grouping digits into readable parts.
 - [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
 - [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+- [formatScientific](#formatscientific) - Converts a number into scientific notation (e.g., 12345 → "1.23e+4").</br>
 - [formatToBinary](#formattobinary) - Converts a decimal integer to a binary string with optional bit grouping.
 - [formatToHexadecimal](#formattohexadecimal) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
 - [formatToDecimal](#formattodecimal) - Converts base-2/8/16 strings to decimal.
@@ -1553,6 +1554,34 @@ formatTemperature(300, { from: 'K', to: 'F' });               // "80.33°F"
 Notes:
 - Kelvin values are rendered without the degree symbol (e.g., "298.15K").
 - An error is thrown for invalid conversions or non-numeric input values.
+
+#### <a id="formatscientific"></a>formatScientific(num, options)
+Converts a number into scientific notation (e.g., 12345 → "1.23e+4").</br>
+Supports custom precision and uppercase "E" formatting.</br>
+Handles negative numbers correctly.</br>
+Throws TypeError if input is not a valid number.</br>
+
+```javascript
+import { formatScientific } from 'stringzy';
+
+formatScientific(12345);                  // "1.23e+4"
+formatScientific(0.000123);               // "1.23e-4"
+formatScientific(-98765);                 // "-9.88e+4"
+
+formatScientific(1000000, { precision: 4 }); // "1.0000e+6"
+formatScientific(98765, { uppercase: true }); // "9.88E+4"
+formatScientific(12345, { precision: 5, uppercase: true }); // "1.23450E+4"
+
+// Invalid cases
+formatScientific('12345'); // TypeError
+formatScientific(null);    // TypeError
+```
+| Parameter         | Type    | Default  | Description                                   |
+| ----------------- | ------- | -------- | --------------------------------------------- |
+| num               | number  | required | The number to convert to scientific notation. |
+| options           | object  | optional | Formatting settings.                          |
+| options.precision | number  | 2        | Digits after decimal point.                   |
+| options.uppercase | boolean | false    | Uses "E" instead of "e".                      |
 
 #### <a id="formattobinary"></a>`formatToBinary(num, options)`
 
