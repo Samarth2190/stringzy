@@ -10,6 +10,7 @@ export { formatOrdinal } from './ordinal';
 export { formatList } from './listToString';
 export { formatToOctal } from './octal';
 export { formatTemperature } from './temperature';
+export { formatToBinary } from './binary';
 export { formatToHexadecimal } from './hexadecimal';
 export { formatToDecimal } from './decimal';
 
@@ -25,6 +26,7 @@ import { formatOrdinal } from './ordinal';
 import { formatList } from './listToString';
 import { formatToOctal } from './octal';
 import { formatTemperature } from './temperature';
+import { formatToBinary } from './binary';
 import { formatToHexadecimal } from './hexadecimal';
 import { formatToDecimal } from './decimal';
 
@@ -40,7 +42,8 @@ export const formatting = {
   formatOrdinal,
   formatList,
   formatTemperature,
+  formatToBinary,
   formatToHexadecimal,
   formatToOctal,
-  formatToDecimal,
+  formatToDecimal
 };
