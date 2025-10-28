@@ -8,6 +8,7 @@ export { formatPercentage } from './percentage';
 export { formatFileSize } from './fileSize';
 export { formatOrdinal } from './ordinal';
 export { formatList } from './listToString';
+export { formatToOctal } from './octal';
 export { formatTemperature } from './temperature';
 export { formatToHexadecimal } from './hexadecimal';
 
@@ -21,6 +22,7 @@ import { formatPercentage } from './percentage';
 import { formatFileSize } from './fileSize';
 import { formatOrdinal } from './ordinal';
 import { formatList } from './listToString';
+import { formatToOctal } from './octal';
 import { formatTemperature } from './temperature';
 import { formatToHexadecimal } from './hexadecimal';
 
@@ -37,4 +39,6 @@ export const formatting = {
   formatList,
   formatTemperature,
   formatToHexadecimal
+  formatToOctal,
+  formatTemperature
 };
