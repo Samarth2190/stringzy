@@ -1505,7 +1505,7 @@ formatCreditCard('');    // "" (empty string)
 
 | Parameter  | Type   | Default  | Description                                                         |
 | ---------- | ------ | -------- | ------------------------------------------------------------------- |
-| cardNumber | string | required | The credit card number to format. Can include non-digit characters. |
+| cardNumber | string | required | The credit card number to format. Cannot include non-digit characters. |
 
 #### <a id="formattotoctal"></a>formatToOctal(num, options?)
 
