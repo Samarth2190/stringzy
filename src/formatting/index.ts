@@ -11,6 +11,7 @@ export { formatList } from './listToString';
 export { formatToOctal } from './octal';
 export { formatTemperature } from './temperature';
 export { formatToHexadecimal } from './hexadecimal';
+export { formatToDecimal } from './decimal';
 
 import { capitalize } from './capitalize';
 import { formatNumber } from './number';
@@ -25,6 +26,7 @@ import { formatList } from './listToString';
 import { formatToOctal } from './octal';
 import { formatTemperature } from './temperature';
 import { formatToHexadecimal } from './hexadecimal';
+import { formatToDecimal } from './decimal';
 
 export const formatting = {
   capitalize,
@@ -40,5 +42,5 @@ export const formatting = {
   formatTemperature,
   formatToHexadecimal,
   formatToOctal,
-  formatTemperature
+  formatToDecimal,
 };
