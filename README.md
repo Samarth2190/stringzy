@@ -145,6 +145,8 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
 - [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
 - [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+- [formatToHexadecimal](#formattohexadecimal) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+
 - [formatToDecimal](#formattodecimal) - Converts base-2/8/16 strings to decimal.
 
 ## 📋 API Reference
@@ -1529,6 +1531,46 @@ formatTemperature(300, { from: 'K', to: 'F' });               // "80.33°F"
 Notes:
 - Kelvin values are rendered without the degree symbol (e.g., "298.15K").
 - An error is thrown for invalid conversions or non-numeric input values.
+
+#### <a id="formattohexadecimal"></a>formatToHexadecimal(num, options)
+Converts a decimal number into its hexadecimal (base-16) string representation.</br>
+Supports optional prefix "0x" and lowercase formatting.</br>
+Handles negative numbers by adding a - sign before the output.</br>
+Throws a TypeError if the input is not a valid number.</br>
+
+```javascript
+import { formatToHexadecimal } from 'stringzy';
+
+formatToHexadecimal(10);          // "A"
+formatToHexadecimal(15);          // "F"
+formatToHexadecimal(255);         // "FF"
+formatToHexadecimal(4095);        // "FFF"
+
+// Negative numbers
+formatToHexadecimal(-255);        // "-FF"
+
+// With prefix
+formatToHexadecimal(255, { prefix: true }); // "0xFF"
+formatToHexadecimal(-255, { prefix: true }); // "-0xFF"
+
+// Lowercase output
+formatToHexadecimal(255, { lowercase: true }); // "ff"
+
+// Prefix + lowercase
+formatToHexadecimal(255, { prefix: true, lowercase: true }); // "0xff"
+
+// Invalid cases
+formatToHexadecimal('255');      // TypeError
+formatToHexadecimal(null);       // TypeError
+formatToHexadecimal(NaN);        // TypeError
+```
+
+| Parameter         | Type                | Default  | Description                                               |
+| ----------------- | ------------------- | -------- | --------------------------------------------------------- |
+| num               | number              | required | The decimal number to convert to hexadecimal.             |
+| options           | object *(optional)* | `{}`     | Formatting options.                                       |
+| options.prefix    | boolean             | `false`  | Adds `"0x"` before the result (or `"-0x"` for negatives). |
+| options.lowercase | boolean             | `false`  | Outputs letters in lowercase (`"ff"` instead of `"FF"`).  |
 
 #### <a id="formattodecimal"></a>`formatToDecimal(value, options)`
 
