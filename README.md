@@ -102,6 +102,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [isSlug](#isslug) - Checks if a string is a valid slug
 - [isTypeOf](#istypeof) - Checks if a file or URL has a valid extension for a given type
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
+- [isIPv6](#isipv6) - Checks if a string is a valid IPv6 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 - [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
@@ -145,6 +146,9 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
 - [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
 - [formatToBinary](#formattobinary) - Converts a decimal integer to a binary string with optional bit grouping.
+- [formatToHexadecimal](#formattohexadecimal) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+
+- [formatToDecimal](#formattodecimal) - Converts base-2/8/16 strings to decimal.
 
 ## 📋 API Reference
 
@@ -727,6 +731,25 @@ isIPv4('192.168.1.a'); // false (non-numeric)
 | Parameter | Type   | Default  | Description                                  |
 | --------- | ------ | -------- | -------------------------------------------- |
 | text      | string | required | The input string to validate as IPv4 address |
+
+#### <a id="isipv6"></a>`isIPv6(text)`
+
+Checks if a string is a valid IPv6 address.
+
+```javascript
+import { isIPv6 } from 'stringzy';
+
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334'); // true
+isIPv6('0:0:0:0:0:0:0:1'); // true
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334:1234'); // false (too many groups)
+isIPv6('2001:db8:::1'); // false (invalid use of shorthand)
+isIPv6('12345::abcd'); // false (out of range)
+isIPv6('2001:db8::g1'); // false (non-hex character)
+```
+
+| Parameter | Type   | Default  | Description                                  |
+| --------- | ------ | -------- | -------------------------------------------- |
+| text      | string | required | The input string to validate as IPv6 address |
 
 #### <a id="ishexcolor"></a>`isHexColor(text)`
 
@@ -1540,6 +1563,81 @@ formatToBinary(10, { group: 0 }); // TypeError (group must be positive integer)
 | num       | number | required| The decimal integer to convert to binary.       |
 | options   | object | `{}`    | Optional configuration.                         |
 | - group   | number | —       | Positive integer; bits per group (right-to-left) |
+#### <a id="formattohexadecimal"></a>formatToHexadecimal(num, options)
+Converts a decimal number into its hexadecimal (base-16) string representation.</br>
+Supports optional prefix "0x" and lowercase formatting.</br>
+Handles negative numbers by adding a - sign before the output.</br>
+Throws a TypeError if the input is not a valid number.</br>
+
+```javascript
+import { formatToHexadecimal } from 'stringzy';
+
+formatToHexadecimal(10);          // "A"
+formatToHexadecimal(15);          // "F"
+formatToHexadecimal(255);         // "FF"
+formatToHexadecimal(4095);        // "FFF"
+
+// Negative numbers
+formatToHexadecimal(-255);        // "-FF"
+
+// With prefix
+formatToHexadecimal(255, { prefix: true }); // "0xFF"
+formatToHexadecimal(-255, { prefix: true }); // "-0xFF"
+
+// Lowercase output
+formatToHexadecimal(255, { lowercase: true }); // "ff"
+
+// Prefix + lowercase
+formatToHexadecimal(255, { prefix: true, lowercase: true }); // "0xff"
+
+// Invalid cases
+formatToHexadecimal('255');      // TypeError
+formatToHexadecimal(null);       // TypeError
+formatToHexadecimal(NaN);        // TypeError
+```
+
+| Parameter         | Type                | Default  | Description                                               |
+| ----------------- | ------------------- | -------- | --------------------------------------------------------- |
+| num               | number              | required | The decimal number to convert to hexadecimal.             |
+| options           | object *(optional)* | `{}`     | Formatting options.                                       |
+| options.prefix    | boolean             | `false`  | Adds `"0x"` before the result (or `"-0x"` for negatives). |
+| options.lowercase | boolean             | `false`  | Outputs letters in lowercase (`"ff"` instead of `"FF"`).  |
+
+#### <a id="formattodecimal"></a>`formatToDecimal(value, options)`
+
+Converts a binary, octal, or hexadecimal string into its decimal (base‑10) number. Supports optional standard prefixes and trims whitespace. Hex accepts uppercase and lowercase.
+
+```javascript
+import { formatToDecimal } from 'stringzy';
+
+// Binary (base 2)
+formatToDecimal('1010', { base: 2 });   // 10
+formatToDecimal('0b111', { base: 2 });  // 7
+
+// Octal (base 8)
+formatToDecimal('12', { base: 8 });     // 10
+formatToDecimal('0o377', { base: 8 });  // 255
+
+// Hexadecimal (base 16)
+formatToDecimal('FF', { base: 16 });    // 255
+formatToDecimal('0x10', { base: 16 });  // 16
+
+// Trimming and sign handling
+formatToDecimal('  +0xFF  ', { base: 16 }); // 255
+formatToDecimal('-0b10', { base: 2 });      // -2
+
+// Invalid cases (throw TypeError)
+// formatToDecimal('102', { base: 2 });
+// formatToDecimal('89', { base: 8 });
+// formatToDecimal('0xG1', { base: 16 });
+// formatToDecimal('10', { base: 10 });
+```
+
+| Parameter | Type          | Default  | Description                                        |
+| --------- | ------------- | -------- | -------------------------------------------------- |
+| value     | string        | required | The numeric string to convert (may include prefix) |
+| options   | object        | required | Configuration for conversion                        |
+| - base    | 2 \| 8 \| 16 | required | The base of the input string                        |
 
 ## 🔧 Usage Patterns
 
