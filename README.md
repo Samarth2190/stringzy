@@ -102,6 +102,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [isSlug](#isslug) - Checks if a string is a valid slug
 - [isTypeOf](#istypeof) - Checks if a file or URL has a valid extension for a given type
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
+- [isIPv6](#isipv6) - Checks if a string is a valid IPv6 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 - [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
@@ -142,8 +143,13 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
 - [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
+- [formatCreditCard](#formatcreditcard) - Formats a credit card number by grouping digits into readable parts.
+- [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
 - [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
 - [formatScientific](#formatscientific) - Converts a number into scientific notation (e.g., 12345 → "1.23e+4").</br>
+- [formatToBinary](#formattobinary) - Converts a decimal integer to a binary string with optional bit grouping.
+- [formatToHexadecimal](#formattohexadecimal) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+- [formatToDecimal](#formattodecimal) - Converts base-2/8/16 strings to decimal.
 
 ## 📋 API Reference
 
@@ -726,6 +732,25 @@ isIPv4('192.168.1.a'); // false (non-numeric)
 | Parameter | Type   | Default  | Description                                  |
 | --------- | ------ | -------- | -------------------------------------------- |
 | text      | string | required | The input string to validate as IPv4 address |
+
+#### <a id="isipv6"></a>`isIPv6(text)`
+
+Checks if a string is a valid IPv6 address.
+
+```javascript
+import { isIPv6 } from 'stringzy';
+
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334'); // true
+isIPv6('0:0:0:0:0:0:0:1'); // true
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334:1234'); // false (too many groups)
+isIPv6('2001:db8:::1'); // false (invalid use of shorthand)
+isIPv6('12345::abcd'); // false (out of range)
+isIPv6('2001:db8::g1'); // false (non-hex character)
+```
+
+| Parameter | Type   | Default  | Description                                  |
+| --------- | ------ | -------- | -------------------------------------------- |
+| text      | string | required | The input string to validate as IPv6 address |
 
 #### <a id="ishexcolor"></a>`isHexColor(text)`
 
@@ -1462,6 +1487,51 @@ formatList(['apple', 123]);                     // TypeError
 | --------- | -------- | -------- | ----------------------------------------- |
 | arr       | string[] | required | The array of strings to format as a list. |
 
+#### <a id="formatcreditcard"></a>formatCreditCard(cardNumber)
+Formats a credit card number into readable groups of digits separated by spaces.
+Supports 15-digit (AmEx) and 16-digit (Visa/MasterCard) numbers.
+Non-digit characters are automatically stripped before formatting.
+Throws an error if the input is not a string.
+
+```javascript
+import { formatCreditCard } from 'stringzy';
+
+formatCreditCard('1234567812345678'); // "1234 5678 1234 5678"
+formatCreditCard('4111111111111111'); // "4111 1111 1111 1111"
+formatCreditCard('378282246310005');  // "3782 822463 10005" (AmEx)
+formatCreditCard('4111-1111-1111-1111'); // "4111 1111 1111 1111"
+formatCreditCard('123'); // "" (invalid length)
+formatCreditCard('');    // "" (empty string)
+```
+
+| Parameter  | Type   | Default  | Description                                                         |
+| ---------- | ------ | -------- | ------------------------------------------------------------------- |
+| cardNumber | string | required | The credit card number to format. Cannot include non-digit characters. |
+
+#### <a id="formattotoctal"></a>formatToOctal(num, options?)
+
+Converts a decimal number to its octal (base-8) string representation. Supports negatives and an optional `0o` prefix.
+
+```javascript
+import { formatToOctal } from 'stringzy';
+
+formatToOctal(8);                      // "10"
+formatToOctal(10);                     // "12"
+formatToOctal(255);                    // "377"
+formatToOctal(0);                      // "0"
+formatToOctal(255, { prefix: true });  // "0o377"
+formatToOctal(-255, { prefix: true }); // "-0o377"
+
+// Invalid cases
+// formatToOctal('10');  // TypeError
+// formatToOctal(NaN);   // TypeError
+```
+
+| Parameter | Type    | Default | Description                                   |
+| --------- | ------- | ------- | --------------------------------------------- |
+| num       | number  | required| The decimal number to convert                 |
+| options   | object  | {}      | Optional settings                             |
+| - prefix  | boolean | false   | If true, prepend the result with `0o`         |
 #### <a id="formattemperature"></a>`formatTemperature(value, options)`
 
 Converts a temperature value between Celsius (C), Fahrenheit (F), and Kelvin (K), with configurable decimal precision.
@@ -1513,6 +1583,111 @@ formatScientific(null);    // TypeError
 | options.precision | number  | 2        | Digits after decimal point.                   |
 | options.uppercase | boolean | false    | Uses "E" instead of "e".                      |
 
+#### <a id="formattobinary"></a>`formatToBinary(num, options)`
+
+Converts a decimal integer to its binary (base-2) string representation with optional grouping from the least significant bit for readability. Supports negative numbers.
+
+```javascript
+import { formatToBinary } from 'stringzy';
+
+// Basic conversions
+formatToBinary(5);      // "101"
+formatToBinary(10);     // "1010"
+formatToBinary(255);    // "11111111"
+formatToBinary(0);      // "0"
+formatToBinary(-5);     // "-101"
+
+// Grouping from right to left (no left-padding)
+formatToBinary(255, { group: 4 }); // "1111 1111"
+formatToBinary(10,  { group: 2 }); // "10 10"
+formatToBinary(-255, { group: 4 }); // "-1111 1111"
+
+// Invalid cases
+formatToBinary(3.14);            // TypeError (must be an integer)
+formatToBinary('5');              // TypeError (input must be a number)
+formatToBinary(10, { group: 0 }); // TypeError (group must be positive integer)
+```
+
+| Parameter | Type   | Default | Description                                      |
+| --------- | ------ | ------- | ------------------------------------------------ |
+| num       | number | required| The decimal integer to convert to binary.       |
+| options   | object | `{}`    | Optional configuration.                         |
+| - group   | number | —       | Positive integer; bits per group (right-to-left) |
+#### <a id="formattohexadecimal"></a>formatToHexadecimal(num, options)
+Converts a decimal number into its hexadecimal (base-16) string representation.</br>
+Supports optional prefix "0x" and lowercase formatting.</br>
+Handles negative numbers by adding a - sign before the output.</br>
+Throws a TypeError if the input is not a valid number.</br>
+
+```javascript
+import { formatToHexadecimal } from 'stringzy';
+
+formatToHexadecimal(10);          // "A"
+formatToHexadecimal(15);          // "F"
+formatToHexadecimal(255);         // "FF"
+formatToHexadecimal(4095);        // "FFF"
+
+// Negative numbers
+formatToHexadecimal(-255);        // "-FF"
+
+// With prefix
+formatToHexadecimal(255, { prefix: true }); // "0xFF"
+formatToHexadecimal(-255, { prefix: true }); // "-0xFF"
+
+// Lowercase output
+formatToHexadecimal(255, { lowercase: true }); // "ff"
+
+// Prefix + lowercase
+formatToHexadecimal(255, { prefix: true, lowercase: true }); // "0xff"
+
+// Invalid cases
+formatToHexadecimal('255');      // TypeError
+formatToHexadecimal(null);       // TypeError
+formatToHexadecimal(NaN);        // TypeError
+```
+
+| Parameter         | Type                | Default  | Description                                               |
+| ----------------- | ------------------- | -------- | --------------------------------------------------------- |
+| num               | number              | required | The decimal number to convert to hexadecimal.             |
+| options           | object *(optional)* | `{}`     | Formatting options.                                       |
+| options.prefix    | boolean             | `false`  | Adds `"0x"` before the result (or `"-0x"` for negatives). |
+| options.lowercase | boolean             | `false`  | Outputs letters in lowercase (`"ff"` instead of `"FF"`).  |
+
+#### <a id="formattodecimal"></a>`formatToDecimal(value, options)`
+
+Converts a binary, octal, or hexadecimal string into its decimal (base‑10) number. Supports optional standard prefixes and trims whitespace. Hex accepts uppercase and lowercase.
+
+```javascript
+import { formatToDecimal } from 'stringzy';
+
+// Binary (base 2)
+formatToDecimal('1010', { base: 2 });   // 10
+formatToDecimal('0b111', { base: 2 });  // 7
+
+// Octal (base 8)
+formatToDecimal('12', { base: 8 });     // 10
+formatToDecimal('0o377', { base: 8 });  // 255
+
+// Hexadecimal (base 16)
+formatToDecimal('FF', { base: 16 });    // 255
+formatToDecimal('0x10', { base: 16 });  // 16
+
+// Trimming and sign handling
+formatToDecimal('  +0xFF  ', { base: 16 }); // 255
+formatToDecimal('-0b10', { base: 2 });      // -2
+
+// Invalid cases (throw TypeError)
+// formatToDecimal('102', { base: 2 });
+// formatToDecimal('89', { base: 8 });
+// formatToDecimal('0xG1', { base: 16 });
+// formatToDecimal('10', { base: 10 });
+```
+
+| Parameter | Type          | Default  | Description                                        |
+| --------- | ------------- | -------- | -------------------------------------------------- |
+| value     | string        | required | The numeric string to convert (may include prefix) |
+| options   | object        | required | Configuration for conversion                        |
+| - base    | 2 \| 8 \| 16 | required | The base of the input string                        |
 
 ## 🔧 Usage Patterns
 
