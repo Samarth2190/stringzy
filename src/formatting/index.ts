@@ -38,7 +38,7 @@ export const formatting = {
   formatOrdinal,
   formatList,
   formatTemperature,
-  formatToHexadecimal
+  formatToHexadecimal,
   formatToOctal,
   formatTemperature
 };
