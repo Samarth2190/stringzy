@@ -102,6 +102,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [isSlug](#isslug) - Checks if a string is a valid slug
 - [isTypeOf](#istypeof) - Checks if a file or URL has a valid extension for a given type
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
+- [isIPv6](#isipv6) - Checks if a string is a valid IPv6 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 - [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
@@ -726,6 +727,25 @@ isIPv4('192.168.1.a'); // false (non-numeric)
 | Parameter | Type   | Default  | Description                                  |
 | --------- | ------ | -------- | -------------------------------------------- |
 | text      | string | required | The input string to validate as IPv4 address |
+
+#### <a id="isipv6"></a>`isIPv6(text)`
+
+Checks if a string is a valid IPv6 address.
+
+```javascript
+import { isIPv6 } from 'stringzy';
+
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334'); // true
+isIPv6('0:0:0:0:0:0:0:1'); // true
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334:1234'); // false (too many groups)
+isIPv6('2001:db8:::1'); // false (invalid use of shorthand)
+isIPv6('12345::abcd'); // false (out of range)
+isIPv6('2001:db8::g1'); // false (non-hex character)
+```
+
+| Parameter | Type   | Default  | Description                                  |
+| --------- | ------ | -------- | -------------------------------------------- |
+| text      | string | required | The input string to validate as IPv6 address |
 
 #### <a id="ishexcolor"></a>`isHexColor(text)`
 

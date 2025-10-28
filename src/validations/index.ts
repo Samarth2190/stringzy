@@ -5,6 +5,7 @@ export { isEmpty } from './isEmpty';
 export { isSlug } from './isSlug';
 export { isURL } from './isURL';
 export { isIPv4 } from './isIPv4';
+export { isIPv6 } from './isIPv6';
 export { isHexColor } from './isHexColor';
 export { isPalindrome } from './isPalindrome'
 export {isLowerCase} from './isLowerCase';
@@ -22,6 +23,7 @@ import { isEmpty } from './isEmpty';
 import { isSlug } from './isSlug';
 import { isURL } from './isURL';
 import { isIPv4 } from './isIPv4';
+import { isIPv6 } from './isIPv6';
 import { isHexColor } from './isHexColor';
 import { isPalindrome } from './isPalindrome';
 import { isLowerCase } from './isLowerCase';
@@ -40,6 +42,7 @@ export const validations = {
   isSlug,
   isURL,
   isIPv4,
+  isIPv6,
   isHexColor,
   isPalindrome,
   isLowerCase,
