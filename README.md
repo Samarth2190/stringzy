@@ -142,6 +142,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
 - [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
+- [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
 - [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
 - [formatToBinary](#formattobinary) - Converts a decimal integer to a binary string with optional bit grouping.
 
@@ -1462,6 +1463,30 @@ formatList(['apple', 123]);                     // TypeError
 | --------- | -------- | -------- | ----------------------------------------- |
 | arr       | string[] | required | The array of strings to format as a list. |
 
+#### <a id="formattotoctal"></a>formatToOctal(num, options?)
+
+Converts a decimal number to its octal (base-8) string representation. Supports negatives and an optional `0o` prefix.
+
+```javascript
+import { formatToOctal } from 'stringzy';
+
+formatToOctal(8);                      // "10"
+formatToOctal(10);                     // "12"
+formatToOctal(255);                    // "377"
+formatToOctal(0);                      // "0"
+formatToOctal(255, { prefix: true });  // "0o377"
+formatToOctal(-255, { prefix: true }); // "-0o377"
+
+// Invalid cases
+// formatToOctal('10');  // TypeError
+// formatToOctal(NaN);   // TypeError
+```
+
+| Parameter | Type    | Default | Description                                   |
+| --------- | ------- | ------- | --------------------------------------------- |
+| num       | number  | required| The decimal number to convert                 |
+| options   | object  | {}      | Optional settings                             |
+| - prefix  | boolean | false   | If true, prepend the result with `0o`         |
 #### <a id="formattemperature"></a>`formatTemperature(value, options)`
 
 Converts a temperature value between Celsius (C), Fahrenheit (F), and Kelvin (K), with configurable decimal precision.
