@@ -143,11 +143,11 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
 - [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
+- [formatCreditCard](#formatcreditcard) - Formats a credit card number by grouping digits into readable parts.
 - [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
 - [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
 - [formatToBinary](#formattobinary) - Converts a decimal integer to a binary string with optional bit grouping.
 - [formatToHexadecimal](#formattohexadecimal) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
-
 - [formatToDecimal](#formattodecimal) - Converts base-2/8/16 strings to decimal.
 
 ## 📋 API Reference
@@ -1485,6 +1485,27 @@ formatList(['apple', 123]);                     // TypeError
 | Parameter | Type     | Default  | Description                               |
 | --------- | -------- | -------- | ----------------------------------------- |
 | arr       | string[] | required | The array of strings to format as a list. |
+
+#### <a id="formatcreditcard"></a>formatCreditCard(cardNumber)
+Formats a credit card number into readable groups of digits separated by spaces.
+Supports 15-digit (AmEx) and 16-digit (Visa/MasterCard) numbers.
+Non-digit characters are automatically stripped before formatting.
+Throws an error if the input is not a string.
+
+```javascript
+import { formatCreditCard } from 'stringzy';
+
+formatCreditCard('1234567812345678'); // "1234 5678 1234 5678"
+formatCreditCard('4111111111111111'); // "4111 1111 1111 1111"
+formatCreditCard('378282246310005');  // "3782 822463 10005" (AmEx)
+formatCreditCard('4111-1111-1111-1111'); // "4111 1111 1111 1111"
+formatCreditCard('123'); // "" (invalid length)
+formatCreditCard('');    // "" (empty string)
+```
+
+| Parameter  | Type   | Default  | Description                                                         |
+| ---------- | ------ | -------- | ------------------------------------------------------------------- |
+| cardNumber | string | required | The credit card number to format. Cannot include non-digit characters. |
 
 #### <a id="formattotoctal"></a>formatToOctal(num, options?)
 
