@@ -102,6 +102,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [isSlug](#isslug) - Checks if a string is a valid slug
 - [isTypeOf](#istypeof) - Checks if a file or URL has a valid extension for a given type
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
+- [isIPv6](#isipv6) - Checks if a string is a valid IPv6 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
 - [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
@@ -142,6 +143,7 @@ These changes improve throughput and reduce memory pressure when working with la
 - [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
 - [formatOrdinal](#formatordinal) -  Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
 - [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
+- [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
 - [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
 - [formatToDecimal](#formattodecimal) - Converts base-2/8/16 strings to decimal.
 
@@ -726,6 +728,25 @@ isIPv4('192.168.1.a'); // false (non-numeric)
 | Parameter | Type   | Default  | Description                                  |
 | --------- | ------ | -------- | -------------------------------------------- |
 | text      | string | required | The input string to validate as IPv4 address |
+
+#### <a id="isipv6"></a>`isIPv6(text)`
+
+Checks if a string is a valid IPv6 address.
+
+```javascript
+import { isIPv6 } from 'stringzy';
+
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334'); // true
+isIPv6('0:0:0:0:0:0:0:1'); // true
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334:1234'); // false (too many groups)
+isIPv6('2001:db8:::1'); // false (invalid use of shorthand)
+isIPv6('12345::abcd'); // false (out of range)
+isIPv6('2001:db8::g1'); // false (non-hex character)
+```
+
+| Parameter | Type   | Default  | Description                                  |
+| --------- | ------ | -------- | -------------------------------------------- |
+| text      | string | required | The input string to validate as IPv6 address |
 
 #### <a id="ishexcolor"></a>`isHexColor(text)`
 
@@ -1462,6 +1483,30 @@ formatList(['apple', 123]);                     // TypeError
 | --------- | -------- | -------- | ----------------------------------------- |
 | arr       | string[] | required | The array of strings to format as a list. |
 
+#### <a id="formattotoctal"></a>formatToOctal(num, options?)
+
+Converts a decimal number to its octal (base-8) string representation. Supports negatives and an optional `0o` prefix.
+
+```javascript
+import { formatToOctal } from 'stringzy';
+
+formatToOctal(8);                      // "10"
+formatToOctal(10);                     // "12"
+formatToOctal(255);                    // "377"
+formatToOctal(0);                      // "0"
+formatToOctal(255, { prefix: true });  // "0o377"
+formatToOctal(-255, { prefix: true }); // "-0o377"
+
+// Invalid cases
+// formatToOctal('10');  // TypeError
+// formatToOctal(NaN);   // TypeError
+```
+
+| Parameter | Type    | Default | Description                                   |
+| --------- | ------- | ------- | --------------------------------------------- |
+| num       | number  | required| The decimal number to convert                 |
+| options   | object  | {}      | Optional settings                             |
+| - prefix  | boolean | false   | If true, prepend the result with `0o`         |
 #### <a id="formattemperature"></a>`formatTemperature(value, options)`
 
 Converts a temperature value between Celsius (C), Fahrenheit (F), and Kelvin (K), with configurable decimal precision.
