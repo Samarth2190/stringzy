@@ -2,6 +2,7 @@ export * from './analyzing';
 export * from './formatting';
 export * from './transformations';
 export * from './validations';
+export * from './transformations/slugify';
 
 import { analyzing } from './analyzing';
 import { formatting } from './formatting';
