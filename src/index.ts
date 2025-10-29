@@ -2,6 +2,8 @@ export * from './analyzing';
 export * from './formatting';
 export * from './transformations';
 export * from './validations';
+export * from './transformations/truncateWords';
+
 
 import { analyzing } from './analyzing';
 import { formatting } from './formatting';
