@@ -1,9 +1,9 @@
 /**
- * Finds occurrences of multiple patterns within a given text using Rabin–Karp algorithm.
+ * Finds occurrences of multiple patterns within a given text using Aho–Corasick algorithm.
  *
  * - Accepts an array of patterns.
  * - Returns all matches of each pattern along with starting indices.
- * - Handles hash collisions by verifying actual substrings.
+ * - Handles overlapping matches.
  * - Is case sensitive
  *
  * @param {string} text - The text to search within.
@@ -28,51 +28,66 @@ export function checkMultiplePatterns(
     return result;
   }
 
-  const prime = 101; // A prime base for hashing
+  interface TrieNode {
+    next: Record<string, TrieNode>;
+    fail: TrieNode | null;
+    output: string[];
+  }
 
-  const getHash = (str: string, m: number): number => {
-    let h = 0;
-    for (let i = 0; i < m; i++) {
-      h = (h * 256 + str.charCodeAt(i)) % prime;
-    }
-    return h;
-  };
-
-  const recomputeHash = (
-    oldHash: number,
-    dropped: string,
-    added: string,
-    m: number
-  ): number => {
-    let h = (oldHash - dropped.charCodeAt(0) * Math.pow(256, m - 1)) % prime;
-    h = (h * 256 + added.charCodeAt(0)) % prime;
-    if (h < 0) h += prime;
-    return h;
-  };
+  const root: TrieNode = { next: {}, fail: null, output: [] };
 
   for (const pattern of patterns) {
-    const m = pattern.length;
+    let node = root;
+    for (const ch of pattern) {
+      if (!node.next[ch]) node.next[ch] = { next: {}, fail: null, output: [] };
+      node = node.next[ch];
+    }
+    node.output.push(pattern);
     result[pattern] = [];
-    if (m === 0 || m > text.length) continue;
+  }
 
-    const patternHash = getHash(pattern, m);
-    let windowHash = getHash(text, m);
+  const queue: TrieNode[] = [];
 
-    for (let i = 0; i <= text.length - m; i++) {
-      if (patternHash === windowHash) {
-        // Verify to avoid collision false positives
-        if (text.slice(i, i + m) === pattern) {
-          result[pattern].push(i);
-        }
+  for (const ch in root.next) {
+    const node = root.next[ch];
+    node.fail = root;
+    queue.push(node);
+  }
+
+  while (queue.length) {
+    const current = queue.shift()!;
+    for (const ch in current.next) {
+      const child = current.next[ch];
+      let fail = current.fail;
+
+      // Find deepest fail link with the same transition
+      while (fail && !fail.next[ch]) {
+        fail = fail.fail;
       }
-      if (i < text.length - m) {
-        windowHash = recomputeHash(
-          windowHash,
-          text[i],
-          text[i + m],
-          m
-        );
-      }
+
+      child.fail = fail ? fail.next[ch] : root;
+      child.output = child.output.concat(child.fail.output);
+      queue.push(child);
+    }
+  }
+
+  let node = root;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+
+    while (node && !node.next[ch]) {
+      node = node.fail!;
+    }
+
+    if (!node) {
+      node = root;
+      continue;
+    }
+
+    node = node.next[ch];
+
+    for (const pattern of node.output) {
+      result[pattern].push(i - pattern.length + 1);
     }
   }
 
