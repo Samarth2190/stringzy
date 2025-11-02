@@ -2009,7 +2009,7 @@ Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTIN
                 </a>
             </td>
         <td align="center">
-                <a href="https://github.com/S">
+                <a href="https://github.com/satyasrisundarapalli">
                     <img src="https://avatars.githubusercontent.com/satyasrisundarapalli" width="100px;"
                         alt="Sundarapalli Lakshmi Satya Sri" />
                     <br />
@@ -2021,12 +2021,52 @@ Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTIN
       </tr>
       <tr>
          <td align="center">
-                <a href="https://github.com/S">
+                <a href="https://github.com/itspavant">
                     <img src="https://avatars.githubusercontent.com/itspavant" width="100px;"
                         alt="T Pavan Teja" />
                     <br />
                     <sub>
                         <b>T Pavan Teja</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/ftonato">
+                    <img src="https://avatars.githubusercontent.com/ftonato" width="100px;"
+                        alt="Ademílson Tonato" />
+                    <br />
+                    <sub>
+                        <b>Ademílson Tonato</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/mNik033">
+                    <img src="https://avatars.githubusercontent.com/mNik033" width="100px;"
+                        alt="nik" />
+                    <br />
+                    <sub>
+                        <b>nik</b>
+                    </sub>
+                </a>
+            </td>
+         <td align="center">
+                <a href="https://github.com/Shree-Gowda">
+                    <img src="https://avatars.githubusercontent.com/Shree-Gowda" width="100px;"
+                        alt="Shree Gowda" />
+                    <br />
+                    <sub>
+                        <b>Shree Gowda</b>
+                    </sub>
+                </a>
+            </td>
+         <td align="center">
+                <a href="https://github.com/sabha348">
+                    <img src="https://avatars.githubusercontent.com/sabha348" width="100px;"
+                        alt="Sahil Sumant Bhat" />
+                    <br />
+                    <sub>
+                        <b>Sahil Sumant Bhat </b>
                     </sub>
                 </a>
             </td>
