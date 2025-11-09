@@ -4,7 +4,7 @@
 
 ![NPM Version](https://img.shields.io/npm/v/stringzy)
 ![Typescript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
-![Downloads](https://img.shields.io/npm/dt/stringzy)
+![Downloads](https://img.shields.io/npm/d18m/stringzy)
 ![License](https://img.shields.io/npm/l/stringzy)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
