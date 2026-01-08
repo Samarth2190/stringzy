@@ -10,14 +10,122 @@ import * as validations from './validations';
 
 declare global {
   interface String {
-    capitalize(): string;
+    /* =========================
+       Transformations
+       ========================= */
+
+    truncateText(maxLength: number, suffix?: string): string;
+    toSlug(): string;
+    capitalizeWords(): string;
+    removeSpecialChars(): string;
+    removeWords(words: string[]): string;
+    removeDuplicates(): string;
+    initials(): string;
+
     camelCase(): string;
-    kebabCase(): string;
+    pascalCase(): string;
     snakeCase(): string;
+    kebabCase(): string;
+    titleCase(): string;
+    constantCase(): string;
+
+    escapeHTML(): string;
+    maskSegment(start: number, end: number, maskChar?: string): string;
+    deburr(): string;
+    splitChunks(chunkSize: number): string[];
+
+    numberToText(lang?: string): string;
+    reverseWordsInString(): string;
+
+    stringPermutations(): string[];
+    stringPermutationsGenerator(): Generator<string>;
+    stringCombinations(): string[];
+
+    /* =========================
+       Validations
+       ========================= */
+
+    isURL(): boolean;
     isEmail(): boolean;
+    isDate(): boolean;
+    isEmpty(): boolean;
+    isSlug(): boolean;
+    isTypeOf(type: string): boolean;
+
+    isIPv4(): boolean;
+    isIPv6(): boolean;
+    isHexColor(): boolean;
+
     isPalindrome(): boolean;
+    isCoordinates(): boolean;
+
+    isLowerCase(): boolean;
+    isUpperCase(): boolean;
+    isAlphabetic(): boolean;
+    isAlphaNumeric(): boolean;
+
+    isAnagram(other: string): boolean;
+    isMacAddress(): boolean;
+    isPanagram(): boolean;
+
+    /* =========================
+       Analysis
+       ========================= */
+
     wordCount(): number;
+    contentWordCount(): number;
+    functionWordCount(): number;
+    readingDuration(wordsPerMinute?: number): number;
+
     characterCount(): number;
+    characterFrequency(): Record<string, number>;
+
+    stringSimilarity(other: string): number;
+    complexity(): {
+      score: number;
+      uniqueness: number;
+      length: number;
+    };
+
+    patternCount(pattern: string | RegExp): number;
+    vowelConsonantCount(): {
+      vowels: number;
+      consonants: number;
+    };
+
+    checkMultiplePatterns(patterns: string[]): Record<string, number>;
+    checkSubsequence(subsequence: string): boolean;
+    stringRotation(other: string): boolean;
+
+    lexicographicalRank(): number;
+
+    /* =========================
+       Formatting
+       ========================= */
+
+    capitalize(): string;
+    formatNumber(locale?: string): string;
+    formatPhone(countryCode?: string): string;
+
+    formatDuration(): string;
+    trim(): string;
+
+    formatRomanNumeral(): string;
+    formatPercentage(decimals?: number): string;
+    formatFileSize(): string;
+
+    formatOrdinal(): string;
+    formatList(conjunction?: string): string;
+
+    formatCreditCard(): string;
+
+    formatToOctal(prefix?: boolean): string;
+    formatTemperature(from: 'C' | 'F' | 'K', to: 'C' | 'F' | 'K'): string;
+
+    formatScientific(precision?: number): string;
+    formatToBinary(groupBits?: boolean): string;
+    formatToHexadecimal(prefix?: boolean): string;
+    formatToDecimal(base: 2 | 8 | 16): number;
   }
 }
 
