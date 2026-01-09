@@ -5,7 +5,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": " npm run build && node --test",
+    "test": "npm run build && node --test dist/tests",
+    "test:unit": "node --test dist/tests/transformations dist/tests/validations dist/tests/formatting dist/tests/analyzing",
+    "test:integration": "node --test dist/tests/integration",
     "prepublishOnly": "npm run build",
     "format": "prettier --write ."
   },
