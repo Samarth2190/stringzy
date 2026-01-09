@@ -23,6 +23,8 @@ import { patternCount } from './patternCount';
 import { vowelConsonantCount } from './vowelConsonantCount';
 import { checkMultiplePatterns } from './checkMultiplePatterns';
 import { checkSubsequence } from './checkSubsequence';
+import { functionWordCount } from './functionWordCount';
+import { contentWordCount } from './contentWordCount';
 import { checkStringRotations } from './stringRotation';
 import { lexicographicalRank } from './lexicographicalRank';
 
@@ -37,6 +39,8 @@ export const analyzing = {
   vowelConsonantCount,
   checkMultiplePatterns,
   checkSubsequence,
+  functionWordCount,
+  contentWordCount,
   checkStringRotations,
-  lexicographicalRank
+  lexicographicalRank,
 };
