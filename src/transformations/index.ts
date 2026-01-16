@@ -13,6 +13,8 @@ export { toSlug } from './toSlug';
 export { truncateText } from './truncateText';
 export { escapeHtml } from './escapeHTML';
 export { maskSegment } from './maskSegment';
+export { deburr } from './deburr';
+export { splitChunks } from './splitChunks';
 export { numberToText } from './numberToText/main';
 export { reverseWordsInString } from './reverseWordsInString ';
 export { stringPermutations, stringPermutationsGenerator } from './stringPermutations';
@@ -34,31 +36,33 @@ import { truncateText } from './truncateText';
 import { escapeHtml } from './escapeHTML';
 import { maskSegment } from './maskSegment';
 import { deburr } from './deburr';
+import { splitChunks } from './splitChunks';
 import { numberToText } from './numberToText/main';
 import { reverseWordsInString } from './reverseWordsInString ';
 import { stringPermutations, stringPermutationsGenerator } from './stringPermutations';
 import { stringCombinations } from './stringCombinations';
 
 export const transformations = {
-    camelCase,
-    capitalizeWords,
-    constantCase,
-    initials,
-    kebabCase,
-    pascalCase,
-    removeDuplicates,
-    removeSpecialChars,
-    removeWords,
-    snakeCase,
-    titleCase,
-    toSlug,
-    truncateText,
-    escapeHtml,
-    maskSegment,
-    deburr,
-    numberToText,
-    reverseWordsInString,
-    stringPermutations,
-    stringPermutationsGenerator,
-    stringCombinations
+  camelCase,
+  capitalizeWords,
+  constantCase,
+  initials,
+  kebabCase,
+  pascalCase,
+  removeDuplicates,
+  removeSpecialChars,
+  removeWords,
+  snakeCase,
+  titleCase,
+  toSlug,
+  truncateText,
+  escapeHtml,
+  maskSegment,
+  deburr,
+  splitChunks,
+  numberToText,
+  reverseWordsInString,
+  stringPermutations,
+  stringPermutationsGenerator,
+  stringCombinations,
 };

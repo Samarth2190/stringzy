@@ -7,14 +7,15 @@ export { isURL } from './isURL';
 export { isIPv4 } from './isIPv4';
 export { isIPv6 } from './isIPv6';
 export { isHexColor } from './isHexColor';
-export { isPalindrome } from './isPalindrome'
-export {isLowerCase} from './isLowerCase';
-export {isUpperCase} from './isUpperCase';
+export { isPalindrome } from './isPalindrome';
+export { isLowerCase } from './isLowerCase';
+export { isUpperCase } from './isUpperCase';
 export { isAlphabetic } from './isAlphabetic';
 export { isAlphaNumeric } from './isAlphaNumeric';
-export { isAnagram } from './isAnagram'; 
+export { isAnagram } from './isAnagram';
 export { isPanagram } from './isPanagram';
 export { isMacAddress } from './isMacAddress';
+export { isTypeOf } from './isTypeOf';
 
 import { isCoordinates } from './isCoordinates';
 import { isDate } from './isDate';
@@ -33,6 +34,7 @@ import { isAlphaNumeric } from './isAlphaNumeric';
 import { isAnagram } from './isAnagram';
 import { isPanagram } from './isPanagram';
 import { isMacAddress } from './isMacAddress';
+import { isTypeOf } from './isTypeOf';
 
 export const validations = {
   isCoordinates,
@@ -51,5 +53,6 @@ export const validations = {
   isAlphaNumeric,
   isAnagram,
   isPanagram,
-  isMacAddress
+  isMacAddress,
+  isTypeOf,
 };
