@@ -38,6 +38,7 @@ import { numberToText } from './numberToText/main';
 import { reverseWordsInString } from './reverseWordsInString ';
 import { stringPermutations, stringPermutationsGenerator } from './stringPermutations';
 import { stringCombinations } from './stringCombinations';
+import { pipe, pipeLine } from './pipe';
 
 export const transformations = {
     camelCase,
@@ -60,5 +61,7 @@ export const transformations = {
     reverseWordsInString,
     stringPermutations,
     stringPermutationsGenerator,
-    stringCombinations
+    stringCombinations,
+    pipeLine,
+    pipe
 };
