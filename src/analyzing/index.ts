@@ -4,6 +4,14 @@ export { complexity } from './complexity';
 export { readingDuration } from './readingDuration';
 export { wordCount } from './wordCount';
 export { stringSimilarity } from './stringSimilarity';
+export { patternCount } from './patternCount';
+export { vowelConsonantCount } from './vowelConsonantCount';
+export { checkMultiplePatterns } from './checkMultiplePatterns';
+export { checkSubsequence } from './checkSubsequence';
+export { functionWordCount } from './functionWordCount';
+export { contentWordCount } from './contentWordCount';
+export { checkStringRotations } from './stringRotation';
+export { lexicographicalRank } from './lexicographicalRank';
 
 import { characterCount } from './characterCount';
 import { characterFrequency } from './characterFrequency';
@@ -11,6 +19,12 @@ import { complexity } from './complexity';
 import { readingDuration } from './readingDuration';
 import { wordCount } from './wordCount';
 import { stringSimilarity } from './stringSimilarity';
+import { patternCount } from './patternCount';
+import { vowelConsonantCount } from './vowelConsonantCount';
+import { checkMultiplePatterns } from './checkMultiplePatterns';
+import { checkSubsequence } from './checkSubsequence';
+import { checkStringRotations } from './stringRotation';
+import { lexicographicalRank } from './lexicographicalRank';
 
 export const analyzing = {
   characterCount,
@@ -19,4 +33,10 @@ export const analyzing = {
   readingDuration,
   wordCount,
   stringSimilarity,
+  patternCount,
+  vowelConsonantCount,
+  checkMultiplePatterns,
+  checkSubsequence,
+  checkStringRotations,
+  lexicographicalRank
 };

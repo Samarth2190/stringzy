@@ -14,6 +14,30 @@ export { truncateText } from './truncateText';
 export { escapeHtml } from './escapeHTML';
 export { maskSegment } from './maskSegment';
 export { numberToText } from './numberToText/main';
+export { reverseWordsInString } from './reverseWordsInString ';
+export { stringPermutations, stringPermutationsGenerator } from './stringPermutations';
+export { stringCombinations } from './stringCombinations';
+
+import { camelCase } from './camelCase';
+import { capitalizeWords } from './capitalizeWords';
+import { constantCase } from './constantCase';
+import { initials } from './initials';
+import { kebabCase } from './kebabCase';
+import { pascalCase } from './pascalCase';
+import { removeDuplicates } from './removeDuplicates';
+import { removeSpecialChars } from './removeSpecialChars';
+import { removeWords } from './removeWords';
+import { snakeCase } from './snakeCase';
+import { titleCase } from './titleCase';
+import { toSlug } from './toSlug';
+import { truncateText } from './truncateText';
+import { escapeHtml } from './escapeHTML';
+import { maskSegment } from './maskSegment';
+import { deburr } from './deburr';
+import { numberToText } from './numberToText/main';
+import { reverseWordsInString } from './reverseWordsInString ';
+import { stringPermutations, stringPermutationsGenerator } from './stringPermutations';
+import { stringCombinations } from './stringCombinations';
 import { pipe, pipeLine } from './pipe';
 
 export const transformations = {
@@ -34,6 +58,10 @@ export const transformations = {
     maskSegment,
     deburr,
     numberToText,
+    reverseWordsInString,
+    stringPermutations,
+    stringPermutationsGenerator,
+    stringCombinations,
     pipeLine,
     pipe
 };

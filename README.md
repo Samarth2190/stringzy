@@ -1,12 +1,11 @@
 <div align="center">
-  
-  
-  ![Stringzy banner](./assets/stringzy-banner2.jpg)
+
+![Stringzy banner](./assets/stringzy-banner2.jpg)
 
 ![NPM Version](https://img.shields.io/npm/v/stringzy)
-![Downloads](https://img.shields.io/npm/dt/stringzy)
+![Typescript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![Downloads](https://badgen.net/npm/dt/stringzy)
 ![License](https://img.shields.io/npm/l/stringzy)
-![Bundle Size](https://img.shields.io/bundlephobia/min/stringzy)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
@@ -20,12 +19,12 @@
 
 ## ✨ Features
 
-- 💪 **Powerful** - Transform, validate, analyze, and format strings with minimal code
-- 🪶 **Lightweight** - Zero dependencies, tiny footprint
-- 🧩 **Modular** - Import only what you need with organized namespaces
-- 🚀 **Fast** - Optimized for performance
-- ✅ **Tested** - Reliable and robust
-- 🎯 **Comprehensive** - 4 specialized modules for all string needs
+- **Powerful** - Transform, validate, analyze, and format strings with minimal code
+- **Lightweight** - Zero dependencies, tiny footprint
+- **Modular** - Import only what you need with organized namespaces
+- **Fast** - Optimized for performance
+- **Tested** - Reliable and robust
+- **Comprehensive** - 4 specialized modules for all string needs
 
 ## 📦 Installation
 
@@ -58,6 +57,15 @@ const isValid = stringzy.validate.isEmail('user@example.com'); // true
 const count = stringzy.analyze.wordCount('Hello world'); // 2
 ```
 
+## ✨ What’s new (perf update)
+
+This release contains a performance-focused update to the permutations utilities:
+
+- `stringPermutations(input: string)` — rewritten to use an optimized iterative approach to reduce recursion overhead and peak memory usage for longer strings.
+- `stringPermutationsGenerator(input: string)` — a new generator-based API that yields permutations lazily so you can iterate large permutation sets without allocating the full result array in memory.
+
+These changes improve throughput and reduce memory pressure when working with larger inputs. Note: complexity remains O(n!) — this update optimizes allocation and recursion overhead. If your code relied on a precise ordering from a previous implementation, run your test-suite as ordering may differ in edge cases.
+
 ## 📋 Table of Contents
 
 ### Transformations
@@ -80,6 +88,10 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [deburr](#deburr) – Removes accents and diacritical marks from a string
 - [splitChunks](#splitchunks) - Breaks a string down into chunks of specified length.
 - [numberToText](#numbertotext) - Converts a number to its text representation in specified language
+- [reverseWordsInString](#reversewordsinstring) - Reverses the order of words in a given string
+- [stringPermutations](#stringpermutations) - Generates all unique permutations of a given string.
+- [stringPermutationsGenerator](#stringpermutationsgenerator) - Generator-based permutations API for lazy iteration.
+- [stringCombinations](#stringcombinations) - Generates all unique combinations of a given string.
 - [pipeLine](#pipeline) - Can be used to chain multiple transformations, and powerful tools to manipulate data flow
 
 ### Validations
@@ -91,23 +103,54 @@ const count = stringzy.analyze.wordCount('Hello world'); // 2
 - [isSlug](#isslug) - Checks if a string is a valid slug
 - [isTypeOf](#istypeof) - Checks if a file or URL has a valid extension for a given type
 - [isIPv4](#isipv4) - Checks if a string is a valid IPv4 address
+- [isIPv6](#isipv6) - Checks if a string is a valid IPv6 address
 - [isHexColor](#ishexcolor) - Checks if the input string is a valid hex color
 - [isPalindrome](#ispalindrome) - Checks if the input string is a palindrome (ignores case, spaces, and punctuation)
+- [isCoordinates](#iscoordinates) - Checks if given latitude and longitude are valid coordinates
+- [isLowerCase](#islowercase) - Checks if given string only has lower case characters.
+- [isUpperCase](#isuppercase) - Checks if given string only has upper case characters.
+- [isAlphabetic](#isalphabetic) - Checks if input string contains only Alphabets (case insensitive)
+- [isAlphaNumeric](#isalphanumeric) - Checks if input string contains only Alphabets and Digits (case insensitive)
+- [isAnagram](#isanagram)- Checks if both strings are anagrams of each other. (ignores case and punctuations)
+- [isMacAddress](#ismacaddress)- Checks if a given string is a valid MAC address.
+- [isPanagram](#ispanagram)- Checks if a given string is a pangram (contains every letter of the English alphabet at least once).
 
 ### Analysis
 
 - [wordCount](#wordcount) - Counts the number of words in a string
+- [contentWordCount](#contentwordcount)- Counts the number of content words (nouns, verbs, adjectives, adverbs, etc.) in a string.
+- [functionWordCount](#functionwordcount)- Counts the number of function words (prepositions, pronouns, conjunctions, articles, etc.) in a string.
 - [readingDuration](#readingduration) - Calculates the reading duration of a given string
 - [characterCount](#charactercount) - Counts the number of characters in a string
 - [characterFrequency](#characterfrequency) - Analyzes character frequency in a string
 - [stringSimilarity](#stringsimilarity) - Calculates the percentage similarity between two strings
 - [complexity](#complexity) - Analyzes string complexity including score, uniqueness, and length
+- [patternCount](#patterncount) - calculates the number of times a specific pattern occurs in a given text
+- [vowelConsonantCount](#vowelconsonantcount) - Counts the number of vowels and consonants in a given string
+- [checkMultiplePatterns](#checkmultiplepatterns) - Finds occurrences of multiple patterns within a given text using Rabin–Karp algorithm (case sensitive)
+- [checkSubsequence](#checksubsequence) - Checks whether the second string is a subsequence of the first string (case sensitive)
+- [stringRotation](#stringrotation) - Checks if one string is a rotation of another (case sensitive).
+- [lexicographicalRank](#lexicographicalrank) - Calculates the lexicographical rank of a string among all its unique permutations.
 
 ### Formatting
 
 - [capitalize](#capitalize) - Capitalizes the first letter of each word
 - [formatNumber](#formatnumber) - Formats a number string with thousand separators
 - [formatPhone](#formatphone) - Formats a phone number string to standard format
+- [formatDuration](#formatduration) - Converts a duration in seconds or milliseconds into a human-readable string
+- [trim](#trim) - Removes unnecessary whitespace from a string.
+- [formatRomanNumeral](#formatromannumeral) - Converts a positive integer into its Roman numeral representation.
+- [formatPercentage](#formatpercentage) - Converts a number into a percentage string with configurable decimal precision.
+- [formatFileSize](#formatfilesize) - Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB).
+- [formatOrdinal](#formatordinal) - Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd").
+- [formatList](#formatlist) - Formats an array of strings into a human-readable list with proper commas and "and".
+- [formatCreditCard](#formatcreditcard) - Formats a credit card number by grouping digits into readable parts.
+- [formatToOctal](#formattotoctal) - Converts a decimal number to octal, optional "0o" prefix.
+- [formatTemperature](#formattemperature) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+- [formatScientific](#formatscientific) - Converts a number into scientific notation (e.g., 12345 → "1.23e+4").</br>
+- [formatToBinary](#formattobinary) - Converts a decimal integer to a binary string with optional bit grouping.
+- [formatToHexadecimal](#formattohexadecimal) - Converts temperatures between Celsius, Fahrenheit, and Kelvin.
+- [formatToDecimal](#formattodecimal) - Converts base-2/8/16 strings to decimal.
 
 ## 📋 API Reference
 
@@ -410,7 +453,7 @@ maskSegment('token');
 | maskEnd   | number | `text.length` | The end index (exclusive) of the segment to mask         |
 | maskChar  | string | `'*'`         | The character to use for masking (must be one character) |
 
-#### <a id="deburr"></a>deburr(text)
+#### <a id="deburr"></a>`deburr(text)`
 
 Removes accents and diacritics from letters in a string (e.g. déjà vu → deja vu).
 
@@ -596,7 +639,9 @@ splitChunks('helloworld');
 | chunkSize | number | `1`      | The size of each chunk in which the string is to be split |
 
 ---
+
 #### <a id="numbertotext"></a>`numberToText(num, lang)`
+
 Converts a number to its text representation in the specified language.
 
 ```javascript
@@ -606,13 +651,112 @@ numberToText(12345, 'en'); // Returns: 'twelve thousand three hundred forty-five
 numberToText(12345, 'pl'); // Returns: 'dwanaście tysięcy trzysta czterdzieści pięć'
 ```
 
-| Parameter | Type   | Default | Description |
-|-----------|--------|---------|-------------|
-| num       | number | required | The number to convert to text |
-| lang      | string | 'en'    | The language code for the text representation (e.g., 'en' for English, 'pl' for Polish) |
+| Parameter | Type   | Default  | Description                                                                             |
+| --------- | ------ | -------- | --------------------------------------------------------------------------------------- |
+| num       | number | required | The number to convert to text                                                           |
+| lang      | string | 'en'     | The language code for the text representation (e.g., 'en' for English, 'pl' for Polish) |
 
 Available languages: en (English), pl (Polish).
 
+#### <a id="reversewordsinstring"></a>`reverseWordsInString(str)`
+
+Reverses the order of words in a string and reverses the position of surrounding whitespace (leading becomes trailing and vice-versa).
+Reverses the order of words in a string while preserving the exact original spacing between each word.
+
+```javascript
+import { reverseWordsInString } from 'stringzy';
+
+reverseWordsInString('Hello   world from stringzy');
+// Returns: 'stringzy from world   Hello'
+
+// Note how the double and triple spaces are preserved:
+reverseWordsInString('  leading  spaces   and trailing  ');
+// Returns: '  trailing  and   spaces leading  '
+
+reverseWordsInString('single-word');
+// Returns: 'single-word'
+```
+
+| Parameter | Type   | Default  | Description                 |
+| --------- | ------ | -------- | --------------------------- |
+| str       | string | required | The input string to reverse |
+
+#### <a id="stringpermutations"></a>`stringPermutations(input: string): string[]`
+
+Generates all unique permutations of the given string. Repeated characters are handled by ensuring only unique permutations are included in the returned array.
+
+- Uses an optimized iterative algorithm under the hood to reduce recursion depth and intermediate allocations (lower peak memory usage and faster runtime for many practical inputs).
+- Note: complexity remains O(n!) — this is an optimization of allocation/recursion overhead, not the factorial growth.
+
+```javascript
+import { stringPermutations } from 'stringzy';
+
+stringPermutations('ab');
+// ['ab', 'ba']
+
+stringPermutations('abc');
+// ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+
+stringPermutations('aab');
+// ['aab', 'aba', 'baa']
+```
+
+| Parameter | Type   | Default  | Description                                           |
+| --------- | ------ | -------- | ----------------------------------------------------- |
+| input     | string | required | The input string to generate all unique permutations. |
+
+#### <a id="stringpermutationsgenerator"></a>`stringPermutationsGenerator(input: string): Generator<string, void, unknown>`
+
+Generator-based API that yields permutations one-by-one. Use this when you only need to process permutations sequentially or when the full result set would not fit in memory.
+
+- Lazily produces permutations; does not allocate the entire permutation set in memory.
+- Particularly useful for memory-sensitive workflows or streaming processing.
+
+```javascript
+import { stringPermutationsGenerator } from 'stringzy';
+
+for (const p of stringPermutationsGenerator('abcd')) {
+  console.log(p);
+  // process each permutation without building a giant array in memory
+}
+
+// If you must collect them all:
+const perms = Array.from(stringPermutationsGenerator('abcd'));
+```
+
+| Parameter | Type   | Default  | Description                                     |
+| --------- | ------ | -------- | ----------------------------------------------- |
+| input     | string | required | The input string to generate permutations from. |
+
+#### <a id="stringcombinations"></a>`stringCombinations(str)`
+
+Generates all unique combinations (subsequences) of a given string, including the empty string.  
+Duplicate characters are handled by ensuring only unique combinations are returned.  
+The order of combinations in the output array is not guaranteed.
+
+```javascript
+stringCombinations('ab');
+// ["", "a", "b", "ab"]
+
+stringCombinations('abc');
+// ["", "a", "b", "c", "ab", "ac", "bc", "abc"]
+
+stringCombinations('aab');
+// ["", "a", "b", "aa", "ab", "aab"]
+
+stringCombinations('');
+// [""]
+
+stringCombinations('A');
+// ["", "A"]
+
+stringCombinations('!@');
+// ["", "!", "@", "!@"]
+```
+
+| Parameter | Type   | Default  | Description                                            |
+| --------- | ------ | -------- | ------------------------------------------------------ |
+| str       | string | required | The input string to generate unique combinations from. |
 
 ### ✅ Validations
 
@@ -700,19 +844,18 @@ isSlug('hello_world'); // false (underscore not allowed)
 Checks if a file or URL has a valid extension for a given type
 
 ```javascript
-isType("photo.PNG", "image");                    // true
-isType("https://example.com/logo.svg", "image"); // true
-isType({ name: "track.mp3" }, "audio");          // true
-isType("filewithoutextension", "image");         // false
-isType("document.zip", "document");              // false
-isType("video.mp4", "document");                 // false
+isType('photo.PNG', 'image'); // true
+isType('https://example.com/logo.svg', 'image'); // true
+isType({ name: 'track.mp3' }, 'audio'); // true
+isType('filewithoutextension', 'image'); // false
+isType('document.zip', 'document'); // false
+isType('video.mp4', 'document'); // false
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| input | string | required | The file name, URL string, or object with .name |
-| input | string | required | The file type category to validate (image, video, audio, document, archive) |
-
+| Parameter | Type   | Default  | Description                                                                 |
+| --------- | ------ | -------- | --------------------------------------------------------------------------- |
+| input     | string | required | The file name, URL string, or object with .name                             |
+| input     | string | required | The file type category to validate (image, video, audio, document, archive) |
 
 #### <a id="isipv4"></a>`isIPv4(text)`
 
@@ -732,6 +875,25 @@ isIPv4('192.168.1.a'); // false (non-numeric)
 | Parameter | Type   | Default  | Description                                  |
 | --------- | ------ | -------- | -------------------------------------------- |
 | text      | string | required | The input string to validate as IPv4 address |
+
+#### <a id="isipv6"></a>`isIPv6(text)`
+
+Checks if a string is a valid IPv6 address.
+
+```javascript
+import { isIPv6 } from 'stringzy';
+
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334'); // true
+isIPv6('0:0:0:0:0:0:0:1'); // true
+isIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334:1234'); // false (too many groups)
+isIPv6('2001:db8:::1'); // false (invalid use of shorthand)
+isIPv6('12345::abcd'); // false (out of range)
+isIPv6('2001:db8::g1'); // false (non-hex character)
+```
+
+| Parameter | Type   | Default  | Description                                  |
+| --------- | ------ | -------- | -------------------------------------------- |
+| text      | string | required | The input string to validate as IPv6 address |
 
 #### <a id="ishexcolor"></a>`isHexColor(text)`
 
@@ -760,17 +922,183 @@ The check is case-insensitive and ignores spaces and punctuation.
 ```javascript
 import { isPalindrome } from 'stringzy';
 
-isPalindrome('racecar');                            // true
-isPalindrome('A man, a plan, a canal: Panama');     // true
-isPalindrome('No lemon, no melon');                 // true
-isPalindrome('hello');                              // false
-isPalindrome('Was it a car or a cat I saw?');       // true
+isPalindrome('racecar'); // true
+isPalindrome('A man, a plan, a canal: Panama'); // true
+isPalindrome('No lemon, no melon'); // true
+isPalindrome('hello'); // false
+isPalindrome('Was it a car or a cat I saw?'); // true
 ```
 
 | Parameter | Type   | Default  | Description                              |
 | --------- | ------ | -------- | ---------------------------------------- |
 | text      | string | required | The input string to check for palindrome |
 
+#### <a id="iscoordinates"></a>`isCoordinates(latitude, longitude)`
+
+Checks if given latitude and longitude are valid coordinates.
+
+```javascript
+import { isCoordinates } from 'stringzy';
+
+isCoordinates(48.8582, 2.2945); // true
+isCoordinates(40.748817, -73.985428); // true
+isCoordinates(9999, -9999); // false
+```
+
+| Parameter | Type   | Default  | Description           |
+| --------- | ------ | -------- | --------------------- |
+| latitude  | number | required | Latitude to validate  |
+| longitude | number | required | Longitude to validate |
+
+#### <a id="islowercase"></a>`isLowerCase(str)`
+
+Checks whether the given string contains only lowercase alphabetic characters.
+Ignores digits, special characters, white spaces.
+
+```javascript
+import { isLowerCase } from 'stringzy';
+
+isLowerCase('hello'); // true
+isLowerCase('hello123!'); // true
+isLowerCase('Hello'); // false
+isLowerCase('12345'); // false
+```
+
+| Parameter | Type   | Default  | Description                                                             |
+| --------- | ------ | -------- | ----------------------------------------------------------------------- |
+| str       | string | required | The input string to validate as containing lowercase alphabetic letters |
+
+#### <a id="isuppercase"></a>`isUpperCase(str)`
+
+Checks whether the given string contains only uppercase alphabetic characters.
+Ignores digits, special characters, white spaces.
+
+```javascript
+import { isUpperCase } from 'stringzy';
+
+isUpperCase('HELLO'); // true
+isUpperCase('HELLO123!'); // true
+isUpperCase('Hello'); // false
+isUpperCase('12345'); // false
+```
+
+| Parameter | Type   | Default  | Description                                                             |
+| --------- | ------ | -------- | ----------------------------------------------------------------------- |
+| str       | string | required | The input string to validate as containing uppercase alphabetic letters |
+
+#### <a id="isalphabetic"></a>`isAlphabetic(text)`
+
+Checks if a string contains only alphabetic characters (a-z, A-Z).
+Throws an error if the input is not a string.
+
+```javascript
+import { isAlphabetic } from 'stringzy';
+
+isAlphabetic('hello'); // true
+isAlphabetic('World'); // true
+isAlphabetic('helloWORLD'); // true
+isAlphabetic('abc123'); // false
+isAlphabetic('hello!'); // false
+isAlphabetic(''); // false
+```
+
+| Parameter | Type   | Default  | Description                                   |
+| --------- | ------ | -------- | --------------------------------------------- |
+| text      | string | required | The input string to check for alphabetic only |
+
+#### <a id="isalphanumeric"></a>`isAlphaNumeric(text)`
+
+Checks if a string contains only alphanumeric characters (letters and digits).
+Throws an error if the input is not a string.
+
+```javascript
+import { isAlphaNumeric } from 'stringzy';
+
+isAlphaNumeric('abc123'); // true
+isAlphaNumeric('A1B2C3'); // true
+isAlphaNumeric('123'); // true
+isAlphaNumeric('hello'); // true
+isAlphaNumeric('hello!'); // false
+isAlphaNumeric('123 456'); // false
+isAlphaNumeric(''); // false
+```
+
+| Parameter | Type   | Default  | Description                                     |
+| --------- | ------ | -------- | ----------------------------------------------- |
+| text      | string | required | The input string to check for alphanumeric only |
+
+#### <a id="isanagram"></a>`isAnagram(str1, str2)`
+
+Checks whether two strings are anagrams of each other (contain the same characters in the same frequency, regardless of order).
+
+- Comparison is case-insensitive.
+- Spaces and punctuation are ignored.
+- Throws an error if either input is not a string.
+
+```javascript
+import { isAnagram } from 'stringzy';
+
+isAnagram('listen', 'silent'); // true
+isAnagram('Debit Card', 'Bad Credit'); // true
+isAnagram('Astronomer', 'Moon starer'); // true
+isAnagram('hello', 'world'); // false
+isAnagram('a', 'b'); // false
+isAnagram('', ''); // true
+```
+
+| Parameter | Type   | Default  | Description                              |
+| --------- | ------ | -------- | ---------------------------------------- |
+| str1      | string | required | The first string to check as an anagram  |
+| str2      | string | required | The second string to check as an anagram |
+
+#### <a id="ismacaddress"></a>`isMacAddress(str)`
+
+Checks whether a given string is a valid **MAC address**.
+
+- A valid MAC address consists of six pairs of hexadecimal digits (`0–9`, `A–F`, case-insensitive).
+- Returns `true` if the string is a valid MAC address, otherwise `false`.
+- Throws an error if input is not a string.
+
+```javascript
+import { isMacAddress } from 'stringzy';
+
+isMacAddress('00:1A:2B:3C:4D:5E'); // true
+isMacAddress('00-1A-2B-3C-4D-5E'); // true
+isMacAddress('aa:bb:cc:dd:ee:ff'); // true
+isMacAddress('FF-FF-FF-FF-FF-FF'); // true
+
+isMacAddress('00:1G:2B:3C:4D:5E'); // false (invalid hex digit)
+isMacAddress('00:1A-2B:3C:4D:5E'); // false (mixed separators)
+isMacAddress('001A:2B:3C:4D:5E'); // false (wrong group length)
+isMacAddress('hello-world-mac'); // false (invalid format)
+isMacAddress(''); // false (empty string)
+```
+
+| Parameter | Type   | Default  | Description                             |
+| --------- | ------ | -------- | --------------------------------------- |
+| str       | string | required | The string to validate as a MAC address |
+
+#### <a id="ispanagram"></a>`isPangram(str)`
+
+- Checks if a given string is a **pangram** (i.e., contains every letter of the English alphabet at least once).
+- The check is **case-insensitive**, and non-alphabetic characters (numbers, punctuation, spaces) are ignored. An empty string is not considered a pangram.
+- Throws an error if the input is not a string.
+
+```javascript
+import { isPangram } from 'stringzy';
+
+isPangram('The quick brown fox jumps over the lazy dog.'); // true
+isPangram('This is not a pangram.'); // false
+isPangram('Abcdefghijklmnopqrstuvwxyz'); // true
+isPangram('AbCdEfGhIjKlMnOpQrStUvWxYz'); // true
+isPangram('A-B-C-D-E-F-G-H-I-J-K-L-M-N-O-P-Q-R-S-T-U-V-W-X-Y-Z'); // true
+isPangram(''); // false
+isPangram('Hello world'); // false
+```
+
+| Parameter | Type   | Default  | Description                                           |
+| --------- | ------ | -------- | ----------------------------------------------------- |
+| str       | string | required | The input string to check for pangram characteristics |
 
 ---
 
@@ -861,8 +1189,6 @@ stringSimilarity('flaw', 'lawn', 'Damerau-Levenshtein'); // Returns: 50
 | textB     | string | required      | The second text to compare.                                   |
 | algorithm | string | 'Levenshtein' | The algorithm to use: 'Levenshtein' or 'Damerau-Levenshtein'. |
 
----
-
 #### <a id="complexity"></a>`complexity(text)`
 
 Analyzes the complexity of a string, returning an object with detailed metrics.
@@ -889,6 +1215,217 @@ complexity('');
 - `score` (number): Overall complexity score
 - `uniqueness` (number): Measure of character uniqueness
 - `length` (number): Length of the input string
+
+feature/content-words
+
+#### <a id="contentwordcount"></a>`contentWordCount(text)`
+
+Counts the number of content words (nouns, verbs, adjectives, adverbs, etc.) in a string.
+
+```javascript
+import { contentWordCount } from 'stringzy';
+
+contentWordCount('Learning JavaScript improves coding skills!');
+// Returns: { count: 5 }
+
+contentWordCount('The cat sleeps on the warm windowsill.');
+// Returns: { count: 5 }
+
+contentWordCount('Wow! Such a beautiful day.');
+// Returns: { count: 4 }
+```
+
+| Parameter | Type   | Default  | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| text      | string | required | The input string to analyze content words |
+
+**Returns:** An object containing:
+
+- `count` (number): Total number of content words in the string
+
+#### <a id="functionwordcount"></a>`functionWordCount(text)`
+
+Counts the number of function words (prepositions, pronouns, conjunctions, articles, etc.) in a string.
+
+```javascript
+import { functionWordCount } from 'stringzy';
+
+functionWordCount('She and I are going to the park.');
+// Returns: { count: 7 }
+
+functionWordCount('It is an example of proper grammar usage.');
+// Returns: { count: 8 }
+
+functionWordCount('Can you see the stars tonight?');
+// Returns: { count: 5 }
+```
+
+| Parameter | Type   | Default  | Description                                |
+| --------- | ------ | -------- | ------------------------------------------ |
+| text      | string | required | The input string to analyze function words |
+
+**Returns:** An object containing:
+
+- `count` (number): Total number of function words in the string
+
+#### <a id="patterncount"></a>`patternCount(text, pattern)`
+
+Counts the number of times a substring (pattern) occurs in a string, including overlapping occurrences.  
+This function uses the **Knuth–Morris–Pratt (KMP)** algorithm for efficient matching.
+
+```javascript
+patternCount('aaaa', 'aa'); // 3
+patternCount('abababa', 'aba'); // 3
+patternCount('hello world', 'o'); // 2
+patternCount('hello world', 'x'); // 0
+```
+
+| Parameter | Type   | Default  | Description                                    |
+| --------- | ------ | -------- | ---------------------------------------------- |
+| text      | string | required | The input string to search in                  |
+| pattern   | string | required | The substring (pattern) to count (overlapping) |
+
+#### <a id="vowelconsonantcount"></a>`vowelConsonantCount(str)`
+
+Counts the number of vowels and consonants in a given string.  
+This function is case-insensitive and ignores non-alphabetic characters.
+
+```javascript
+vowelConsonantCount('hello');
+// { vowels: 2, consonants: 3 }
+
+vowelConsonantCount('stringzy');
+// { vowels: 1, consonants: 7 }
+
+vowelConsonantCount('');
+// { vowels: 0, consonants: 0 }
+```
+
+| Parameter | Type   | Default  | Description                                        |
+| --------- | ------ | -------- | -------------------------------------------------- |
+| str       | string | required | The input string to count vowels and consonants in |
+
+feature/content-words
+
+#### <a id="checkmultiplepatterns"></a>`checkMultiplePatterns(text, patterns)`
+
+Finds occurrences of multiple patterns within a given text using the Rabin–Karp algorithm. <br>
+Accepts an array of patterns.<br>
+Returns all matches of each pattern along with starting indices.<br>
+Handles hash collisions by verifying actual substrings.<br>
+Pattern matching is case sensitive.
+
+```javascript
+checkMultiplePatterns('abracadabra', ['abra', 'cad']);
+// { abra: [0, 7], cad: [4] }
+
+checkMultiplePatterns('aaaa', ['aa', 'aaa']);
+// { aa: [0, 1, 2], aaa: [0, 1] }
+
+checkMultiplePatterns('hello world', ['xyz', '123']);
+// { xyz: [], 123: [] }
+```
+
+| Parameter | Type       | Default  | Description                                                 |
+| --------- | ---------- | -------- | ----------------------------------------------------------- |
+| text      | string     | required | The text to search within.                                  |
+| patterns  | string\[ ] | required | An array of patterns to search for (each must be a string). |
+
+#### <a id="checksubsequence"></a>`checkSubsequence(str, sub)`
+
+Checks whether a given string sub is a subsequence of another string str.
+A subsequence maintains the relative order of characters, but they do not need to be consecutive.
+Case-sensitive comparison is performed.
+Spaces and all characters are treated literally.
+
+```javascript
+isSubsequence('abcde', 'ace');
+// true  → 'a', 'c', 'e' appear in order
+
+isSubsequence('abracadabra', 'aaa');
+// true  → multiple 'a's in correct order
+
+isSubsequence('abcde', 'aec');
+// false → order is broken (e comes before c)
+
+isSubsequence('anything', '');
+// true  → empty subsequence is always valid
+
+isSubsequence('AbC', 'AC');
+// true  → exact case matches
+
+isSubsequence('a b c', 'abc');
+// false → spaces count as characters
+```
+
+| Parameter | Type   | Default  | Description                                     |
+| --------- | ------ | -------- | ----------------------------------------------- |
+| str       | string | required | The main string to check within.                |
+| sub       | string | required | The subsequence string to verify against `str`. |
+
+#### <a id="stringrotation"></a>`checkStringRotations(str1, str2)`
+
+Checks whether a given string `str2` is a rotation of another string `str1`.
+Case-sensitive comparison is performed. Both strings must be of equal length to be considered rotations.
+Spaces and all characters are treated literally.
+
+```javascript
+isRotation('waterbottle', 'erbottlewat');
+// true  → rotation at position 3
+
+isRotation('abcde', 'cdeab');
+// true  → rotation at position 2
+
+isRotation('abc', 'abc');
+// true  → no rotation, identical strings
+
+isRotation('abc', 'cab');
+// true  → rotation at position 2
+
+isRotation('abc', 'bac');
+// false → not a valid rotation
+
+isRotation('ArB', 'Bar');
+// false → case-sensitive mismatch
+
+isRotation('abcd', 'abc');
+// false → lengths differ
+```
+
+| Parameter | Type   | Default  | Description                                         |
+| --------- | ------ | -------- | --------------------------------------------------- |
+| str1      | string | required | The original string.                                |
+| str2      | string | required | The string to verify if it is a rotation of `str1`. |
+
+#### <a id="lexicographicalrank"></a>`lexicographicalRank(str)`
+
+Calculates the lexicographic rank of a string among all its unique permutations sorted alphabetically.  
+The rank is **1-based** (first permutation has rank 1).  
+Handles duplicate characters by correctly adjusting ranks.
+
+```javascript
+lexicographicRank('acb');
+// 2 → permutations: ["abc", "acb", "bac", "bca", "cab", "cba"]
+
+lexicographicRank('string');
+// 598
+
+lexicographicRank('cba');
+// 6 → permutations: ["abc", "acb", "bac", "bca", "cab", "cba"]
+
+lexicographicRank('aba');
+// 2 → permutations: ["aab", "aba", "baa"]
+
+lexicographicRank('a');
+// 1
+
+lexicographicRank('');
+// 1 → edge case, empty string considered rank 1
+```
+
+| Parameter | Type   | Default  | Description                               |
+| --------- | ------ | -------- | ----------------------------------------- |
+| str       | string | required | The input string to calculate the rank of |
 
 ---
 
@@ -936,6 +1473,380 @@ formatPhone('11234567890', 'international'); // '+1 (123) 456-7890'
 | --------- | ------ | -------- | ------------------------------------ |
 | phone     | string | required | The phone number string to format    |
 | format    | string | 'us'     | Format type: 'us' or 'international' |
+
+#### <a id="formatduration"></a>`formatDuration(input, options)`
+
+Converts a duration in seconds or milliseconds into a human-readable string.
+
+```javascript
+formatDuration(60); // "1m"
+formatDuration(61); // "1m 1s"
+formatDuration(3661); // "1h 1m 1s"
+formatDuration(7325); // "2h 2m 5s"
+formatDuration(1234567, { unit: 'milliseconds', includeMs: true }); // "20m 34s 567ms"
+```
+
+| Parameter   | Type    | Default   | Description                                 |
+| ----------- | ------- | --------- | ------------------------------------------- |
+| input       | number  | required  | The duration in seconds or milliseconds     |
+| options     | object  | `{}`      | Optional configuration object               |
+| - unit      | string  | 'seconds' | Input unit: 'seconds' or 'milliseconds'     |
+| - format    | string  | 'short'   | Output format: 'short', 'medium', or 'long' |
+| - includeMs | boolean | false     | Whether to include milliseconds in output   |
+| - delimiter | string  | ' '       | The delimiter between time units            |
+
+#### <a id="trim"></a>`trim(str)`
+
+Removes unnecessary whitespace from a string, including leading/trailing spaces, multiple spaces between words, tabs, and line breaks.
+
+```javascript
+trim('  hello   world  '); // 'hello world'
+trim('line \n breaks\tand tabs'); // 'line breaks and tabs'
+```
+
+| Parameter | Type   | Default  | Description                             |
+| --------- | ------ | -------- | --------------------------------------- |
+| str       | string | required | The input string to trim and normalize. |
+
+#### <a id="formatromannumeral"></a>formatRomanNumeral(num)
+
+Converts a positive integer into its Roman numeral representation (supports values from 1 to 3999).
+Throws an error for invalid, non-numeric, zero, or negative inputs.
+
+```javascript
+import { formatRomanNumeral } from 'stringzy';
+
+formatRomanNumeral(1); // "I"
+formatRomanNumeral(4); // "IV"
+formatRomanNumeral(9); // "IX"
+formatRomanNumeral(58); // "LVIII"
+formatRomanNumeral(1994); // "MCMXCIV"
+
+// Invalid cases
+formatRomanNumeral(0); // RangeError
+formatRomanNumeral(-5); // RangeError
+formatRomanNumeral('123'); // TypeError
+```
+
+| Parameter | Type   | Default  | Description                                          |
+| --------- | ------ | -------- | ---------------------------------------------------- |
+| num       | number | required | The integer (1–3999) to convert into Roman numerals. |
+
+#### <a id="formatpercentage"></a>formatPercentage(num, precision)
+
+Converts a number into a percentage string with configurable decimal precision. </br>
+Supports positive, negative, and whole numbers. </br>
+Throws an error for invalid or non-numeric inputs.
+
+```javascript
+import { formatPercentage } from 'stringzy';
+
+formatPercentage(0.567); // "56.70%"
+formatPercentage(0.567, 1); // "56.7%"
+formatPercentage(0.5, 0); // "50%"
+formatPercentage(1); // "100%"
+formatPercentage(-0.25); // "-25%"
+formatPercentage(50); // "5000%"
+
+// Invalid cases
+formatPercentage('0.5'); // TypeError
+formatPercentage(null); // TypeError
+formatPercentage(0.5, -1); // TypeError
+```
+
+| Parameter | Type   | Default  | Description                                            |
+| --------- | ------ | -------- | ------------------------------------------------------ |
+| num       | number | required | The number to convert into a percentage string.        |
+| precision | number | 2        | The number of decimal places to include in the output. |
+
+#### <a id="formatfilesize"></a>formatFileSize(bytes, precision)
+
+Converts a number of bytes into a human-readable file size string (B, KB, MB, GB, TB). </br>
+Automatically scales the unit based on the size and supports configurable decimal precision.</br>
+Throws an error for invalid, non-numeric, or negative inputs.</br>
+
+```javascript
+import { formatFileSize } from 'stringzy';
+
+formatFileSize(123); // "123 B"
+formatFileSize(1024); // "1 KB"
+formatFileSize(1048576); // "1 MB"
+formatFileSize(1073741824); // "1 GB"
+formatFileSize(1572864); // "1.5 MB"
+formatFileSize(1500, 3); // "1.465 KB"
+
+// Invalid cases
+formatFileSize(-1024); // RangeError
+formatFileSize('1024'); // TypeError
+formatFileSize(1024, -1); // TypeError
+```
+
+| Parameter | Type   | Default  | Description                                                     |
+| --------- | ------ | -------- | --------------------------------------------------------------- |
+| bytes     | number | required | The number of bytes to convert into a human-readable file size. |
+| precision | number | 2        | The number of decimal places for fractional sizes.              |
+
+#### <a id="formatordinal"></a>formatOrdinal(num)
+
+Converts a number into its ordinal string representation (e.g., 1 → "1st", 2 → "2nd"). </br>
+Handles special cases for numbers ending in 11, 12, and 13.</br>
+Throws a TypeError if the input is not a number.</br>
+
+```javascript
+import { formatOrdinal } from 'stringzy';
+
+formatOrdinal(1); // "1st"
+formatOrdinal(2); // "2nd"
+formatOrdinal(3); // "3rd"
+formatOrdinal(4); // "4th"
+formatOrdinal(11); // "11th"
+formatOrdinal(12); // "12th"
+formatOrdinal(13); // "13th"
+formatOrdinal(21); // "21st"
+formatOrdinal(22); // "22nd"
+formatOrdinal(23); // "23rd"
+formatOrdinal(24); // "24th"
+
+// Invalid cases
+formatOrdinal('21'); // TypeError
+formatOrdinal(null); // TypeError
+```
+
+| Parameter | Type   | Default  | Description                         |
+| --------- | ------ | -------- | ----------------------------------- |
+| num       | number | required | The number to format as an ordinal. |
+
+#### <a id="formatlist"></a>formatList(arr)
+
+Formats an array of strings into a human-readable list using commas and "and".
+Automatically applies the Oxford comma for lists of three or more items.
+Returns an empty string for empty arrays and throws a TypeError for invalid inputs.
+
+```javascript
+import { formatList } from 'stringzy';
+
+formatList(['apples', 'bananas', 'cherries']); // "apples, bananas, and cherries"
+formatList(['apples', 'bananas']); // "apples and bananas"
+formatList(['apple']); // "apple"
+formatList([]); // ""
+
+// Invalid cases
+formatList('apple'); // TypeError
+formatList(['apple', 123]); // TypeError
+```
+
+| Parameter | Type     | Default  | Description                               |
+| --------- | -------- | -------- | ----------------------------------------- |
+| arr       | string[] | required | The array of strings to format as a list. |
+
+#### <a id="formatcreditcard"></a>formatCreditCard(cardNumber)
+
+Formats a credit card number into readable groups of digits separated by spaces.
+Supports 15-digit (AmEx) and 16-digit (Visa/MasterCard) numbers.
+Non-digit characters are automatically stripped before formatting.
+Throws an error if the input is not a string.
+
+```javascript
+import { formatCreditCard } from 'stringzy';
+
+formatCreditCard('1234567812345678'); // "1234 5678 1234 5678"
+formatCreditCard('4111111111111111'); // "4111 1111 1111 1111"
+formatCreditCard('378282246310005'); // "3782 822463 10005" (AmEx)
+formatCreditCard('4111-1111-1111-1111'); // "4111 1111 1111 1111"
+formatCreditCard('123'); // "" (invalid length)
+formatCreditCard(''); // "" (empty string)
+```
+
+| Parameter  | Type   | Default  | Description                                                            |
+| ---------- | ------ | -------- | ---------------------------------------------------------------------- |
+| cardNumber | string | required | The credit card number to format. Cannot include non-digit characters. |
+
+#### <a id="formattotoctal"></a>formatToOctal(num, options?)
+
+Converts a decimal number to its octal (base-8) string representation. Supports negatives and an optional `0o` prefix.
+
+```javascript
+import { formatToOctal } from 'stringzy';
+
+formatToOctal(8); // "10"
+formatToOctal(10); // "12"
+formatToOctal(255); // "377"
+formatToOctal(0); // "0"
+formatToOctal(255, { prefix: true }); // "0o377"
+formatToOctal(-255, { prefix: true }); // "-0o377"
+
+// Invalid cases
+// formatToOctal('10');  // TypeError
+// formatToOctal(NaN);   // TypeError
+```
+
+| Parameter | Type    | Default  | Description                           |
+| --------- | ------- | -------- | ------------------------------------- |
+| num       | number  | required | The decimal number to convert         |
+| options   | object  | {}       | Optional settings                     |
+| - prefix  | boolean | false    | If true, prepend the result with `0o` |
+
+#### <a id="formattemperature"></a>`formatTemperature(value, options)`
+
+Converts a temperature value between Celsius (C), Fahrenheit (F), and Kelvin (K), with configurable decimal precision.
+
+```javascript
+formatTemperature(0, { from: 'C', to: 'F' }); // "32.00°F"
+formatTemperature(32, { from: 'F', to: 'C', precision: 1 }); // "0.0°C"
+formatTemperature(25, { from: 'C', to: 'K' }); // "298.15K"
+formatTemperature(300, { from: 'K', to: 'F' }); // "80.33°F"
+```
+
+| Parameter   | Type   | Default  | Description                            |
+| ----------- | ------ | -------- | -------------------------------------- | --- | --- |
+| value       | number | required | Temperature to convert                 |
+| options     | object | required | Conversion settings                    |
+| - from      | string | required | Source unit: 'C'                       | 'F' | 'K' |
+| - to        | string | required | Target unit: 'C'                       | 'F' | 'K' |
+| - precision | number | 2        | Number of decimal places in the output |
+
+Notes:
+
+- Kelvin values are rendered without the degree symbol (e.g., "298.15K").
+- An error is thrown for invalid conversions or non-numeric input values.
+
+#### <a id="formatscientific"></a>formatScientific(num, options)
+
+Converts a number into scientific notation (e.g., 12345 → "1.23e+4").</br>
+Supports custom precision and uppercase "E" formatting.</br>
+Handles negative numbers correctly.</br>
+Throws TypeError if input is not a valid number.</br>
+
+```javascript
+import { formatScientific } from 'stringzy';
+
+formatScientific(12345); // "1.23e+4"
+formatScientific(0.000123); // "1.23e-4"
+formatScientific(-98765); // "-9.88e+4"
+
+formatScientific(1000000, { precision: 4 }); // "1.0000e+6"
+formatScientific(98765, { uppercase: true }); // "9.88E+4"
+formatScientific(12345, { precision: 5, uppercase: true }); // "1.23450E+4"
+
+// Invalid cases
+formatScientific('12345'); // TypeError
+formatScientific(null); // TypeError
+```
+
+| Parameter         | Type    | Default  | Description                                   |
+| ----------------- | ------- | -------- | --------------------------------------------- |
+| num               | number  | required | The number to convert to scientific notation. |
+| options           | object  | optional | Formatting settings.                          |
+| options.precision | number  | 2        | Digits after decimal point.                   |
+| options.uppercase | boolean | false    | Uses "E" instead of "e".                      |
+
+#### <a id="formattobinary"></a>`formatToBinary(num, options)`
+
+Converts a decimal integer to its binary (base-2) string representation with optional grouping from the least significant bit for readability. Supports negative numbers.
+
+```javascript
+import { formatToBinary } from 'stringzy';
+
+// Basic conversions
+formatToBinary(5); // "101"
+formatToBinary(10); // "1010"
+formatToBinary(255); // "11111111"
+formatToBinary(0); // "0"
+formatToBinary(-5); // "-101"
+
+// Grouping from right to left (no left-padding)
+formatToBinary(255, { group: 4 }); // "1111 1111"
+formatToBinary(10, { group: 2 }); // "10 10"
+formatToBinary(-255, { group: 4 }); // "-1111 1111"
+
+// Invalid cases
+formatToBinary(3.14); // TypeError (must be an integer)
+formatToBinary('5'); // TypeError (input must be a number)
+formatToBinary(10, { group: 0 }); // TypeError (group must be positive integer)
+```
+
+| Parameter | Type   | Default  | Description                                      |
+| --------- | ------ | -------- | ------------------------------------------------ |
+| num       | number | required | The decimal integer to convert to binary.        |
+| options   | object | `{}`     | Optional configuration.                          |
+| - group   | number | —        | Positive integer; bits per group (right-to-left) |
+
+#### <a id="formattohexadecimal"></a>formatToHexadecimal(num, options)
+
+Converts a decimal number into its hexadecimal (base-16) string representation.</br>
+Supports optional prefix "0x" and lowercase formatting.</br>
+Handles negative numbers by adding a - sign before the output.</br>
+Throws a TypeError if the input is not a valid number.</br>
+
+```javascript
+import { formatToHexadecimal } from 'stringzy';
+
+formatToHexadecimal(10); // "A"
+formatToHexadecimal(15); // "F"
+formatToHexadecimal(255); // "FF"
+formatToHexadecimal(4095); // "FFF"
+
+// Negative numbers
+formatToHexadecimal(-255); // "-FF"
+
+// With prefix
+formatToHexadecimal(255, { prefix: true }); // "0xFF"
+formatToHexadecimal(-255, { prefix: true }); // "-0xFF"
+
+// Lowercase output
+formatToHexadecimal(255, { lowercase: true }); // "ff"
+
+// Prefix + lowercase
+formatToHexadecimal(255, { prefix: true, lowercase: true }); // "0xff"
+
+// Invalid cases
+formatToHexadecimal('255'); // TypeError
+formatToHexadecimal(null); // TypeError
+formatToHexadecimal(NaN); // TypeError
+```
+
+| Parameter         | Type                | Default  | Description                                               |
+| ----------------- | ------------------- | -------- | --------------------------------------------------------- |
+| num               | number              | required | The decimal number to convert to hexadecimal.             |
+| options           | object _(optional)_ | `{}`     | Formatting options.                                       |
+| options.prefix    | boolean             | `false`  | Adds `"0x"` before the result (or `"-0x"` for negatives). |
+| options.lowercase | boolean             | `false`  | Outputs letters in lowercase (`"ff"` instead of `"FF"`).  |
+
+#### <a id="formattodecimal"></a>`formatToDecimal(value, options)`
+
+Converts a binary, octal, or hexadecimal string into its decimal (base‑10) number. Supports optional standard prefixes and trims whitespace. Hex accepts uppercase and lowercase.
+
+```javascript
+import { formatToDecimal } from 'stringzy';
+
+// Binary (base 2)
+formatToDecimal('1010', { base: 2 }); // 10
+formatToDecimal('0b111', { base: 2 }); // 7
+
+// Octal (base 8)
+formatToDecimal('12', { base: 8 }); // 10
+formatToDecimal('0o377', { base: 8 }); // 255
+
+// Hexadecimal (base 16)
+formatToDecimal('FF', { base: 16 }); // 255
+formatToDecimal('0x10', { base: 16 }); // 16
+
+// Trimming and sign handling
+formatToDecimal('  +0xFF  ', { base: 16 }); // 255
+formatToDecimal('-0b10', { base: 2 }); // -2
+
+// Invalid cases (throw TypeError)
+// formatToDecimal('102', { base: 2 });
+// formatToDecimal('89', { base: 8 });
+// formatToDecimal('0xG1', { base: 16 });
+// formatToDecimal('10', { base: 10 });
+```
+
+| Parameter | Type         | Default  | Description                                        |
+| --------- | ------------ | -------- | -------------------------------------------------- |
+| value     | string       | required | The numeric string to convert (may include prefix) |
+| options   | object       | required | Configuration for conversion                       |
+| - base    | 2 \| 8 \| 16 | required | The base of the input string                       |
 
 ## 🔧 Usage Patterns
 
@@ -1181,6 +2092,140 @@ Contributions are welcome! Please read our [contribution guidelines](CONTRIBUTIN
                     <br />
                     <sub>
                         <b>Abdul Arham</b>
+                    </sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Thenlie">
+                    <img src="https://avatars.githubusercontent.com/Thenlie" width="100px;"
+                        alt="Thenlie" />
+                    <br />
+                    <sub>
+                        <b>Leithen</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/rickyryden">
+                    <img src="https://avatars.githubusercontent.com/rickyryden" width="100px;"
+                        alt="Ricky Ryden" />
+                    <br />
+                    <sub>
+                        <b>Ricky Ryden</b>
+                    </sub>
+                </a>
+            </td>
+      </tr>
+      <tr>
+        <td align="center">
+                <a href="https://github.com/adityaatre26">
+                    <img src="https://avatars.githubusercontent.com/adityaatre26" width="100px;"
+                        alt="Aditya Atre" />
+                    <br />
+                    <sub>
+                        <b>Aditya Atre</b>
+                    </sub>
+                </a>
+            </td>
+         <td align="center">
+                <a href="https://github.com/kittenwarrior-qb">
+                    <img src="https://avatars.githubusercontent.com/kittenwarrior-qb" width="100px;"
+                        alt="quocbui05" />
+                    <br />
+                    <sub>
+                        <b>quocbui05</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/MariamEwas">
+                    <img src="https://avatars.githubusercontent.com/MariamEwas" width="100px;"
+                        alt="Mariam Hasan" />
+                    <br />
+                    <sub>
+                        <b>Mariam Hasan</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/milendrakumarbaghel">
+                    <img src="https://avatars.githubusercontent.com/milendrakumarbaghel" width="100px;"
+                        alt="Milendra Kumar Baghel" />
+                    <br />
+                    <sub>
+                        <b>Milendra Kumar Baghel</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/Farkhanda-Dalal">
+                    <img src="https://avatars.githubusercontent.com/Farkhanda-Dalal" width="100px;"
+                        alt="Farkhanda Dalal" />
+                    <br />
+                    <sub>
+                        <b>Farkhanda Dalal</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/satyasrisundarapalli">
+                    <img src="https://avatars.githubusercontent.com/satyasrisundarapalli" width="100px;"
+                        alt="Sundarapalli Lakshmi Satya Sri" />
+                    <br />
+                    <sub>
+                        <b>Sundarapalli Lakshmi Satya Sri</b>
+                    </sub>
+                </a>
+            </td>
+      </tr>
+      <tr>
+         <td align="center">
+                <a href="https://github.com/itspavant">
+                    <img src="https://avatars.githubusercontent.com/itspavant" width="100px;"
+                        alt="T Pavan Teja" />
+                    <br />
+                    <sub>
+                        <b>T Pavan Teja</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/ftonato">
+                    <img src="https://avatars.githubusercontent.com/ftonato" width="100px;"
+                        alt="Ademílson Tonato" />
+                    <br />
+                    <sub>
+                        <b>Ademílson Tonato</b>
+                    </sub>
+                </a>
+            </td>
+        <td align="center">
+                <a href="https://github.com/mNik033">
+                    <img src="https://avatars.githubusercontent.com/mNik033" width="100px;"
+                        alt="nik" />
+                    <br />
+                    <sub>
+                        <b>nik</b>
+                    </sub>
+                </a>
+            </td>
+         <td align="center">
+                <a href="https://github.com/Shree-Gowda">
+                    <img src="https://avatars.githubusercontent.com/Shree-Gowda" width="100px;"
+                        alt="Shree Gowda" />
+                    <br />
+                    <sub>
+                        <b>Shree Gowda</b>
+                    </sub>
+                </a>
+            </td>
+         <td align="center">
+                <a href="https://github.com/sabha348">
+                    <img src="https://avatars.githubusercontent.com/sabha348" width="100px;"
+                        alt="Sahil Sumant Bhat" />
+                    <br />
+                    <sub>
+                        <b>Sahil Sumant Bhat </b>
                     </sub>
                 </a>
             </td>
